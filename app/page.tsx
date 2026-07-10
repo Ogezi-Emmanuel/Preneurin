@@ -494,10 +494,11 @@ export default function Home() {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.4 }}
                     animate={{ y: [0, -10, 0] }}
                     transition={{ 
-                      y: { repeat: Infinity, duration: 3, ease: "easeInOut" },
+                      duration: 0.6,
+                      delay: 0.4,
+                      y: { repeat: Infinity, duration: 3, ease: "easeInOut", delay: 0.6 + 0.4 },
                     }}
                     className="absolute bottom-6 left-6 right-6 bg-[#0A0A0A]/80 backdrop-blur-xl border border-white/10 rounded-2xl p-4 md:p-6"
                   >
