@@ -1,78 +1,172 @@
 'use client';
 
+import Image from 'next/image';
 import Breadcrumb from '@/components/Breadcrumb';
 import StaggerContainer from '@/components/StaggerContainer';
 import StaggerItem from '@/components/StaggerItem';
 
-export default function SuccessStoriesPage() {
-  const stories = [
-    { 
-      name: "Amara Okafor", 
-      brand: "Amara Couture", 
-      achievement: "Grew revenue by 300% in 18 months after implementing our pricing and production systems.",
-      quote: "For the first time, I actually understand my numbers and feel confident about the future of my brand.",
-      image: "/Amara Okafor.jpg"
-    },
-    { 
-      name: "Kofi Mensah", 
-      brand: "Kofi Atelier", 
-      achievement: "Built a team of 8 tailors and scaled from 5 to 50+ custom orders per month.",
-      quote: "The community support and practical advice helped me systemize my production in ways I never thought possible.",
-      image: "/Kofi Mensah.jpg"
-    },
-    { 
-      name: "Zara Ibrahim", 
-      brand: "Zara Luxe", 
-      achievement: "Increased average order value by 150% through better client management and positioning.",
-      quote: "Learning to set boundaries and price appropriately completely transformed my relationship with my clients and my business.",
-      image: "/Zara Ibrahim.jpg"
-    }
-  ];
+const sessionMoments = [
+  {
+    title: 'The First Room',
+    body: 'Preneurin began with one live session in April. The starting point was simple: gather fashion designers in a room honest enough to talk about the business problems that usually stay hidden.',
+    image: '/DASA%20PICTURES/IMG_0745.jpg',
+  },
+  {
+    title: 'What Designers Brought',
+    body: 'The conversations centered on pricing, production pressure, client boundaries, and the operational decisions that affect whether a studio grows well or keeps running on stress.',
+    image: '/DASA%20PICTURES/IMG_0766.jpg',
+  },
+  {
+    title: 'What Comes Next',
+    body: 'That first session is now the proof point. Preneurin is using what it learned there to shape future sessions, supporting resources, and early collaboration opportunities.',
+    image: '/DASA%20PICTURES/IMG_0826.jpg',
+  },
+];
 
+const sessionGallery = [
+  {
+    src: '/DASA%20PICTURES/IMG_0718.jpg',
+    alt: 'Designers seated during the Preneurin April session',
+    className: 'lg:col-span-2',
+  },
+  {
+    src: '/DASA%20PICTURES/IMG_0739.jpg',
+    alt: 'A candid moment from the Preneurin first session',
+    className: 'lg:col-span-1',
+  },
+  {
+    src: '/DASA%20PICTURES/IMG_0794.jpg',
+    alt: 'Participants listening during the Preneurin session',
+    className: 'lg:col-span-1',
+  },
+  {
+    src: '/DASA%20PICTURES/IMG_0797.jpg',
+    alt: 'Another view of the Preneurin April gathering',
+    className: 'lg:col-span-1',
+  },
+  {
+    src: '/DASA%20PICTURES/IMG_0856.jpg',
+    alt: 'A detailed scene from the first Preneurin session',
+    className: 'lg:col-span-2',
+  },
+];
+
+const proofPoints = [
+  'The photos on this page are from the real April session.',
+  'The format is still early, but the direction is clear and founder-led.',
+  'Future growth is being built carefully instead of being overstated.',
+];
+
+export default function FirstSessionPage() {
   return (
-    <div className="min-h-screen bg-[#0A0A0A] text-white font-sans">
+    <div className="min-h-screen text-[var(--foreground)] font-sans">
       <Breadcrumb />
 
-      {/* Hero Section */}
-      <section className="pb-24 px-6">
+      <section className="pb-24 px-6 pt-24">
         <div className="max-w-5xl mx-auto text-center">
           <StaggerContainer>
             <StaggerItem>
               <h1 className="font-serif font-luxury text-5xl md:text-7xl lg:text-8xl leading-tight mb-8">
-                Success Stories
+                Our First Session
               </h1>
             </StaggerItem>
-            
+
             <StaggerItem>
-              <p className="text-gray-300 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
-                Real designers, real results. See how our community has transformed their businesses.
+              <p className="text-gray-500 dark:text-gray-300 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
+                Preneurin is still early. What we can show honestly is where it started: one live session in April and the practical conversations that came out of it.
               </p>
             </StaggerItem>
           </StaggerContainer>
         </div>
       </section>
 
-      {/* Success Stories Grid Section */}
-      <section className="py-24 px-6">
+      <section className="pb-24 px-6">
+        <div className="max-w-6xl mx-auto">
+          <StaggerContainer>
+            <StaggerItem>
+              <div className="rounded-3xl border border-[var(--border)] bg-[var(--card)] p-8 md:p-10">
+                <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr]">
+                  <div>
+                    <p className="text-sm uppercase tracking-[0.2em] text-accent">Real Proof</p>
+                    <h2 className="mt-4 font-serif text-4xl md:text-5xl">One session. Real conversations. A clear next step.</h2>
+                    <p className="mt-6 text-lg leading-relaxed text-gray-500 dark:text-gray-300">
+                      Preneurin was founded by Damilola Obiesan, Creative Director of Dassah Oikos, to create a more honest support system for fashion designers navigating business growth. The first live session became the foundation for everything now being built.
+                    </p>
+                  </div>
+
+                  <div className="space-y-4">
+                    {proofPoints.map((point) => (
+                      <div
+                        key={point}
+                        className="rounded-2xl border border-[var(--border)] bg-[var(--background)] px-5 py-4 text-gray-500 dark:text-gray-300"
+                      >
+                        {point}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </StaggerItem>
+          </StaggerContainer>
+        </div>
+      </section>
+
+      <section className="pb-24 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-3 gap-12">
-            {stories.map((story, index) => (
-              <StaggerContainer key={index} delay={index * 0.15}>
+            {sessionMoments.map((moment, index) => (
+              <StaggerContainer key={moment.title} delay={index * 0.15}>
                 <StaggerItem>
-                  <div className="bg-[#0F0F0F] border border-white/10 rounded-3xl overflow-hidden">
+                  <div className="bg-[var(--card)] border border-[var(--border)] rounded-3xl overflow-hidden">
                     <div className="h-[350px] overflow-hidden">
-                      <img 
-                        src={story.image}
-                        alt={story.name}
-                        className="w-full h-full object-cover object-top"
+                      <Image
+                        src={moment.image}
+                        alt={moment.title}
+                        width={1200}
+                        height={1400}
+                        sizes="(min-width: 1024px) 33vw, 100vw"
+                        className="h-full w-full object-cover object-top"
                       />
                     </div>
                     <div className="p-8">
-                      <h3 className="font-serif text-2xl mb-2">{story.name}</h3>
-                      <p className="text-[#D4AF37] mb-4">{story.brand}</p>
-                      <p className="text-gray-300 mb-6 italic">"{story.quote}"</p>
-                      <p className="text-gray-400 text-sm">{story.achievement}</p>
+                      <h3 className="font-serif text-2xl mb-4">{moment.title}</h3>
+                      <p className="text-gray-500 dark:text-gray-300 leading-relaxed">{moment.body}</p>
                     </div>
+                  </div>
+                </StaggerItem>
+              </StaggerContainer>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="pb-24 px-6">
+        <div className="max-w-7xl mx-auto">
+          <StaggerContainer>
+            <StaggerItem>
+              <div className="mb-12 text-center">
+                <p className="text-sm uppercase tracking-[0.2em] text-accent">Session Gallery</p>
+                <h2 className="mt-4 font-serif font-luxury text-4xl md:text-5xl">More from the April room</h2>
+                <p className="mx-auto mt-4 max-w-3xl text-lg leading-relaxed text-gray-500 dark:text-gray-300">
+                  These additional images capture the atmosphere, attention, and real founder conversations that defined Preneurin&apos;s first session.
+                </p>
+              </div>
+            </StaggerItem>
+          </StaggerContainer>
+
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {sessionGallery.map((image, index) => (
+              <StaggerContainer key={image.src} delay={index * 0.1}>
+                <StaggerItem>
+                  <div className={`overflow-hidden rounded-3xl border border-[var(--border)] bg-[var(--card)] ${image.className}`}>
+                    <Image
+                      src={image.src}
+                      alt={image.alt}
+                      width={1600}
+                      height={1200}
+                      sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                      className="h-[260px] w-full object-cover object-top md:h-[320px]"
+                    />
                   </div>
                 </StaggerItem>
               </StaggerContainer>

@@ -9,7 +9,7 @@ const pathnames: Record<string, string> = {
   '/about': 'About',
   '/programs': 'Programs',
   '/initiatives': 'Initiatives',
-  '/success-stories': 'Success Stories',
+  '/success-stories': 'First Session',
   '/contact': 'Contact',
 };
 
@@ -36,9 +36,9 @@ export default function Breadcrumb() {
           <li key={crumb.href} className="flex items-center gap-2">
             {index > 0 && <ChevronRight className="w-4 h-4" />}
             {index === breadcrumbs.length - 1 ? (
-              <span className="text-[#D4AF37]">{crumb.name}</span>
+              <span className="text-accent">{crumb.name}</span>
             ) : (
-              <Link href={crumb.href} className="hover:text-[#D4AF37] transition-colors">
+              <Link href={crumb.href} className="hover:text-accent transition-colors">
                 {crumb.name}
               </Link>
             )}

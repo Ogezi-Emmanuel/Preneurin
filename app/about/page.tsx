@@ -1,16 +1,19 @@
 'use client';
 
+import Image from 'next/image';
 import Breadcrumb from '@/components/Breadcrumb';
 import StaggerContainer from '@/components/StaggerContainer';
 import StaggerItem from '@/components/StaggerItem';
 
+const ABOUT_IMAGE = '/DASA%20PICTURES/IMG_0700.jpg';
+
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-[#0A0A0A] text-white font-sans">
+    <div className="min-h-screen text-[var(--foreground)] font-sans">
       <Breadcrumb />
 
       {/* Hero Section */}
-      <section className="pb-24 px-6">
+      <section className="pb-24 px-6 pt-24">
         <div className="max-w-5xl mx-auto text-center">
           <StaggerContainer>
             <StaggerItem>
@@ -20,8 +23,8 @@ export default function AboutPage() {
             </StaggerItem>
             
             <StaggerItem>
-              <p className="text-gray-300 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
-                Empowering fashion designers with practical knowledge, community, and resources to build sustainable, successful businesses.
+              <p className="text-gray-500 dark:text-gray-300 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
+                Preneurin is an early-stage, founder-led platform created to help fashion designers face the business side of growth with more honesty and structure.
               </p>
             </StaggerItem>
           </StaggerContainer>
@@ -29,23 +32,26 @@ export default function AboutPage() {
       </section>
 
       {/* Our Story Section */}
-      <section className="py-24 px-6 bg-gradient-to-b from-[#0A0A0A] via-[#0F0F0F] to-[#0A0A0A]">
+      <section className="py-24 px-6 bg-gradient-to-b from-transparent via-[var(--card)] to-transparent">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <StaggerContainer>
               <StaggerItem>
                 <h2 className="font-serif font-luxury text-4xl md:text-5xl mb-8">
-                  Our Story
+                  How It Started
                 </h2>
               </StaggerItem>
               
               <StaggerItem>
-                <div className="space-y-6 text-gray-300 text-lg leading-relaxed">
+                <div className="space-y-6 text-gray-500 dark:text-gray-300 text-lg leading-relaxed">
                   <p>
-                    Preneurin was born from the frustration of seeing talented fashion designers struggle with the operational side of their businesses—problems that have nothing to do with creativity.
+                    Preneurin began with one live session in April. It was created by Damilola Obiesan, Creative Director of Dassah Oikos, after years of seeing talented designers carry operational pressure in silence.
                   </p>
                   <p>
-                    After years of witnessing designers face the same challenges in secret, we created a safe space where they could talk openly, learn from each other, and get real solutions.
+                    Instead of pretending to be a large institution from day one, Preneurin started as a practical room: a space to talk honestly about pricing, production bottlenecks, client issues, and the systems fashion founders need to grow well.
+                  </p>
+                  <p>
+                    The photos on this site come from that first session. They represent the real starting point of the work, and they shape how we are building the next chapter.
                   </p>
                 </div>
               </StaggerItem>
@@ -53,11 +59,15 @@ export default function AboutPage() {
 
             <StaggerContainer delay={0.2}>
               <StaggerItem>
-                <div className="rounded-3xl overflow-hidden border border-white/10">
-                  <img 
-                    src="/Our Story.jpg" 
-                    alt="Our Story"
-                    className="w-full h-[400px] md:h-[500px] object-cover"
+                <div className="rounded-3xl overflow-hidden border border-[var(--border)]">
+                  <Image
+                    src={ABOUT_IMAGE}
+                    alt="Fashion designers in conversation during Preneurin's first live session"
+                    width={1600}
+                    height={1200}
+                    sizes="(min-width: 1024px) 50vw, 100vw"
+                    className="h-[400px] w-full object-cover md:h-[500px]"
+                    priority
                   />
                 </div>
               </StaggerItem>
@@ -72,7 +82,7 @@ export default function AboutPage() {
           <StaggerContainer>
             <StaggerItem>
               <h2 className="font-serif font-luxury text-4xl md:text-5xl mb-12 text-center">
-                Our Mission & Values
+                What We Stand For
               </h2>
             </StaggerItem>
           </StaggerContainer>
@@ -80,35 +90,35 @@ export default function AboutPage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               { 
-                title: "Community First", 
-                desc: "We believe in the power of designers supporting each other through shared experiences and collective wisdom."
+                title: "Founder-Led Clarity", 
+                desc: "Preneurin is shaped by real studio experience and a founder who understands the pressure behind fashion growth."
               },
               { 
-                title: "Practical Knowledge", 
-                desc: "Focus on real-world solutions, not just theory. Everything we teach has been tested in real fashion businesses."
+                title: "Practical Honesty", 
+                desc: "We focus on the issues designers actually deal with: costing, production, client management, and decision-making under pressure."
               },
               { 
-                title: "Transparency", 
-                desc: "We talk about the parts of fashion design that nobody discusses openly—because that's where the real growth happens."
+                title: "Truth Before Hype", 
+                desc: "We would rather show one real session than invent scale we have not earned. Credibility matters."
               },
               { 
-                title: "Inclusivity", 
-                desc: "Welcoming designers from all backgrounds, experience levels, and locations. Your story matters here."
+                title: "Steady Growth", 
+                desc: "Preneurin is still early, and that means we can build carefully, learn from each session, and improve the format with intention."
               },
               { 
-                title: "Excellence", 
-                desc: "Striving for the highest standards in everything we do, from our community guidelines to our educational content."
+                title: "Designers First", 
+                desc: "Every session, initiative, and resource is meant to solve real friction for fashion designers, not create more noise."
               },
               { 
-                title: "Sustainability", 
-                desc: "Building businesses that are not just profitable, but also sustainable for the long term."
+                title: "Open Collaboration", 
+                desc: "We are open to aligned sponsors and ecosystem partners who want to help fashion founders grow with substance."
               }
             ].map((value, index) => (
               <StaggerContainer key={index} delay={index * 0.1}>
                 <StaggerItem>
-                  <div className="bg-[#0F0F0F] border border-white/10 rounded-2xl p-8 hover:border-[#D4AF37]/50 transition-all">
-                    <h3 className="font-serif text-2xl mb-4 text-[#D4AF37]">{value.title}</h3>
-                    <p className="text-gray-400">{value.desc}</p>
+                  <div className="bg-[var(--card)] border border-[var(--border)] rounded-2xl p-8 hover:border-accent/50 transition-all">
+                    <h3 className="font-serif text-2xl mb-4 text-accent">{value.title}</h3>
+                    <p className="text-gray-500 dark:text-gray-400">{value.desc}</p>
                   </div>
                 </StaggerItem>
               </StaggerContainer>

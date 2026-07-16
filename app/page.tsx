@@ -1,12 +1,23 @@
 'use client';
 
 import { motion, useMotionValue, useSpring } from 'framer-motion';
-import { Users, DollarSign, MessageSquare, Send, ChevronRight, Play, Pause, Plus, Minus } from 'lucide-react';
+import { Users, DollarSign, MessageSquare, Send, ChevronRight, Play, Plus, Minus } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import StaggerContainer from '@/components/StaggerContainer';
 import StaggerItem from '@/components/StaggerItem';
 import Breadcrumb from '@/components/Breadcrumb';
+
+const DASA_MEDIA_ROOT = '/DASA%20PICTURES';
+const HERO_VIDEO_SRC = `${DASA_MEDIA_ROOT}/IMG_5870.MP4`;
+const HERO_FALLBACK_IMAGE = `${DASA_MEDIA_ROOT}/IMG_0847.jpg`;
+const COMMUNITY_IMAGE = `${DASA_MEDIA_ROOT}/IMG_0815.jpg`;
+const CONTACT_EMAIL = 'secretariat@preneurin.org';
+
+function buildMailtoHref(subject: string, lines: string[]) {
+  return `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join('\n'))}`;
+}
 
 // Magnetic Button Component
 const MagneticButton = ({ children, className, onClick, href }: any) => {
@@ -66,13 +77,13 @@ const FAQItem = ({ question, answer }: { question: string; answer: string }) => 
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="border-b border-white/10 py-6">
+    <div className="border-b border-[var(--border)] py-6">
       <button 
         onClick={() => setIsOpen(!isOpen)}
         className="w-full flex justify-between items-center text-left"
       >
         <span className="text-lg font-medium">{question}</span>
-        {isOpen ? <Minus className="w-5 h-5 text-[#D4AF37]" /> : <Plus className="w-5 h-5 text-[#D4AF37]" />}
+        {isOpen ? <Minus className="w-5 h-5 text-accent" /> : <Plus className="w-5 h-5 text-accent" />}
       </button>
       <motion.div
         initial={false}
@@ -80,8 +91,60 @@ const FAQItem = ({ question, answer }: { question: string; answer: string }) => 
         transition={{ duration: 0.3 }}
         className="overflow-hidden"
       >
-        <p className="text-gray-400 pt-4">{answer}</p>
+        <p className="text-gray-500 dark:text-gray-400 pt-4">{answer}</p>
       </motion.div>
+    </div>
+  );
+};
+
+const HeroBackgroundVideo = () => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [autoplayBlocked, setAutoplayBlocked] = useState(false);
+  const [videoReady, setVideoReady] = useState(false);
+
+  useEffect(() => {
+    const video = videoRef.current;
+
+    if (!video) {
+      return;
+    }
+
+    const playPromise = video.play();
+
+    if (playPromise && typeof playPromise.catch === 'function') {
+      playPromise.catch(() => {
+        setAutoplayBlocked(true);
+      });
+    }
+  }, []);
+
+  return (
+    <div className="absolute inset-0">
+      <Image
+        src={HERO_FALLBACK_IMAGE}
+        alt=""
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover"
+      />
+      {!autoplayBlocked && (
+        <video
+          ref={videoRef}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          poster={HERO_FALLBACK_IMAGE}
+          onLoadedData={() => setVideoReady(true)}
+          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${videoReady ? 'opacity-100' : 'opacity-0'}`}
+          aria-hidden="true"
+        >
+          <source src={HERO_VIDEO_SRC} type="video/mp4" />
+        </video>
+      )}
+      <div className="absolute inset-0 bg-gradient-to-r from-[var(--background)]/95 via-[var(--background)]/75 to-black/50 dark:from-black/85 dark:via-black/60 dark:to-black/55" />
     </div>
   );
 };
@@ -111,15 +174,20 @@ const VideoPlayer = () => {
           playsInline
           preload="metadata"
           className="w-full h-full object-cover object-top rounded-3xl"
+          onClick={togglePlay}
         />
-        <button 
+        <motion.button 
+          initial={{ opacity: 1 }}
+          animate={{ opacity: isPlaying ? 0 : 1 }}
+          transition={{ duration: 0.3 }}
           onClick={togglePlay}
           className="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/40 transition-colors rounded-3xl"
+          style={{ pointerEvents: isPlaying ? 'none' : 'auto' }}
         >
-          <div className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-[#D4AF37] flex items-center justify-center shadow-2xl">
-            {isPlaying ? <Pause className="w-10 h-10 md:w-12 md:h-12 text-[#0A0A0A]" /> : <Play className="w-10 h-10 md:w-12 md:h-12 text-[#0A0A0A] ml-1" />}
+          <div className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-accent flex items-center justify-center shadow-2xl">
+            <Play className="w-10 h-10 md:w-12 md:h-12 text-[#0A0A0A]" />
           </div>
-        </button>
+        </motion.button>
       </div>
     </div>
   );
@@ -173,17 +241,21 @@ const MultiStepForm = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (validateStep()) {
-      const message = `*PRENEURIN DESIGNERS DEVELOPMENT INITIATIVE APPLICATION*\n\n` +
-        `Full Name: ${formData.fullName}\n` +
-        `Brand Name: ${formData.brandName}\n` +
-        `Email: ${formData.email}\n` +
-        `WhatsApp: ${formData.phone}\n` +
-        `Brand Stage: ${formData.brandStage}\n` +
-        `Primary Barrier: ${formData.barrier}\n` +
-        `Why Join: ${formData.whyJoin}`;
+      const href = buildMailtoHref(`Preneurin Interest Form: ${formData.brandName}`, [
+        'PRENEURIN INTEREST FORM',
+        '',
+        `Full Name: ${formData.fullName}`,
+        `Brand Name: ${formData.brandName}`,
+        `Email: ${formData.email}`,
+        `WhatsApp: ${formData.phone}`,
+        `Brand Stage: ${formData.brandStage}`,
+        `Primary Barrier: ${formData.barrier}`,
+        '',
+        'Why I Want To Join:',
+        formData.whyJoin,
+      ]);
 
-      const encodedMessage = encodeURIComponent(message);
-      window.open(`https://api.whatsapp.com/send?phone=2340000000000&text=${encodedMessage}`, '_blank');
+      window.location.href = href;
     }
   };
 
@@ -195,19 +267,19 @@ const MultiStepForm = () => {
   };
 
   return (
-    <div className="bg-[#0F0F0F] border border-white/10 rounded-3xl p-8 md:p-12">
+    <div className="bg-[var(--card)] border border-[var(--border)] rounded-3xl p-8 md:p-12">
       {/* Progress Bar */}
       <div className="mb-12">
         <div className="flex justify-between mb-3">
           {[1, 2, 3].map(num => (
-            <div key={num} className={`text-sm font-medium ${step >= num ? 'text-[#D4AF37]' : 'text-gray-500'}`}>
+            <div key={num} className={`text-sm font-medium ${step >= num ? 'text-accent' : 'text-gray-500 dark:text-gray-400'}`}>
               Step {num}
             </div>
           ))}
         </div>
-        <div className="h-1 bg-white/10 rounded-full overflow-hidden">
+        <div className="h-1 bg-[var(--border)] rounded-full overflow-hidden">
           <motion.div 
-            className="h-full bg-[#D4AF37]"
+            className="h-full bg-accent"
             initial={{ width: 0 }}
             animate={{ width: `${(step / totalSteps) * 100}%` }}
             transition={{ duration: 0.5 }}
@@ -226,27 +298,27 @@ const MultiStepForm = () => {
           >
             <div className="grid md:grid-cols-2 gap-6">
               <div>
-                <label className="block text-sm text-gray-300 mb-2">Full Name</label>
+                <label className="block text-sm text-gray-500 dark:text-gray-400 mb-2">Full Name</label>
                 <input 
                   required
                   name="fullName"
                   type="text" 
                   value={formData.fullName}
                   onChange={handleChange}
-                  className={`w-full bg-[#0A0A0A] border rounded-xl px-4 py-3 text-white focus:outline-none transition-colors ${errors.fullName ? 'border-red-500' : 'border-white/10 focus:border-[#D4AF37]'}`}
+                  className={`w-full bg-[var(--background)] border rounded-xl px-4 py-3 text-[var(--foreground)] focus:outline-none transition-colors ${errors.fullName ? 'border-red-500' : 'border-[var(--border)] focus:border-accent'}`}
                   placeholder="Your full name"
                 />
                 {errors.fullName && <p className="text-red-500 text-sm mt-1">{errors.fullName}</p>}
               </div>
               <div>
-                <label className="block text-sm text-gray-300 mb-2">Brand Name</label>
+                <label className="block text-sm text-gray-500 dark:text-gray-400 mb-2">Brand Name</label>
                 <input 
                   required
                   name="brandName"
                   type="text" 
                   value={formData.brandName}
                   onChange={handleChange}
-                  className={`w-full bg-[#0A0A0A] border rounded-xl px-4 py-3 text-white focus:outline-none transition-colors ${errors.brandName ? 'border-red-500' : 'border-white/10 focus:border-[#D4AF37]'}`}
+                  className={`w-full bg-[var(--background)] border rounded-xl px-4 py-3 text-[var(--foreground)] focus:outline-none transition-colors ${errors.brandName ? 'border-red-500' : 'border-[var(--border)] focus:border-accent'}`}
                   placeholder="Your brand name"
                 />
                 {errors.brandName && <p className="text-red-500 text-sm mt-1">{errors.brandName}</p>}
@@ -254,27 +326,27 @@ const MultiStepForm = () => {
             </div>
             <div className="grid md:grid-cols-2 gap-6">
               <div>
-                <label className="block text-sm text-gray-300 mb-2">Email Address</label>
+                <label className="block text-sm text-gray-500 dark:text-gray-400 mb-2">Email Address</label>
                 <input 
                   required
                   name="email"
                   type="email" 
                   value={formData.email}
                   onChange={handleChange}
-                  className={`w-full bg-[#0A0A0A] border rounded-xl px-4 py-3 text-white focus:outline-none transition-colors ${errors.email ? 'border-red-500' : 'border-white/10 focus:border-[#D4AF37]'}`}
+                  className={`w-full bg-[var(--background)] border rounded-xl px-4 py-3 text-[var(--foreground)] focus:outline-none transition-colors ${errors.email ? 'border-red-500' : 'border-[var(--border)] focus:border-accent'}`}
                   placeholder="you@example.com"
                 />
                 {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
               </div>
               <div>
-                <label className="block text-sm text-gray-300 mb-2">WhatsApp Phone Number</label>
+                <label className="block text-sm text-gray-500 dark:text-gray-400 mb-2">WhatsApp Phone Number</label>
                 <input 
                   required
                   name="phone"
                   type="tel" 
                   value={formData.phone}
                   onChange={handleChange}
-                  className={`w-full bg-[#0A0A0A] border rounded-xl px-4 py-3 text-white focus:outline-none transition-colors ${errors.phone ? 'border-red-500' : 'border-white/10 focus:border-[#D4AF37]'}`}
+                  className={`w-full bg-[var(--background)] border rounded-xl px-4 py-3 text-[var(--foreground)] focus:outline-none transition-colors ${errors.phone ? 'border-red-500' : 'border-[var(--border)] focus:border-accent'}`}
                   placeholder="+234..."
                 />
                 {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
@@ -292,13 +364,13 @@ const MultiStepForm = () => {
             className="space-y-6"
           >
             <div>
-              <label className="block text-sm text-gray-300 mb-2">Current Brand Stage</label>
+              <label className="block text-sm text-gray-500 dark:text-gray-400 mb-2">Current Brand Stage</label>
               <select 
                 required
                 name="brandStage"
                 value={formData.brandStage}
                 onChange={handleChange}
-                className={`w-full bg-[#0A0A0A] border rounded-xl px-4 py-3 text-white focus:outline-none transition-colors ${errors.brandStage ? 'border-red-500' : 'border-white/10 focus:border-[#D4AF37]'}`}
+                className={`w-full bg-[var(--background)] border rounded-xl px-4 py-3 text-[var(--foreground)] focus:outline-none transition-colors ${errors.brandStage ? 'border-red-500' : 'border-[var(--border)] focus:border-accent'}`}
               >
                 <option value="">Select your stage</option>
                 <option value="Emerging Designer">Emerging Designer</option>
@@ -308,13 +380,13 @@ const MultiStepForm = () => {
               {errors.brandStage && <p className="text-red-500 text-sm mt-1">{errors.brandStage}</p>}
             </div>
             <div>
-              <label className="block text-sm text-gray-300 mb-2">Primary Operational Barrier</label>
+              <label className="block text-sm text-gray-500 dark:text-gray-400 mb-2">Primary Operational Barrier</label>
               <select 
                 required
                 name="barrier"
                 value={formData.barrier}
                 onChange={handleChange}
-                className={`w-full bg-[#0A0A0A] border rounded-xl px-4 py-3 text-white focus:outline-none transition-colors ${errors.barrier ? 'border-red-500' : 'border-white/10 focus:border-[#D4AF37]'}`}
+                className={`w-full bg-[var(--background)] border rounded-xl px-4 py-3 text-[var(--foreground)] focus:outline-none transition-colors ${errors.barrier ? 'border-red-500' : 'border-[var(--border)] focus:border-accent'}`}
               >
                 <option value="">Select your biggest challenge</option>
                 <option value="Staffing & Tailor Management">Staffing & Tailor Management</option>
@@ -336,21 +408,21 @@ const MultiStepForm = () => {
             className="space-y-6"
           >
             <div>
-              <label className="block text-sm text-gray-300 mb-2">Why do you want to join PRENEURIN DESIGNERS DEVELOPMENT INITIATIVE?</label>
+              <label className="block text-sm text-gray-500 dark:text-gray-400 mb-2">Why do you want to join Preneurin?</label>
               <textarea 
                 required
                 name="whyJoin"
                 value={formData.whyJoin}
                 onChange={handleChange}
                 rows={6}
-                className={`w-full bg-[#0A0A0A] border rounded-xl px-4 py-3 text-white focus:outline-none transition-colors resize-none ${errors.whyJoin ? 'border-red-500' : 'border-white/10 focus:border-[#D4AF37]'}`}
+                className={`w-full bg-[var(--background)] border rounded-xl px-4 py-3 text-[var(--foreground)] focus:outline-none transition-colors resize-none ${errors.whyJoin ? 'border-red-500' : 'border-[var(--border)] focus:border-accent'}`}
                 placeholder="Share your story and goals..."
               />
               {errors.whyJoin && <p className="text-red-500 text-sm mt-1">{errors.whyJoin}</p>}
             </div>
-            <div className="bg-[#0A0A0A] border border-[#D4AF37]/20 rounded-xl p-6">
-              <h4 className="text-[#D4AF37] font-semibold mb-2">Application Preview</h4>
-              <div className="text-gray-400 text-sm space-y-1">
+            <div className="bg-[var(--background)] border border-accent/20 rounded-xl p-6">
+              <h4 className="text-accent font-semibold mb-2">Interest Form Preview</h4>
+              <div className="text-gray-500 dark:text-gray-400 text-sm space-y-1">
                 <p><strong>Name:</strong> {formData.fullName || 'Not provided'}</p>
                 <p><strong>Brand:</strong> {formData.brandName || 'Not provided'}</p>
                 <p><strong>Stage:</strong> {formData.brandStage || 'Not provided'}</p>
@@ -365,7 +437,7 @@ const MultiStepForm = () => {
             <button
               type="button"
               onClick={handlePrev}
-              className="flex-1 py-4 border border-white/10 rounded-xl hover:border-[#D4AF37] hover:text-[#D4AF37] transition-all"
+              className="flex-1 py-4 border border-[var(--border)] rounded-xl hover:border-accent hover:text-accent transition-all"
             >
               Previous
             </button>
@@ -374,16 +446,16 @@ const MultiStepForm = () => {
             <button
               type="button"
               onClick={handleNext}
-              className="flex-1 py-4 bg-[#D4AF37] text-[#0A0A0A] font-semibold rounded-xl hover:bg-[#E5C048] transition-all flex items-center justify-center gap-2"
+              className="flex-1 py-4 bg-primary text-cream font-semibold rounded-xl hover:bg-[#5a2833] transition-all flex items-center justify-center gap-2"
             >
               Next Step <ChevronRight className="w-4 h-4" />
             </button>
           ) : (
             <button
               type="submit"
-              className="flex-1 py-4 bg-[#D4AF37] text-[#0A0A0A] font-semibold rounded-xl hover:bg-[#E5C048] transition-all flex items-center justify-center gap-2"
+              className="flex-1 py-4 bg-primary text-cream font-semibold rounded-xl hover:bg-[#5a2833] transition-all flex items-center justify-center gap-2"
             >
-              Submit Application <Send className="w-4 h-4" />
+              Prepare Email Draft <Send className="w-4 h-4" />
             </button>
           )}
         </div>
@@ -393,101 +465,71 @@ const MultiStepForm = () => {
 };
 
 export default function Home() {
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 1500);
-    return () => clearTimeout(timer);
-  }, []);
-
-  if (isLoading) {
-    return (
-      <div className="fixed inset-0 bg-[#0A0A0A] z-[10000] flex items-center justify-center">
-        <div className="text-center">
-          <div className="w-16 h-16 border-2 border-[#D4AF37] border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-          <p className="text-[#D4AF37] font-serif text-xl">PRENUERIN DESIGNERS DEVELOPMENT INITIATIVE</p>
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <div className="min-h-screen bg-[#0A0A0A] text-white font-sans">
+    <div className="min-h-screen text-[var(--foreground)] font-sans">
       <Breadcrumb />
 
       {/* Hero Section */}
-      <section className="pb-24 px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <StaggerContainer>
-              <StaggerItem>
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#D4AF37]/30 text-[#D4AF37] text-sm tracking-widest mb-8 shimmer">
-                  <span className="h-2 w-2 rounded-full bg-[#D4AF37]" />
-                  PRENEURIN DESIGNERS DEVELOPMENT INITIATIVE • BEHIND THE SEAMS
-                </div>
-              </StaggerItem>
-              
-              <StaggerItem>
-                <h1 className="font-serif font-luxury text-5xl md:text-6xl lg:text-7xl leading-tight mb-8">
-                  Where We Talk About The Parts Nobody Says Out Loud.
-                </h1>
-              </StaggerItem>
-              
-              <StaggerItem>
-                <p className="text-gray-300 text-lg md:text-xl max-w-xl mb-12 leading-relaxed">
-                  A safe space and business development community for fashion designers to face real truths, solve operational struggles, and find clarity. Real stories. Real struggles. Real growth.
-                </p>
-              </StaggerItem>
-
-              <StaggerItem>
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <MagneticButton href="#join-inner-circle">
-                    <span 
-                      className="px-8 py-4 bg-[#D4AF37] text-[#0A0A0A] font-semibold rounded-full hover:bg-[#E5C048] transition-all transform hover:scale-105 flex items-center justify-center gap-2"
-                    >
-                      Join The Forum <ChevronRight className="w-4 h-4" />
-                    </span>
-                  </MagneticButton>
-                  <MagneticButton href="/programs">
-                    <span 
-                      className="px-8 py-4 border border-white/10 rounded-full hover:border-[#D4AF37] hover:text-[#D4AF37] transition-all flex items-center justify-center gap-2"
-                    >
-                      Explore Programs
-                    </span>
-                  </MagneticButton>
-                </div>
-              </StaggerItem>
-            </StaggerContainer>
-
-            <StaggerContainer delay={0.2}>
-              <StaggerItem>
-                <div className="relative">
-                  <div className="rounded-3xl overflow-hidden border border-white/10">
-                    <img 
-                      src="/Our Story.jpg"
-                      alt="Fashion designers collaborating in luxury studio"
-                      className="w-full h-[400px] md:h-[500px] lg:h-[600px] object-cover"
-                    />
+      <section className="px-6 pt-24">
+        <div className="relative mx-auto max-w-7xl overflow-hidden rounded-[2rem] border border-[var(--border)] min-h-[78vh]">
+          <HeroBackgroundVideo />
+          <div className="relative z-10 flex min-h-[78vh] items-center px-4 py-12 md:px-10 lg:px-16">
+            <div className="max-w-lg !text-white">
+              <StaggerContainer>
+                <StaggerItem>
+                  <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/25 px-3 py-2 text-[10px] tracking-[0.16em] !text-white backdrop-blur-xl sm:px-4 sm:text-xs">
+                    <span className="h-2 w-2 rounded-full bg-accent" />
+                    DESIGNERS ONLY
                   </div>
-                </div>
-              </StaggerItem>
-            </StaggerContainer>
+                </StaggerItem>
+
+                <StaggerItem>
+                  <h1 className="mt-5 max-w-md font-serif font-luxury text-[2rem] leading-tight !text-white sm:text-5xl md:text-6xl lg:text-7xl">
+                    Fashion Growth. No Guesswork.
+                  </h1>
+                </StaggerItem>
+
+                <StaggerItem>
+                  <p className="mt-3 max-w-sm text-sm leading-relaxed !text-white sm:text-base md:text-lg">
+                    Built from our first April session for designers tackling pricing, production, clients, and growth.
+                  </p>
+                </StaggerItem>
+
+                <StaggerItem>
+                  <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                    <MagneticButton href="#join-inner-circle">
+                      <span className="flex w-full items-center justify-center gap-2 rounded-full bg-primary px-7 py-3.5 font-semibold text-white transition-all hover:bg-[#5a2833] hover:scale-105 sm:w-auto sm:px-8 sm:py-4">
+                        Join The Next Session <ChevronRight className="h-4 w-4" />
+                      </span>
+                    </MagneticButton>
+                    <MagneticButton href="/success-stories">
+                      <span className="flex w-full items-center justify-center gap-2 rounded-full border border-white/25 bg-black/20 px-7 py-3.5 text-white transition-all hover:border-accent hover:text-white sm:w-auto sm:px-8 sm:py-4">
+                        See How It Started
+                      </span>
+                    </MagneticButton>
+                  </div>
+                </StaggerItem>
+              </StaggerContainer>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Founder's Manifesto Section */}
-      <section className="py-24 px-6">
+      <section className="py-24 px-6 bg-gradient-to-b from-transparent via-[var(--card)] to-transparent">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <StaggerContainer>
               <StaggerItem>
                 <div className="relative">
-                  <div className="rounded-3xl overflow-hidden border border-white/10">
-                    <img 
-                      src="/Damilola.jpg" 
-                      alt="Damilola Obisesan" 
-                      className="w-full h-[500px] md:h-[600px] object-cover"
+                  <div className="rounded-3xl overflow-hidden border border-[var(--border)]">
+                    <Image
+                      src={COMMUNITY_IMAGE}
+                      alt="Preneurin community members in a design studio setting"
+                      width={1600}
+                      height={2000}
+                      sizes="(min-width: 768px) 50vw, 100vw"
+                      className="h-[500px] w-full object-cover md:h-[600px]"
                     />
                   </div>
                   <motion.div 
@@ -500,10 +542,10 @@ export default function Home() {
                       delay: 0.4,
                       y: { repeat: Infinity, duration: 3, ease: "easeInOut", delay: 0.6 + 0.4 },
                     }}
-                    className="absolute bottom-6 left-6 right-6 bg-[#0A0A0A]/80 backdrop-blur-xl border border-white/10 rounded-2xl p-4 md:p-6"
+                    className="absolute bottom-6 left-6 right-6 bg-[var(--background)]/80 backdrop-blur-xl border border-[var(--border)] rounded-2xl p-4 md:p-6"
                   >
-                    <p className="text-[#D4AF37] font-semibold text-sm tracking-wider">DAMILOLA OBISESAN</p>
-                    <p className="text-white/80 text-sm">Founder, Preneurin</p>
+                    <p className="text-accent font-semibold text-sm tracking-wide">FIRST LIVE SESSION</p>
+                    <p className="text-gray-500 dark:text-gray-400 text-sm">The April room that shaped what Preneurin is becoming.</p>
                   </motion.div>
                 </div>
               </StaggerItem>
@@ -512,17 +554,20 @@ export default function Home() {
             <StaggerContainer delay={0.2}>
               <StaggerItem>
                 <h2 className="font-serif font-luxury text-4xl md:text-5xl lg:text-6xl leading-tight mb-8">
-                  From Where You Are, To Where You Want To Be.
+                  Built from one honest room for fashion founders.
                 </h2>
               </StaggerItem>
               
               <StaggerItem>
-                <div className="space-y-6 text-gray-300 text-lg leading-relaxed">
+                <div className="space-y-6 text-gray-500 dark:text-gray-400 text-lg leading-relaxed">
                   <p>
-                    No matter how big of a designer you are, you have faced operational nightmares—whether it is dealing with unreliable tailors, pay guys, underpricing, or client communication.
+                    Preneurin started with one live session in April after Damilola Obiesan, Creative Director of Dassah Oikos, saw how often designers were facing pricing, production, and client problems alone.
                   </p>
                   <p>
-                    We all face these struggles in secret. At Preneurin Forum, we come together as a verified community to find practical solutions from designers who have already walked the exact road you are currently walking.
+                    The first session was intentionally practical: honest conversations about what happens inside real studios, what keeps founders stuck, and what kind of support actually helps.
+                  </p>
+                  <p>
+                    That early momentum now guides the next phase of Preneurin: a founder-led platform for fashion designers who want clearer decisions, stronger structure, and growth they can sustain.
                   </p>
                 </div>
               </StaggerItem>
@@ -532,13 +577,13 @@ export default function Home() {
       </section>
 
       {/* Video Section */}
-      <section className="py-24 px-6 bg-gradient-to-b from-[#0A0A0A] via-[#0F0F0F] to-[#0A0A0A]">
+      <section className="py-24 px-6 bg-gradient-to-b from-transparent via-[var(--card)] to-transparent">
         <div className="max-w-7xl mx-auto">
           <StaggerContainer>
             <StaggerItem>
               <div className="text-center mb-12">
                 <h2 className="font-serif font-luxury text-4xl md:text-5xl mb-4">Watch The Vision</h2>
-                <p className="text-gray-400 text-lg">Hear directly from Damilola about what Preneurin Forum truly is.</p>
+                <p className="text-gray-500 dark:text-gray-400 text-lg">Hear directly from Damilola about why Preneurin started and where it can grow from here.</p>
               </div>
             </StaggerItem>
             
@@ -556,7 +601,7 @@ export default function Home() {
             <StaggerItem>
               <div className="text-center mb-16">
                 <h2 className="font-serif font-luxury text-4xl md:text-5xl mb-4">The Reality</h2>
-                <p className="text-gray-400 text-lg">Why The Forum Exists</p>
+                <p className="text-gray-500 dark:text-gray-400 text-lg">Why the first session mattered</p>
               </div>
             </StaggerItem>
           </StaggerContainer>
@@ -566,34 +611,34 @@ export default function Home() {
               { 
                 num: "01", 
                 title: "Staffing & Production", 
-                desc: "Solving the daily chaos of unreliable tailors, pattern makers, and beading artisans.",
-                icon: <Users className="w-10 h-10 text-[#D4AF37]" />
+                desc: "Unpacking the daily chaos around tailors, pattern makers, and the handoff between creative ideas and real delivery.",
+                icon: <Users className="w-10 h-10 text-accent" />
               },
               { 
                 num: "02", 
                 title: "Pricing & Profitability", 
-                desc: "Mastering garment costing so designers never underprice their creativity again.",
-                icon: <DollarSign className="w-10 h-10 text-[#D4AF37]" />
+                desc: "Helping designers price with more confidence so growth does not come at the expense of profit.",
+                icon: <DollarSign className="w-10 h-10 text-accent" />
               },
               { 
                 num: "03", 
                 title: "Client Boundaries", 
-                desc: "Setting strict standards and managing high-ticket customer expectations professionally.",
-                icon: <MessageSquare className="w-10 h-10 text-[#D4AF37]" />
+                desc: "Giving founders language and structure for handling demanding clients with more clarity.",
+                icon: <MessageSquare className="w-10 h-10 text-accent" />
               }
             ].map((pillar, index) => (
               <StaggerContainer key={index} delay={index * 0.15}>
                 <StaggerItem>
                   <motion.div 
                     whileHover={{ y: -8, transition: { duration: 0.3 } }}
-                    className="bg-[#0F0F0F] border border-white/10 rounded-2xl p-8 hover:border-[#D4AF37]/50 transition-all group"
+                    className="bg-[var(--card)] border border-[var(--border)] rounded-2xl p-8 hover:border-accent/50 transition-all group"
                   >
-                    <div className="text-[#D4AF37] font-serif text-5xl font-bold mb-4 opacity-30 group-hover:opacity-100 transition-opacity">
+                    <div className="text-accent font-serif text-5xl font-bold mb-4 opacity-30 group-hover:opacity-100 transition-opacity">
                       {pillar.num}
                     </div>
                     <div className="mb-4">{pillar.icon}</div>
                     <h3 className="font-serif text-2xl mb-3">{pillar.title}</h3>
-                    <p className="text-gray-400">{pillar.desc}</p>
+                    <p className="text-gray-500 dark:text-gray-400">{pillar.desc}</p>
                   </motion.div>
                 </StaggerItem>
               </StaggerContainer>
@@ -603,33 +648,33 @@ export default function Home() {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-24 px-6 bg-gradient-to-b from-[#0A0A0A] via-[#0F0F0F] to-[#0A0A0A]">
+      <section className="py-24 px-6 bg-gradient-to-b from-transparent via-[var(--card)] to-transparent">
         <div className="max-w-3xl mx-auto">
           <StaggerContainer>
             <StaggerItem>
               <div className="text-center mb-12">
                 <h2 className="font-serif font-luxury text-4xl md:text-5xl mb-4">Frequently Asked Questions</h2>
-                <p className="text-gray-400 text-lg">Got questions? We've got answers.</p>
+                <p className="text-gray-500 dark:text-gray-400 text-lg">Clear answers about where Preneurin stands today.</p>
               </div>
             </StaggerItem>
             
             <StaggerItem>
               <div>
                 <FAQItem 
-                  question="Who can join Preneurin Forum?"
-                  answer="Preneurin Forum is exclusively for fashion designers who are serious about growing their business and solving real operational challenges. We verify all members to ensure a safe, high-quality community."
+                  question="Who can join Preneurin?"
+                  answer="Preneurin is built for fashion designers who want practical business clarity. At this stage, each session is kept focused so the room fits the designers it is meant to serve."
                 />
                 <FAQItem 
                   question="How much does it cost to join?"
-                  answer="Pricing information is shared during the application process. We offer different tiers based on your brand stage and needs."
+                  answer="Pricing is shared when the next session opens. Because Preneurin is still growing from its first live session, details are communicated directly to interested designers."
                 />
                 <FAQItem 
                   question="What kind of support will I get?"
-                  answer="You'll get access to a private community, monthly Q&As with Damilola, expert workshops, and practical resources for staffing, pricing, and client management."
+                  answer="Right now, support centers on live sessions, practical discussion, and follow-up resources shaped by the questions designers brought into the April room."
                 />
                 <FAQItem 
                   question="Is this community only for designers in Nigeria?"
-                  answer="While founded in Lagos, Preneurin Forum welcomes fashion designers from around the world who are facing similar operational challenges."
+                  answer="Preneurin started in Lagos and the first session happened there, but the long-term vision is to support fashion designers wherever the conversation is relevant."
                 />
               </div>
             </StaggerItem>
@@ -643,8 +688,8 @@ export default function Home() {
           <StaggerContainer>
             <StaggerItem>
               <div className="text-center mb-12">
-                <h2 className="font-serif font-luxury text-4xl md:text-5xl mb-4">Join The Inner Circle</h2>
-                <p className="text-gray-400 text-lg">Connect, ask real questions, and scale with a verified network of fashion entrepreneurs.</p>
+                <h2 className="font-serif font-luxury text-4xl md:text-5xl mb-4">Register Your Interest</h2>
+                <p className="text-gray-500 dark:text-gray-400 text-lg">Share your details and the challenge you want help with for the next Preneurin session.</p>
               </div>
             </StaggerItem>
             

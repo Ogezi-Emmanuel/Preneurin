@@ -7,27 +7,45 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Light Mode */
 :root {
+  --background: #f5f1ed;
+  --foreground: #1a1a1a;
+  --card: #ffffff;
+  --border: rgba(0,0,0,0.1);
+  /* Preneurin Brand Colors */
+  --primary: #4a2029;
+  --cream: #e2ceb0;
+  --taupe: #8d6f62;
+  --accent: #ad8a70;
+  --muted: #a68c94;
+}
+
+/* Dark Mode */
+.dark {
   --background: #0A0A0A;
   --foreground: #FFFFFF;
-  --gold: #D4AF37;
+  --card: #0F0F0F;
+  --border: rgba(255,255,255,0.1);
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
   cursor: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 * {
   cursor: none;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 /* Custom Cursor */
 .custom-cursor {
   width: 20px;
   height: 20px;
-  border: 2px solid var(--gold);
+  border: 2px solid var(--accent);
   border-radius: 50%;
   position: fixed;
   pointer-events: none;
@@ -39,7 +57,7 @@ body {
 .cursor-dot {
   width: 6px;
   height: 6px;
-  background: var(--gold);
+  background: var(--accent);
   border-radius: 50%;
   position: fixed;
   pointer-events: none;
@@ -48,12 +66,12 @@ body {
 
 .cursor-hover {
   transform: scale(2);
-  background: rgba(212, 175, 55, 0.2);
+  background: rgba(173, 138, 112, 0.2);
 }
 
 /* Shimmer Effect */
 .shimmer {
-  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.2), transparent);
+  background: linear-gradient(90deg, transparent, rgba(173, 138, 112, 0.2), transparent);
   background-size: 200% 100%;
   animation: shimmer 2s infinite;
 }
@@ -73,7 +91,8 @@ body {
   position: relative;
   overflow: hidden;
   border-radius: 24px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border);
+  background-color: var(--card);
 }
 
 .video-container video {

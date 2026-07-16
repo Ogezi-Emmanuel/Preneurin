@@ -6,25 +6,27 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "node --test"
   },
   "dependencies": {
+    "clsx": "^2",
+    "framer-motion": "^12",
+    "get-image-colors": "^4.0.1",
+    "lucide-react": "^0.500",
+    "next": "^15",
     "react": "^19",
     "react-dom": "^19",
-    "next": "^15",
-    "framer-motion": "^12",
-    "lucide-react": "^0.500",
-    "clsx": "^2",
     "tailwind-merge": "^2"
   },
   "devDependencies": {
-    "typescript": "^5",
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "^15",
     "postcss": "^8",
     "tailwindcss": "^3",
-    "eslint": "^9",
-    "eslint-config-next": "^15"
+    "typescript": "^5"
   }
 }
