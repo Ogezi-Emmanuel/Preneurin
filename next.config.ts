@@ -1,7 +1,9 @@
 import type { NextConfig } from "next";
 
+const useCustomDistDir = process.platform === "win32" && process.env.VERCEL !== "1";
+
 const nextConfig: NextConfig = {
-  distDir: "build",
+  ...(useCustomDistDir ? { distDir: "build" } : {}),
   compress: true,
   poweredByHeader: false,
   images: {
