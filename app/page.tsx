@@ -13,6 +13,7 @@ const DASA_MEDIA_ROOT = '/DASA%20PICTURES';
 const HERO_VIDEO_SRC = `${DASA_MEDIA_ROOT}/IMG_5870.MP4`;
 const HERO_FALLBACK_IMAGE = `${DASA_MEDIA_ROOT}/IMG_0847.jpg`;
 const COMMUNITY_IMAGE = `${DASA_MEDIA_ROOT}/IMG_0815.jpg`;
+const BTS_POSTER_IMAGE = `${DASA_MEDIA_ROOT}/IMG_0718.jpg`;
 const CONTACT_EMAIL = 'secretariat@preneurin.org';
 
 function buildMailtoHref(subject: string, lines: string[]) {
@@ -569,6 +570,62 @@ export default function Home() {
                   <p>
                     That early momentum now guides the next phase of Preneurin: a founder-led platform for fashion designers who want clearer decisions, stronger structure, and growth they can sustain.
                   </p>
+                </div>
+              </StaggerItem>
+            </StaggerContainer>
+          </div>
+        </div>
+      </section>
+
+      {/* BTS Teaser Section */}
+      <section className="py-24 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid items-center gap-12 lg:grid-cols-[0.95fr_1.05fr]">
+            <StaggerContainer>
+              <StaggerItem>
+                <div className="relative overflow-hidden rounded-3xl border border-[var(--border)] bg-[var(--card)]">
+                  <Image
+                    src={BTS_POSTER_IMAGE}
+                    alt="Behind the scenes moment from the Preneurin April session"
+                    width={1600}
+                    height={1200}
+                    sizes="(min-width: 1024px) 50vw, 100vw"
+                    className="h-[340px] w-full object-cover object-top md:h-[460px]"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/15 to-transparent" />
+                  <div className="absolute inset-x-6 bottom-6 flex items-center justify-between gap-4 rounded-2xl border border-white/15 bg-black/25 px-5 py-4 backdrop-blur-md">
+                    <div>
+                      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/75">Behind The Scenes</p>
+                      <p className="mt-1 text-sm text-white">A real look inside the April room that started Preneurin.</p>
+                    </div>
+                    <div className="flex h-14 w-14 items-center justify-center rounded-full bg-accent shadow-2xl">
+                      <Play className="h-6 w-6 text-[#0A0A0A]" />
+                    </div>
+                  </div>
+                </div>
+              </StaggerItem>
+            </StaggerContainer>
+
+            <StaggerContainer delay={0.15}>
+              <StaggerItem>
+                <p className="text-sm uppercase tracking-[0.2em] text-accent">Inside The April Session</p>
+                <h2 className="mt-4 font-serif font-luxury text-4xl leading-tight md:text-5xl">
+                  See the behind-the-scenes energy that made the first session real.
+                </h2>
+                <p className="mt-6 max-w-2xl text-lg leading-relaxed text-gray-500 dark:text-gray-400">
+                  The DASA BTS video captures what the photos alone cannot: the atmosphere, attention, and founder-led conversations that shaped Preneurin&apos;s first live gathering.
+                </p>
+                <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                  <MagneticButton href="/success-stories">
+                    <span className="flex w-full items-center justify-center gap-2 rounded-full bg-primary px-7 py-3.5 font-semibold text-white transition-all hover:bg-[#5a2833] hover:scale-105 sm:w-auto sm:px-8 sm:py-4">
+                      Watch The BTS <ChevronRight className="h-4 w-4" />
+                    </span>
+                  </MagneticButton>
+                  <MagneticButton href="/success-stories">
+                    <span className="flex w-full items-center justify-center gap-2 rounded-full border border-[var(--border)] bg-[var(--card)] px-7 py-3.5 transition-all hover:border-accent hover:text-accent sm:w-auto sm:px-8 sm:py-4">
+                      Explore The First Session
+                    </span>
+                  </MagneticButton>
                 </div>
               </StaggerItem>
             </StaggerContainer>

@@ -1,9 +1,15 @@
 'use client';
 
 import Image from 'next/image';
+import { motion } from 'framer-motion';
+import { Play } from 'lucide-react';
+import { useRef, useState } from 'react';
 import Breadcrumb from '@/components/Breadcrumb';
 import StaggerContainer from '@/components/StaggerContainer';
 import StaggerItem from '@/components/StaggerItem';
+
+const BTS_VIDEO = '/DASA BTS.mp4';
+const BTS_POSTER = '/DASA%20PICTURES/IMG_0718.jpg';
 
 const sessionMoments = [
   {
@@ -53,9 +59,63 @@ const sessionGallery = [
 
 const proofPoints = [
   'The photos on this page are from the real April session.',
+  'The BTS video on this page was captured during that same day.',
   'The format is still early, but the direction is clear and founder-led.',
   'Future growth is being built carefully instead of being overstated.',
 ];
+
+function SessionBTSVideo() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const togglePlay = async () => {
+    if (!videoRef.current) {
+      return;
+    }
+
+    if (videoRef.current.paused) {
+      await videoRef.current.play();
+      setIsPlaying(true);
+      return;
+    }
+
+    videoRef.current.pause();
+    setIsPlaying(false);
+  };
+
+  return (
+    <div className="video-container w-full">
+      <div className="relative aspect-[4/5] overflow-hidden rounded-3xl md:aspect-[16/10]">
+        <video
+          ref={videoRef}
+          src={BTS_VIDEO}
+          playsInline
+          preload="none"
+          poster={BTS_POSTER}
+          controls={isPlaying}
+          className="h-full w-full object-cover object-center rounded-3xl"
+          onClick={togglePlay}
+          onPause={() => setIsPlaying(false)}
+          onPlay={() => setIsPlaying(true)}
+        />
+        <motion.button
+          type="button"
+          initial={{ opacity: 1 }}
+          animate={{ opacity: isPlaying ? 0 : 1 }}
+          transition={{ duration: 0.3 }}
+          onClick={togglePlay}
+          className="absolute inset-0 flex items-center justify-center bg-black/25 transition-colors hover:bg-black/35"
+          style={{ pointerEvents: isPlaying ? 'none' : 'auto' }}
+          aria-label="Play behind the scenes video"
+        >
+          <div className="flex h-24 w-24 items-center justify-center rounded-full bg-accent shadow-2xl md:h-28 md:w-28">
+            <Play className="h-10 w-10 text-[#0A0A0A] md:h-12 md:w-12" />
+          </div>
+        </motion.button>
+      </div>
+    </div>
+  );
+}
 
 export default function FirstSessionPage() {
   return (
@@ -106,6 +166,28 @@ export default function FirstSessionPage() {
                   </div>
                 </div>
               </div>
+            </StaggerItem>
+          </StaggerContainer>
+        </div>
+      </section>
+
+      <section className="pb-24 px-6">
+        <div className="max-w-7xl mx-auto">
+          <StaggerContainer>
+            <StaggerItem>
+              <div className="mb-12 text-center">
+                <p className="text-sm uppercase tracking-[0.2em] text-accent">Behind The Scenes</p>
+                <h2 className="mt-4 font-serif font-luxury text-4xl md:text-5xl">What the April session actually felt like</h2>
+                <p className="mx-auto mt-4 max-w-3xl text-lg leading-relaxed text-gray-500 dark:text-gray-300">
+                  This BTS video adds movement and atmosphere to the real story of Preneurin&apos;s first room, showing the energy behind the conversations, focus, and founder-led direction.
+                </p>
+              </div>
+            </StaggerItem>
+          </StaggerContainer>
+
+          <StaggerContainer>
+            <StaggerItem>
+              <SessionBTSVideo />
             </StaggerItem>
           </StaggerContainer>
         </div>

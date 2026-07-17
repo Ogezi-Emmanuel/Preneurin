@@ -21,6 +21,11 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://preneurin.org'),
   title: "Preneurin | Founder-Led Growth Platform For Fashion Designers",
   description: "Preneurin is a founder-led platform for fashion designers, built from its first live session in April to help studios navigate pricing, production, clients, and growth with practical clarity.",
+  icons: {
+    icon: "/Preneurin%20Logo.jpeg",
+    shortcut: "/Preneurin%20Logo.jpeg",
+    apple: "/Preneurin%20Logo.jpeg",
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
