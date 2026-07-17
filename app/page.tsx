@@ -613,7 +613,7 @@ export default function Home() {
                   See the behind-the-scenes energy that made the first session real.
                 </h2>
                 <p className="mt-6 max-w-2xl text-lg leading-relaxed text-gray-500 dark:text-gray-400">
-                  The DASA BTS video captures what the photos alone cannot: the atmosphere, attention, and founder-led conversations that shaped Preneurin&apos;s first live gathering.
+                  The BTS video captures what the photos alone cannot: the atmosphere,and attention that shaped Preneurin&apos;s first live gathering.
                 </p>
                 <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                   <MagneticButton href="/success-stories">
