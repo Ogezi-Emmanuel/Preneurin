@@ -6,6 +6,7 @@ import StaggerContainer from '@/components/StaggerContainer';
 import StaggerItem from '@/components/StaggerItem';
 
 const CONTACT_EMAIL = 'secretariat@preneurin.org';
+const EMAIL_HREF = `mailto:${CONTACT_EMAIL}`;
 const SPONSORSHIP_AREAS = [
   'Session sponsorship',
   'Founding partnership',
@@ -127,19 +128,33 @@ export default function ContactPage() {
       <Breadcrumb />
 
       {/* Hero Section */}
-      <section className="pb-24 px-6 pt-24">
-        <div className="max-w-5xl mx-auto text-center">
+      <section className="px-6 pb-24 pt-32">
+        <div className="max-w-6xl mx-auto">
           <StaggerContainer>
             <StaggerItem>
-              <h1 className="font-serif font-luxury text-5xl md:text-7xl lg:text-8xl leading-tight mb-8">
-                Get In Touch
-              </h1>
-            </StaggerItem>
-            
-            <StaggerItem>
-              <p className="text-gray-500 dark:text-gray-300 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
-                Reach the Preneurin team for general enquiries or use the partnership brief below to start an early sponsorship conversation.
-              </p>
+              <div className="premium-panel rounded-[2.25rem] px-8 py-14 text-center md:px-14">
+                <p className="text-sm uppercase tracking-[0.24em] text-accent">Contact Preneurin</p>
+                <h1 className="mt-6 font-serif font-luxury text-5xl leading-tight md:text-7xl lg:text-8xl">
+                  Get In Touch
+                </h1>
+                <p className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-gray-600 md:text-xl">
+                  Reach the Preneurin team for general enquiries or use the partnership brief below to start an early sponsorship conversation.
+                </p>
+                <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+                  <a
+                    href={EMAIL_HREF}
+                    className="rounded-full bg-primary px-7 py-3.5 font-semibold text-white transition-colors hover:bg-[#5a2833]"
+                  >
+                    Email The Team
+                  </a>
+                  <a
+                    href={EMAIL_HREF}
+                    className="rounded-full border border-[var(--border)] bg-white/65 px-7 py-3.5 font-semibold text-[var(--foreground)] transition-colors hover:border-accent hover:text-accent"
+                  >
+                    Route All Enquiries Here
+                  </a>
+                </div>
+              </div>
             </StaggerItem>
           </StaggerContainer>
         </div>
@@ -154,34 +169,30 @@ export default function ContactPage() {
                 <h2 className="font-serif font-luxury text-4xl mb-8">Contact Information</h2>
                 
                 <div className="space-y-8">
-                  <div>
-                    <h3 className="text-xl mb-2 text-accent">Email</h3>
-                    <p className="text-gray-500 dark:text-gray-400">secretariat@preneurin.org</p>
-                  </div>
-                  
-                  <div>
-                    <h3 className="text-xl mb-2 text-accent">Location</h3>
-                    <p className="text-gray-500 dark:text-gray-400">Lagos, Nigeria</p>
-                  </div>
-                  
-                  <div>
-                    <h3 className="text-xl mb-2 text-accent">Social Media</h3>
-                    <a
-                      href="https://www.instagram.com/preneurinforum/"
-                      target="_blank"
-                      rel="noreferrer"
-                      className="text-gray-500 transition-colors hover:text-accent dark:text-gray-400"
-                    >
-                      Instagram: @preneurinforum
-                    </a>
-                  </div>
+                  <a href={EMAIL_HREF} className="premium-panel block rounded-[1.75rem] p-6 transition-transform hover:-translate-y-1">
+                    <h3 className="mb-2 text-xl text-accent">Email</h3>
+                    <p className="text-gray-600">{CONTACT_EMAIL}</p>
+                    <p className="mt-3 text-sm text-gray-500">This is the primary inbox for every enquiry on the site.</p>
+                  </a>
 
-                  <div className="rounded-3xl border border-[var(--border)] bg-[var(--card)] p-6">
+                  <a href={EMAIL_HREF} className="premium-panel block rounded-[1.75rem] p-6 transition-transform hover:-translate-y-1">
+                    <h3 className="mb-2 text-xl text-accent">Location</h3>
+                    <p className="text-gray-600">Lagos, Nigeria</p>
+                    <p className="mt-3 text-sm text-gray-500">Even location-based enquiries route through email so your future contact setup stays centralized.</p>
+                  </a>
+
+                  <a href={EMAIL_HREF} className="premium-panel block rounded-[1.75rem] p-6 transition-transform hover:-translate-y-1">
+                    <h3 className="mb-2 text-xl text-accent">Social Presence</h3>
+                    <p className="text-gray-600">Instagram: @preneurinforum</p>
+                    <p className="mt-3 text-sm text-gray-500">For now, all social enquiries are directed back to the main email contact.</p>
+                  </a>
+
+                  <div className="premium-panel rounded-[1.75rem] p-6">
                     <h3 className="text-xl mb-2 text-accent">Collaboration Desk</h3>
-                    <p className="text-gray-500 dark:text-gray-400">
+                    <p className="text-gray-600">
                       Preneurin does not yet list sponsors or partners publicly, but we are open to aligned conversations through {CONTACT_EMAIL}.
                     </p>
-                    <p className="mt-3 text-sm text-gray-500 dark:text-gray-400">
+                    <p className="mt-3 text-sm text-gray-500">
                       Best response window: 2-3 business days.
                     </p>
                   </div>
@@ -191,36 +202,36 @@ export default function ContactPage() {
 
             <StaggerContainer delay={0.2}>
               <StaggerItem>
-                <div className="bg-[var(--card)] border border-[var(--border)] rounded-3xl p-8 md:p-12">
+                <div className="premium-panel rounded-[2rem] p-8 md:p-12">
                   {generalSubmitted ? (
                     <div className="text-center py-12">
                       <h3 className="font-serif text-3xl text-accent mb-4">Thank You!</h3>
-                      <p className="text-gray-500 dark:text-gray-400">Your email draft is ready to send. We&apos;ll follow up once it reaches the Secretariat inbox.</p>
+                      <p className="text-gray-600">Your email draft is ready to send. We&apos;ll follow up once it reaches the Secretariat inbox.</p>
                     </div>
                   ) : (
                     <form onSubmit={handleGeneralSubmit} className="space-y-6">
                       <div>
-                        <label className="block text-sm text-gray-500 dark:text-gray-300 mb-2">Your Name</label>
+                        <label className="block text-sm text-gray-600 mb-2">Your Name</label>
                         <input 
                           required
                           name="name"
                           type="text" 
                           value={generalForm.name}
                           onChange={handleGeneralChange}
-                          className="w-full bg-[var(--background)] border border-[var(--border)] rounded-xl px-4 py-3 text-[var(--foreground)] focus:outline-none focus:border-accent transition-colors"
+                          className="w-full rounded-xl border border-[var(--border)] bg-white/65 px-4 py-3 text-[var(--foreground)] focus:outline-none focus:border-accent transition-colors"
                           placeholder="John Doe"
                         />
                       </div>
                       
                       <div>
-                        <label className="block text-sm text-gray-500 dark:text-gray-300 mb-2">Email Address</label>
+                        <label className="block text-sm text-gray-600 mb-2">Email Address</label>
                         <input 
                           required
                           name="email"
                           type="email" 
                           value={generalForm.email}
                           onChange={handleGeneralChange}
-                          className="w-full bg-[var(--background)] border border-[var(--border)] rounded-xl px-4 py-3 text-[var(--foreground)] focus:outline-none focus:border-accent transition-colors"
+                          className="w-full rounded-xl border border-[var(--border)] bg-white/65 px-4 py-3 text-[var(--foreground)] focus:outline-none focus:border-accent transition-colors"
                           placeholder="you@example.com"
                         />
                       </div>
@@ -233,25 +244,25 @@ export default function ContactPage() {
                           type="text" 
                           value={generalForm.subject}
                           onChange={handleGeneralChange}
-                          className="w-full bg-[var(--background)] border border-[var(--border)] rounded-xl px-4 py-3 text-[var(--foreground)] focus:outline-none focus:border-accent transition-colors"
+                          className="w-full rounded-xl border border-[var(--border)] bg-white/65 px-4 py-3 text-[var(--foreground)] focus:outline-none focus:border-accent transition-colors"
                           placeholder="How can we help?"
                         />
                       </div>
                       
                       <div>
-                        <label className="block text-sm text-gray-500 dark:text-gray-300 mb-2">Message</label>
+                        <label className="block text-sm text-gray-600 mb-2">Message</label>
                         <textarea 
                           required
                           name="message"
                           value={generalForm.message}
                           onChange={handleGeneralChange}
                           rows={6}
-                          className="w-full bg-[var(--background)] border border-[var(--border)] rounded-xl px-4 py-3 text-[var(--foreground)] focus:outline-none focus:border-accent transition-colors resize-none"
+                          className="w-full resize-none rounded-xl border border-[var(--border)] bg-white/65 px-4 py-3 text-[var(--foreground)] focus:outline-none focus:border-accent transition-colors"
                           placeholder="Tell us more about your inquiry..."
                         />
                       </div>
 
-                      <p className="text-sm text-gray-500 dark:text-gray-400">
+                      <p className="text-sm text-gray-500">
                         Messages open in your default mail client so your enquiry goes straight into the current contact workflow.
                       </p>
                       
@@ -274,34 +285,34 @@ export default function ContactPage() {
         <div className="max-w-7xl mx-auto">
           <StaggerContainer>
             <StaggerItem>
-              <div className="rounded-3xl border border-[var(--border)] bg-[var(--card)] p-8 md:p-12">
+              <div className="premium-panel rounded-[2rem] p-8 md:p-12">
                 <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr]">
                   <div>
                     <p className="text-sm tracking-[0.2em] text-accent uppercase">Sponsorship Inquiry</p>
                     <h2 className="mt-4 font-serif font-luxury text-4xl md:text-5xl">
                       Start a sponsorship or partnership conversation.
                     </h2>
-                    <p className="mt-6 text-gray-500 dark:text-gray-300 leading-relaxed">
+                    <p className="mt-6 leading-relaxed text-gray-600">
                       Preneurin is still at an early stage, so this brief is designed for first conversations with aligned organizations that want to support fashion founders as the platform grows.
                     </p>
 
                     <div className="mt-8 space-y-4">
-                      <div className="rounded-2xl bg-[var(--background)] p-4">
+                      <div className="rounded-2xl bg-white/60 p-4">
                         <p className="text-xs uppercase tracking-[0.2em] text-accent">Point Of Contact</p>
-                        <p className="mt-2 text-sm text-gray-500 dark:text-gray-300">{CONTACT_EMAIL}</p>
+                        <a href={EMAIL_HREF} className="mt-2 block text-sm text-gray-600 transition-colors hover:text-accent">{CONTACT_EMAIL}</a>
                       </div>
-                      <div className="rounded-2xl bg-[var(--background)] p-4">
+                      <div className="rounded-2xl bg-white/60 p-4">
                         <p className="text-xs uppercase tracking-[0.2em] text-accent">What To Include</p>
-                        <p className="mt-2 text-sm text-gray-500 dark:text-gray-300">Organization, budget range, preferred partnership areas, timing, and how you would like to support Preneurin&apos;s next stage.</p>
+                        <p className="mt-2 text-sm text-gray-600">Organization, budget range, preferred partnership areas, timing, and how you would like to support Preneurin&apos;s next stage.</p>
                       </div>
                     </div>
                   </div>
 
-                  <div className="rounded-3xl border border-[var(--border)] bg-[var(--background)] p-6 md:p-8">
+                  <div className="rounded-3xl border border-[var(--border)] bg-white/55 p-6 md:p-8">
                     {sponsorshipSubmitted ? (
                       <div className="text-center py-12">
                         <h3 className="font-serif text-3xl text-accent mb-4">Brief Prepared</h3>
-                        <p className="text-gray-500 dark:text-gray-400">Your sponsorship brief is ready in your mail client for review and sending.</p>
+                        <p className="text-gray-600">Your sponsorship brief is ready in your mail client for review and sending.</p>
                       </div>
                     ) : (
                       <form onSubmit={handleSponsorshipSubmit} className="space-y-6">

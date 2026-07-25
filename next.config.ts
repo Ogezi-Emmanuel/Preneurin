@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
 const useCustomDistDir = process.platform === "win32" && process.env.VERCEL !== "1";
+const useOptimizePackageImports = !useCustomDistDir;
 
 const nextConfig: NextConfig = {
   ...(useCustomDistDir ? { distDir: "build" } : {}),
@@ -10,9 +11,13 @@ const nextConfig: NextConfig = {
     formats: ["image/avif", "image/webp"],
     minimumCacheTTL: 60 * 60 * 24 * 30,
   },
-  experimental: {
-    optimizePackageImports: ["lucide-react"],
-  },
+  ...(useOptimizePackageImports
+    ? {
+        experimental: {
+          optimizePackageImports: ["lucide-react"],
+        },
+      }
+    : {}),
   async headers() {
     return [
       {

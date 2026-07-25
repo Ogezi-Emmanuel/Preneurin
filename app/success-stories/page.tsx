@@ -150,7 +150,7 @@ export default function FirstSessionPage() {
                     <p className="text-sm uppercase tracking-[0.2em] text-accent">Real Proof</p>
                     <h2 className="mt-4 font-serif text-4xl md:text-5xl">One session. Real conversations. A clear next step.</h2>
                     <p className="mt-6 text-lg leading-relaxed text-gray-500 dark:text-gray-300">
-                      Preneurin was founded by Damilola Obiesan, Creative Director of Dassah Oikos, to create a more honest support system for fashion designers navigating business growth. The first live session became the foundation for everything now being built.
+                      Preneurin was founded by Damilola Obisesan, Creative Director of Dassah Oikos, to create a more honest support system for fashion designers navigating business growth. The first live session became the foundation for everything now being built.
                     </p>
                   </div>
 

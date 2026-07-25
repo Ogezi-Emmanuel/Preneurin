@@ -45,7 +45,7 @@ export default function AboutPage() {
               <StaggerItem>
                 <div className="space-y-6 text-gray-500 dark:text-gray-300 text-lg leading-relaxed">
                   <p>
-                    Preneurin began with one live session in April. It was created by Damilola Obiesan, Creative Director of Dassah Oikos, after years of seeing talented designers carry operational pressure in silence.
+                    Preneurin began with one live session in April. It was created by Damilola Obisesan, Creative Director of Dassah Oikos, after years of seeing talented designers carry operational pressure in silence.
                   </p>
                   <p>
                     Instead of pretending to be a large institution from day one, Preneurin started as a practical room: a space to talk honestly about pricing, production bottlenecks, client issues, and the systems fashion founders need to grow well.

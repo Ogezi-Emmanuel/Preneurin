@@ -14,9 +14,13 @@ test('homepage keeps the original vision video and uses the DASA hero video', ()
 
   assert.match(homepage, /IMG_5870\.MP4/);
   assert.match(homepage, /HERO_FALLBACK_IMAGE/);
-  assert.match(homepage, /src="\/Preneurin Video\.mp4"/);
+  assert.match(homepage, /Preneurin%202!\.mp4/);
+  assert.match(homepage, /Preneurin%20Video\.mp4/);
+  assert.ok(
+    homepage.indexOf('/Preneurin%202!.mp4') < homepage.indexOf('/Preneurin%20Video.mp4')
+  );
   assert.match(homepage, /Preneurin Interest Form/);
-  assert.doesNotMatch(homepage, /api\.whatsapp\.com\/send\?phone=2340000000000/);
+  assert.match(homepage, /https:\/\/wa\.me\/2348132098926/);
 });
 
 test('programs page only describes the current Preneurin offering', () => {
@@ -45,6 +49,7 @@ test('contact page includes the sponsorship inquiry workflow fields', () => {
   assert.match(contactPage, /Budget Range/);
   assert.match(contactPage, /Interested Partnership Areas/);
   assert.match(contactPage, /secretariat@preneurin\.org/);
+  assert.match(contactPage, /mailto:secretariat@preneurin\.org/);
   assert.match(contactPage, /does not yet list sponsors or partners publicly/i);
 });
 
@@ -53,7 +58,7 @@ test('first session page reflects real early-stage proof instead of fictional su
 
   assert.match(firstSessionPage, /Our First Session/);
   assert.match(firstSessionPage, /one live session in April/i);
-  assert.match(firstSessionPage, /Damilola Obiesan/);
+  assert.match(firstSessionPage, /Damilola Obisesan/);
   assert.doesNotMatch(firstSessionPage, /Amara Okafor|Kofi Mensah|Zara Ibrahim|Grew revenue by 300%|Increased average order value by 150%/);
 });
 

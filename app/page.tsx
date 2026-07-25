@@ -1,23 +1,27 @@
 'use client';
 
 import { motion, useMotionValue, useSpring } from 'framer-motion';
-import { Users, DollarSign, MessageSquare, Send, ChevronRight, Play, Plus, Minus } from 'lucide-react';
+import { Users, DollarSign, MessageSquare, Send, ChevronRight, ChevronLeft, Play, Plus, Minus } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import StaggerContainer from '@/components/StaggerContainer';
 import StaggerItem from '@/components/StaggerItem';
-import Breadcrumb from '@/components/Breadcrumb';
 
 const DASA_MEDIA_ROOT = '/DASA%20PICTURES';
 const HERO_VIDEO_SRC = `${DASA_MEDIA_ROOT}/IMG_5870.MP4`;
 const HERO_FALLBACK_IMAGE = `${DASA_MEDIA_ROOT}/IMG_0847.jpg`;
 const COMMUNITY_IMAGE = `${DASA_MEDIA_ROOT}/IMG_0815.jpg`;
 const BTS_POSTER_IMAGE = `${DASA_MEDIA_ROOT}/IMG_0718.jpg`;
-const CONTACT_EMAIL = 'secretariat@preneurin.org';
+const FOUNDER_IMAGE = '/IMG_0580.JPG.jpeg';
+const VISION_VIDEOS = [
+  { src: '/Preneurin%202!.mp4', label: 'Vision Film 01' },
+  { src: '/Preneurin%20Video.mp4', label: 'Vision Film 02' },
+];
+const WHATSAPP_NUMBER = '2348132098926';
 
-function buildMailtoHref(subject: string, lines: string[]) {
-  return `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join('\n'))}`;
+function buildWhatsAppHref(lines: string[]) {
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(lines.join('\n'))}`;
 }
 
 // Magnetic Button Component
@@ -145,50 +149,144 @@ const HeroBackgroundVideo = () => {
           <source src={HERO_VIDEO_SRC} type="video/mp4" />
         </video>
       )}
-      <div className="absolute inset-0 bg-gradient-to-r from-[var(--background)]/95 via-[var(--background)]/75 to-black/50 dark:from-black/85 dark:via-black/60 dark:to-black/55" />
+      <div className="absolute inset-0 bg-gradient-to-r from-[var(--background)]/92 via-[var(--background)]/70 to-black/55" />
     </div>
   );
 };
 
-// Custom Video Player
-const VideoPlayer = () => {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
+const VisionVideoCarousel = () => {
+  const slideRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [playingIndex, setPlayingIndex] = useState<number | null>(null);
 
-  const togglePlay = () => {
-    if (videoRef.current) {
-      if (isPlaying) {
-        videoRef.current.pause();
-      } else {
-        videoRef.current.play();
-      }
-      setIsPlaying(!isPlaying);
-    }
+  const scrollToIndex = (index: number) => {
+    slideRefs.current[index]?.scrollIntoView({
+      behavior: 'smooth',
+      inline: 'center',
+      block: 'nearest',
+    });
+    setActiveIndex(index);
   };
 
+  const pauseOtherVideos = (keepIndex: number) => {
+    videoRefs.current.forEach((video, idx) => {
+      if (!video) return;
+      if (idx !== keepIndex && !video.paused) {
+        video.pause();
+      }
+    });
+  };
+
+  const togglePlay = async (index: number) => {
+    const video = videoRefs.current[index];
+    if (!video) return;
+
+    if (video.paused) {
+      pauseOtherVideos(index);
+      try {
+        await video.play();
+        setPlayingIndex(index);
+        scrollToIndex(index);
+      } catch {
+        setPlayingIndex(null);
+      }
+      return;
+    }
+
+    video.pause();
+    setPlayingIndex(null);
+  };
+
+  const goPrev = () => scrollToIndex(Math.max(0, activeIndex - 1));
+  const goNext = () => scrollToIndex(Math.min(VISION_VIDEOS.length - 1, activeIndex + 1));
+
   return (
-    <div className="video-container w-full max-w-4xl mx-auto">
-      <div className="relative aspect-[3/4] md:aspect-[4/5] lg:aspect-[9/12]">
-        <video 
-          ref={videoRef}
-          src="/Preneurin Video.mp4"
-          playsInline
-          preload="metadata"
-          className="w-full h-full object-cover object-top rounded-3xl"
-          onClick={togglePlay}
-        />
-        <motion.button 
-          initial={{ opacity: 1 }}
-          animate={{ opacity: isPlaying ? 0 : 1 }}
-          transition={{ duration: 0.3 }}
-          onClick={togglePlay}
-          className="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/40 transition-colors rounded-3xl"
-          style={{ pointerEvents: isPlaying ? 'none' : 'auto' }}
+    <div className="relative">
+      <div className="relative">
+        <div className="-mx-6 flex snap-x snap-mandatory gap-6 overflow-x-auto px-6 pb-4 pt-2">
+          {VISION_VIDEOS.map((video, index) => (
+            <div
+              key={video.src}
+              ref={(node) => {
+                slideRefs.current[index] = node;
+              }}
+              className="snap-center shrink-0 w-[min(92vw,46rem)]"
+            >
+              <div className="video-container w-full">
+                <div className="relative aspect-[3/4] md:aspect-[4/5] lg:aspect-[9/12]">
+                  <video
+                    ref={(node) => {
+                      videoRefs.current[index] = node;
+                    }}
+                    src={video.src}
+                    playsInline
+                    preload="metadata"
+                    poster={HERO_FALLBACK_IMAGE}
+                    className="h-full w-full rounded-3xl object-cover object-top"
+                    onClick={() => togglePlay(index)}
+                    onPause={() => {
+                      if (playingIndex === index) {
+                        setPlayingIndex(null);
+                      }
+                    }}
+                    onPlay={() => {
+                      setPlayingIndex(index);
+                    }}
+                  />
+                  <div className="absolute left-5 top-5 rounded-full border border-white/20 bg-black/25 px-3 py-2 text-[10px] tracking-[0.16em] text-white backdrop-blur-xl sm:px-4 sm:text-xs">
+                    {video.label}
+                  </div>
+                  <motion.button
+                    type="button"
+                    initial={{ opacity: 1 }}
+                    animate={{ opacity: playingIndex === index ? 0 : 1 }}
+                    transition={{ duration: 0.3 }}
+                    onClick={() => togglePlay(index)}
+                    className="absolute inset-0 flex items-center justify-center rounded-3xl bg-black/30 transition-colors hover:bg-black/40"
+                    style={{ pointerEvents: playingIndex === index ? 'none' : 'auto' }}
+                    aria-label={`Play ${video.label}`}
+                  >
+                    <div className="flex h-24 w-24 items-center justify-center rounded-full bg-accent shadow-2xl md:h-32 md:w-32">
+                      <Play className="h-10 w-10 text-[#0A0A0A] md:h-12 md:w-12" />
+                    </div>
+                  </motion.button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <button
+          type="button"
+          onClick={goPrev}
+          disabled={activeIndex === 0}
+          className="absolute left-0 top-1/2 hidden -translate-y-1/2 rounded-full border border-[var(--border)] bg-[var(--card)]/90 p-3 text-[var(--foreground)] backdrop-blur-xl transition-colors hover:border-accent disabled:opacity-40 md:flex"
+          aria-label="Previous video"
         >
-          <div className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-accent flex items-center justify-center shadow-2xl">
-            <Play className="w-10 h-10 md:w-12 md:h-12 text-[#0A0A0A]" />
-          </div>
-        </motion.button>
+          <ChevronLeft className="h-5 w-5" />
+        </button>
+        <button
+          type="button"
+          onClick={goNext}
+          disabled={activeIndex === VISION_VIDEOS.length - 1}
+          className="absolute right-0 top-1/2 hidden -translate-y-1/2 rounded-full border border-[var(--border)] bg-[var(--card)]/90 p-3 text-[var(--foreground)] backdrop-blur-xl transition-colors hover:border-accent disabled:opacity-40 md:flex"
+          aria-label="Next video"
+        >
+          <ChevronRight className="h-5 w-5" />
+        </button>
+      </div>
+
+      <div className="mt-6 flex justify-center gap-2 md:hidden">
+        {VISION_VIDEOS.map((video, index) => (
+          <button
+            key={video.src}
+            type="button"
+            onClick={() => scrollToIndex(index)}
+            className={`h-2 w-2 rounded-full transition-colors ${activeIndex === index ? 'bg-primary' : 'bg-[var(--border)]'}`}
+            aria-label={`Go to ${video.label}`}
+          />
+        ))}
       </div>
     </div>
   );
@@ -242,7 +340,7 @@ const MultiStepForm = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (validateStep()) {
-      const href = buildMailtoHref(`Preneurin Interest Form: ${formData.brandName}`, [
+      const href = buildWhatsAppHref([
         'PRENEURIN INTEREST FORM',
         '',
         `Full Name: ${formData.fullName}`,
@@ -268,7 +366,7 @@ const MultiStepForm = () => {
   };
 
   return (
-    <div className="bg-[var(--card)] border border-[var(--border)] rounded-3xl p-8 md:p-12">
+    <div className="premium-panel rounded-[2rem] p-8 md:p-12">
       {/* Progress Bar */}
       <div className="mb-12">
         <div className="flex justify-between mb-3">
@@ -421,9 +519,9 @@ const MultiStepForm = () => {
               />
               {errors.whyJoin && <p className="text-red-500 text-sm mt-1">{errors.whyJoin}</p>}
             </div>
-            <div className="bg-[var(--background)] border border-accent/20 rounded-xl p-6">
+            <div className="rounded-[1.5rem] border border-accent/20 bg-white/60 p-6">
               <h4 className="text-accent font-semibold mb-2">Interest Form Preview</h4>
-              <div className="text-gray-500 dark:text-gray-400 text-sm space-y-1">
+              <div className="text-sm space-y-1 text-gray-600">
                 <p><strong>Name:</strong> {formData.fullName || 'Not provided'}</p>
                 <p><strong>Brand:</strong> {formData.brandName || 'Not provided'}</p>
                 <p><strong>Stage:</strong> {formData.brandStage || 'Not provided'}</p>
@@ -456,7 +554,7 @@ const MultiStepForm = () => {
               type="submit"
               className="flex-1 py-4 bg-primary text-cream font-semibold rounded-xl hover:bg-[#5a2833] transition-all flex items-center justify-center gap-2"
             >
-              Prepare Email Draft <Send className="w-4 h-4" />
+              Send To WhatsApp <Send className="w-4 h-4" />
             </button>
           )}
         </div>
@@ -468,31 +566,29 @@ const MultiStepForm = () => {
 export default function Home() {
   return (
     <div className="min-h-screen text-[var(--foreground)] font-sans">
-      <Breadcrumb />
-
       {/* Hero Section */}
-      <section className="px-6 pt-24">
-        <div className="relative mx-auto max-w-7xl overflow-hidden rounded-[2rem] border border-[var(--border)] min-h-[78vh]">
-          <HeroBackgroundVideo />
-          <div className="relative z-10 flex min-h-[78vh] items-center px-4 py-12 md:px-10 lg:px-16">
-            <div className="max-w-lg !text-white">
+      <section className="soft-grid relative min-h-[100svh] w-full overflow-hidden">
+        <HeroBackgroundVideo />
+        <div className="relative z-10 flex min-h-[100svh] items-center px-6 pb-16 pt-32">
+          <div className="mx-auto w-full max-w-7xl">
+            <div className="max-w-xl !text-white">
               <StaggerContainer>
                 <StaggerItem>
                   <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/25 px-3 py-2 text-[10px] tracking-[0.16em] !text-white backdrop-blur-xl sm:px-4 sm:text-xs">
                     <span className="h-2 w-2 rounded-full bg-accent" />
-                    DESIGNERS ONLY
+                    LIVE FASHION BUSINESS ROOM
                   </div>
                 </StaggerItem>
 
                 <StaggerItem>
-                  <h1 className="mt-5 max-w-md font-serif font-luxury text-[2rem] leading-tight !text-white sm:text-5xl md:text-6xl lg:text-7xl">
-                    Fashion Growth. No Guesswork.
+                  <h1 className="mt-5 max-w-lg font-serif font-luxury text-[2.4rem] leading-[0.95] !text-white sm:text-5xl md:text-6xl lg:text-[5.4rem]">
+                    A sharper, more beautiful home for fashion founders.
                   </h1>
                 </StaggerItem>
 
                 <StaggerItem>
-                  <p className="mt-3 max-w-sm text-sm leading-relaxed !text-white sm:text-base md:text-lg">
-                    Built from our first April session for designers tackling pricing, production, clients, and growth.
+                  <p className="mt-4 max-w-md text-sm leading-relaxed !text-white/90 sm:text-base md:text-lg">
+                    Preneurin is built from a real April session and designed for fashion designers who want clarity around pricing, production, clients, and growth.
                   </p>
                 </StaggerItem>
 
@@ -510,8 +606,65 @@ export default function Home() {
                     </MagneticButton>
                   </div>
                 </StaggerItem>
+
+                <StaggerItem>
+                  <div className="mt-10 grid max-w-xl gap-4 sm:grid-cols-3">
+                    {[
+                      { label: 'Founded From', value: 'One Live Session' },
+                      { label: 'Built For', value: 'Fashion Designers' },
+                      { label: 'Next Step', value: 'Founder-Led Growth' },
+                    ].map((item) => (
+                      <div key={item.label} className="rounded-[1.5rem] border border-white/15 bg-white/10 px-4 py-4 backdrop-blur-md">
+                        <p className="text-[10px] uppercase tracking-[0.2em] text-white/65">{item.label}</p>
+                        <p className="mt-2 text-sm font-medium text-white">{item.value}</p>
+                      </div>
+                    ))}
+                  </div>
+                </StaggerItem>
               </StaggerContainer>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-24 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid items-center gap-12 lg:grid-cols-[0.95fr_1.05fr]">
+            <StaggerContainer>
+              <StaggerItem>
+                <div className="overflow-hidden rounded-3xl border border-[var(--border)] bg-[var(--card)]">
+                  <Image
+                    src={FOUNDER_IMAGE}
+                    alt="Damilola Obisesan, founder of Preneurin"
+                    width={1400}
+                    height={1800}
+                    sizes="(min-width: 1024px) 45vw, 100vw"
+                    className="h-[420px] w-full object-cover object-top md:h-[560px]"
+                  />
+                </div>
+              </StaggerItem>
+            </StaggerContainer>
+
+            <StaggerContainer delay={0.15}>
+              <StaggerItem>
+                <p className="text-sm uppercase tracking-[0.2em] text-accent">About The Founder</p>
+                <h2 className="mt-4 font-serif font-luxury text-4xl leading-tight md:text-5xl">
+                  Damilola Obisesan
+                </h2>
+                <p className="mt-6 max-w-2xl text-lg leading-relaxed text-gray-500">
+                  Before fashion became my career, it was my survival. In 2004, during one of the hardest phases of my life, I found comfort in an unexpected place: sewing.
+                </p>
+                <p className="mt-5 max-w-2xl text-lg leading-relaxed text-gray-500">
+                  I had no formal training and no real tools. Just thread, a needle, curiosity, and the stubborn desire to create something beautiful. I still remember cutting my first dress from a fabric meant to be thrown away, stitching under a dim lantern so nobody would notice. That was my first DIY, and it changed the way I saw myself.
+                </p>
+                <p className="mt-5 max-w-2xl text-lg leading-relaxed text-gray-500">
+                  From leftover pieces to local training, I kept choosing the work. That early "yes" became a compass into fashion, and it is the same spirit that shaped Preneurin: a space built for designers who deserve clarity, support, and honest growth.
+                </p>
+                <p className="mt-6 text-sm font-semibold tracking-wide text-primary">
+                  Founder of Preneurin | Creative Director, Dassah Oikos
+                </p>
+              </StaggerItem>
+            </StaggerContainer>
           </div>
         </div>
       </section>
@@ -523,7 +676,7 @@ export default function Home() {
             <StaggerContainer>
               <StaggerItem>
                 <div className="relative">
-                  <div className="rounded-3xl overflow-hidden border border-[var(--border)]">
+                  <div className="premium-panel overflow-hidden rounded-[2rem]">
                     <Image
                       src={COMMUNITY_IMAGE}
                       alt="Preneurin community members in a design studio setting"
@@ -543,10 +696,10 @@ export default function Home() {
                       delay: 0.4,
                       y: { repeat: Infinity, duration: 3, ease: "easeInOut", delay: 0.6 + 0.4 },
                     }}
-                    className="absolute bottom-6 left-6 right-6 bg-[var(--background)]/80 backdrop-blur-xl border border-[var(--border)] rounded-2xl p-4 md:p-6"
+                    className="absolute bottom-6 left-6 right-6 rounded-2xl border border-[var(--border)] bg-white/70 p-4 backdrop-blur-xl md:p-6"
                   >
                     <p className="text-accent font-semibold text-sm tracking-wide">FIRST LIVE SESSION</p>
-                    <p className="text-gray-500 dark:text-gray-400 text-sm">The April room that shaped what Preneurin is becoming.</p>
+                    <p className="text-sm text-gray-600">The April room that shaped what Preneurin is becoming.</p>
                   </motion.div>
                 </div>
               </StaggerItem>
@@ -560,9 +713,9 @@ export default function Home() {
               </StaggerItem>
               
               <StaggerItem>
-                <div className="space-y-6 text-gray-500 dark:text-gray-400 text-lg leading-relaxed">
+                <div className="premium-panel rounded-[2rem] p-8 text-lg leading-relaxed text-gray-600">
                   <p>
-                    Preneurin started with one live session in April after Damilola Obiesan, Creative Director of Dassah Oikos, saw how often designers were facing pricing, production, and client problems alone.
+                    Preneurin started with one live session in April after Damilola Obisesan, Creative Director of Dassah Oikos, saw how often designers were facing pricing, production, and client problems alone.
                   </p>
                   <p>
                     The first session was intentionally practical: honest conversations about what happens inside real studios, what keeps founders stuck, and what kind of support actually helps.
@@ -583,7 +736,7 @@ export default function Home() {
           <div className="grid items-center gap-12 lg:grid-cols-[0.95fr_1.05fr]">
             <StaggerContainer>
               <StaggerItem>
-                <div className="relative overflow-hidden rounded-3xl border border-[var(--border)] bg-[var(--card)]">
+                <div className="premium-panel relative overflow-hidden rounded-[2rem]">
                   <Image
                     src={BTS_POSTER_IMAGE}
                     alt="Behind the scenes moment from the Preneurin April session"
@@ -612,7 +765,7 @@ export default function Home() {
                 <h2 className="mt-4 font-serif font-luxury text-4xl leading-tight md:text-5xl">
                   See the behind-the-scenes energy that made the first session real.
                 </h2>
-                <p className="mt-6 max-w-2xl text-lg leading-relaxed text-gray-500 dark:text-gray-400">
+                <p className="mt-6 max-w-2xl text-lg leading-relaxed text-gray-600">
                   The BTS video captures what the photos alone cannot: the atmosphere,and attention that shaped Preneurin&apos;s first live gathering.
                 </p>
                 <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -634,18 +787,18 @@ export default function Home() {
       </section>
 
       {/* Video Section */}
-      <section className="py-24 px-6 bg-gradient-to-b from-transparent via-[var(--card)] to-transparent">
+      <section className="py-24 px-6">
         <div className="max-w-7xl mx-auto">
           <StaggerContainer>
             <StaggerItem>
               <div className="text-center mb-12">
                 <h2 className="font-serif font-luxury text-4xl md:text-5xl mb-4">Watch The Vision</h2>
-                <p className="text-gray-500 dark:text-gray-400 text-lg">Hear directly from Damilola about why Preneurin started and where it can grow from here.</p>
+                <p className="text-lg text-gray-600">Hear directly from Damilola about why Preneurin started and where it can grow from here.</p>
               </div>
             </StaggerItem>
             
             <StaggerItem>
-              <VideoPlayer />
+              <VisionVideoCarousel />
             </StaggerItem>
           </StaggerContainer>
         </div>
@@ -658,7 +811,7 @@ export default function Home() {
             <StaggerItem>
               <div className="text-center mb-16">
                 <h2 className="font-serif font-luxury text-4xl md:text-5xl mb-4">The Reality</h2>
-                <p className="text-gray-500 dark:text-gray-400 text-lg">Why the first session mattered</p>
+                <p className="text-lg text-gray-600">Why the first session mattered</p>
               </div>
             </StaggerItem>
           </StaggerContainer>
@@ -688,14 +841,14 @@ export default function Home() {
                 <StaggerItem>
                   <motion.div 
                     whileHover={{ y: -8, transition: { duration: 0.3 } }}
-                    className="bg-[var(--card)] border border-[var(--border)] rounded-2xl p-8 hover:border-accent/50 transition-all group"
+                    className="premium-panel rounded-[1.75rem] p-8 transition-all group hover:border-accent/50"
                   >
                     <div className="text-accent font-serif text-5xl font-bold mb-4 opacity-30 group-hover:opacity-100 transition-opacity">
                       {pillar.num}
                     </div>
                     <div className="mb-4">{pillar.icon}</div>
                     <h3 className="font-serif text-2xl mb-3">{pillar.title}</h3>
-                    <p className="text-gray-500 dark:text-gray-400">{pillar.desc}</p>
+                    <p className="text-gray-600">{pillar.desc}</p>
                   </motion.div>
                 </StaggerItem>
               </StaggerContainer>
@@ -705,13 +858,13 @@ export default function Home() {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-24 px-6 bg-gradient-to-b from-transparent via-[var(--card)] to-transparent">
+      <section className="py-24 px-6">
         <div className="max-w-3xl mx-auto">
           <StaggerContainer>
             <StaggerItem>
               <div className="text-center mb-12">
                 <h2 className="font-serif font-luxury text-4xl md:text-5xl mb-4">Frequently Asked Questions</h2>
-                <p className="text-gray-500 dark:text-gray-400 text-lg">Clear answers about where Preneurin stands today.</p>
+                <p className="text-lg text-gray-600">Clear answers about where Preneurin stands today.</p>
               </div>
             </StaggerItem>
             

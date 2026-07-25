@@ -3,7 +3,6 @@ import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { ThemeProvider } from "@/components/ThemeProvider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -47,34 +46,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                try {
-                  const theme = localStorage.getItem('theme');
-                  if (theme) {
-                    document.documentElement.classList.add(theme);
-                  } else {
-                    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                    document.documentElement.classList.add(prefersDark ? 'dark' : 'light');
-                  }
-                } catch (e) {}
-              })();
-            `,
-          }}
-        />
-      </head>
+    <html lang="en" className="light">
       <body 
         className={`${inter.variable} ${playfair.variable} font-sans antialiased`}
       >
-        <ThemeProvider>
-          <Header />
-          {children}
-          <Footer />
-        </ThemeProvider>
+        <Header />
+        {children}
+        <Footer />
       </body>
     </html>
   );
