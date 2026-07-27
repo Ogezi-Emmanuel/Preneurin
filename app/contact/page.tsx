@@ -135,10 +135,10 @@ export default function ContactPage() {
               <div className="premium-panel rounded-[2.25rem] px-8 py-14 text-center md:px-14">
                 <p className="text-sm uppercase tracking-[0.24em] text-accent">Contact Preneurin</p>
                 <h1 className="mt-6 font-serif font-luxury text-5xl leading-tight md:text-7xl lg:text-8xl">
-                  Get In Touch
+                  Reach the Preneurin community.
                 </h1>
                 <p className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-gray-600 md:text-xl">
-                  Reach the Preneurin team for general enquiries or use the partnership brief below to start an early sponsorship conversation.
+                  Reach the Preneurin team for community enquiries, future sessions, collaborations, or early sponsorship conversations.
                 </p>
                 <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
                   <a

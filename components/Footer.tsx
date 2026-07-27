@@ -20,7 +20,7 @@ export default function Footer() {
             <div>
               <img src="/Preneurin Logo.jpeg" alt="Preneurin Logo" className="mb-5 h-14 w-auto rounded-full premium-outline" />
               <p className="max-w-sm text-sm leading-relaxed text-gray-600">
-                A founder-led growth platform for fashion designers, built from one real session and shaped with practical clarity.
+                Preneurin is a community for fashion designers to learn, share experiences, build meaningful connections, and grow personally and professionally.
               </p>
               <a
                 href={`mailto:${CONTACT_EMAIL}`}
@@ -46,16 +46,16 @@ export default function Footer() {
             </div>
 
             <div>
-              <h4 className="mb-4 text-lg font-medium">Studio Contact</h4>
+              <h4 className="mb-4 text-lg font-medium">Community Contact</h4>
               <p className="text-sm text-gray-600">Lagos, Nigeria</p>
               <p className="mt-3 text-sm leading-relaxed text-gray-600">
-                For sessions, partnerships, and general enquiries, route everything through the main inbox so future updates stay centralized.
+                For sessions, partnerships, community enquiries, and collaborations, route everything through the main inbox.
               </p>
               <a
                 href={`mailto:${CONTACT_EMAIL}`}
                 className="mt-5 inline-flex rounded-full bg-primary px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#5a2833]"
               >
-                Contact Via Email
+                Reach Preneurin
               </a>
             </div>
           </div>

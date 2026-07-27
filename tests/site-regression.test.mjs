@@ -13,14 +13,16 @@ test('homepage keeps the original vision video and uses the DASA hero video', ()
   const homepage = readProjectFile(path.join('app', 'page.tsx'));
 
   assert.match(homepage, /IMG_5870\.MP4/);
-  assert.match(homepage, /HERO_FALLBACK_IMAGE/);
+  assert.match(homepage, /IMG_0629\.jpg/);
   assert.match(homepage, /Preneurin%202!\.mp4/);
   assert.match(homepage, /Preneurin%20Video\.mp4/);
   assert.ok(
     homepage.indexOf('/Preneurin%202!.mp4') < homepage.indexOf('/Preneurin%20Video.mp4')
   );
   assert.match(homepage, /Preneurin Interest Form/);
-  assert.match(homepage, /https:\/\/wa\.me\/2348132098926/);
+  assert.match(homepage, /mailto:secretariat@preneurin\.org/);
+  assert.doesNotMatch(homepage, /https:\/\/wa\.me\/2348132098926/);
+  assert.doesNotMatch(homepage, /poster=\{HERO_FALLBACK_IMAGE\}/);
 });
 
 test('programs page only describes the current Preneurin offering', () => {
@@ -59,7 +61,16 @@ test('first session page reflects real early-stage proof instead of fictional su
   assert.match(firstSessionPage, /Our First Session/);
   assert.match(firstSessionPage, /one live session in April/i);
   assert.match(firstSessionPage, /Damilola Obisesan/);
+  assert.match(firstSessionPage, /IMG_0847\.jpg/);
+  assert.doesNotMatch(firstSessionPage, /IMG_0794\.jpg/);
   assert.doesNotMatch(firstSessionPage, /Amara Okafor|Kofi Mensah|Zara Ibrahim|Grew revenue by 300%|Increased average order value by 150%/);
+});
+
+test('about page uses the updated forum image and messaging', () => {
+  const aboutPage = readProjectFile(path.join('app', 'about', 'page.tsx'));
+
+  assert.match(aboutPage, /IMG_0519\.jpg/);
+  assert.match(aboutPage, /supportive platform for fashion designers/i);
 });
 
 test('legacy marketing images are removed from the app routes', () => {

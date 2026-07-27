@@ -23,7 +23,7 @@ export default function Header() {
           <Link href="/" className="flex items-center gap-3">
             <img src="/Preneurin Logo.jpeg" alt="Preneurin Logo" className="h-10 w-auto rounded-full premium-outline" />
             <div className="hidden sm:block">
-              <p className="text-xs uppercase tracking-[0.24em] text-accent">Founder-Led Platform</p>
+              <p className="text-xs uppercase tracking-[0.24em] text-accent">Fashion Designer Community</p>
               <p className="text-sm font-medium">Preneurin</p>
             </div>
           </Link>
@@ -42,7 +42,7 @@ export default function Header() {
               href="/contact"
               className="rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white transition-all hover:bg-[#5a2833]"
             >
-              Contact
+              Join The Community
             </Link>
           </div>
 
@@ -77,7 +77,7 @@ export default function Header() {
                 className="mt-2 block rounded-2xl bg-primary px-4 py-3 text-center font-semibold text-white"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                Contact
+                Join The Community
               </Link>
             </div>
           </div>

@@ -9,16 +9,16 @@ const PROGRAM_IMAGE = '/DASA%20PICTURES/IMG_0812.jpg';
 
 export default function ProgramsPage() {
   const programHighlights = [
-    { label: 'Current Format', value: 'Live founder-led session' },
-    { label: 'Next Phase', value: 'Growing toward a biannual rhythm' },
+    { label: 'Current Format', value: 'Live community session' },
     { label: 'Audience', value: 'Fashion designers only' },
-    { label: 'Focus', value: 'Operations, structure, growth' },
+    { label: 'Core Experience', value: 'Learn, share, connect, grow' },
+    { label: 'Focus', value: 'Community, clarity, professionalism' },
   ];
 
   const programOutcomes = [
-    'Clarity on pricing, staffing, production, and client management decisions.',
-    'A founder-led format shaped by what came up in the first April session.',
-    'A practical learning room for designers who want substance before scale.',
+    'A room where designers can share experiences and learn from each other with honesty.',
+    'Practical guidance on production, pricing, branding, and the day-to-day decisions that shape growth.',
+    'A stronger sense of professional community, collaboration, and meaningful connection.',
   ];
 
   return (
@@ -26,19 +26,19 @@ export default function ProgramsPage() {
       <Breadcrumb />
 
       {/* Hero Section */}
-      <section className="pb-24 px-6 pt-24">
-        <div className="max-w-5xl mx-auto text-center">
+      <section className="px-6 pb-24 pt-32">
+        <div className="max-w-6xl mx-auto">
           <StaggerContainer>
             <StaggerItem>
-              <h1 className="font-serif font-luxury text-5xl md:text-7xl lg:text-8xl leading-tight mb-8">
-                Our Programs
-              </h1>
-            </StaggerItem>
-            
-            <StaggerItem>
-              <p className="text-gray-500 dark:text-gray-300 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
-                Preneurin currently has one core offering: a live session format for fashion designers, with future editions intended to grow into a biannual rhythm.
-              </p>
+              <div className="premium-panel rounded-[2.25rem] px-8 py-14 text-center md:px-14">
+                <p className="section-kicker">Programs</p>
+                <h1 className="mt-6 font-serif font-luxury text-5xl leading-tight md:text-7xl lg:text-8xl">
+                  One core format. A richer community experience.
+                </h1>
+                <p className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-gray-600 md:text-xl">
+                  Preneurin currently has one public program: a live session created to bring fashion designers together to learn, share experiences, build meaningful connections, and grow.
+                </p>
+              </div>
             </StaggerItem>
           </StaggerContainer>
         </div>
@@ -50,7 +50,7 @@ export default function ProgramsPage() {
           <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
             <StaggerContainer>
               <StaggerItem>
-                <div className="overflow-hidden rounded-3xl border border-[var(--border)] bg-[var(--card)]">
+                <div className="premium-panel overflow-hidden rounded-[2rem]">
                   <div className="relative h-[320px] md:h-[420px]">
                     <Image
                       src={PROGRAM_IMAGE}
@@ -67,29 +67,29 @@ export default function ProgramsPage() {
 
             <StaggerContainer delay={0.1}>
               <StaggerItem>
-                <div className="rounded-3xl border border-[var(--border)] bg-[var(--card)] p-8 md:p-10">
+                <div className="premium-panel rounded-[2rem] p-8 md:p-10">
                   <div className="flex flex-wrap items-center gap-3">
                     <span className="rounded-full border border-accent/30 px-4 py-2 text-sm tracking-[0.18em] text-accent">
                       PRENEURIN
                     </span>
-                    <span className="rounded-full bg-[var(--background)] px-4 py-2 text-sm text-gray-500 dark:text-gray-300">
-                      Founder-led live session
+                    <span className="rounded-full bg-white/65 px-4 py-2 text-sm text-gray-600">
+                      Community-led learning room
                     </span>
                   </div>
 
                   <h2 className="mt-6 font-serif text-4xl md:text-5xl">
-                    A practical format shaped by one real session.
+                    A fashion designer community expressed through one live format.
                   </h2>
 
-                  <p className="mt-6 text-lg leading-relaxed text-gray-500 dark:text-gray-300">
-                    Preneurin is being built as a live, founder-led learning format exclusively for fashion designers. The first session happened in April, and future editions are being developed around the same goal: helping founders confront operational friction, make better decisions, and grow with practical clarity.
+                  <p className="mt-6 text-lg leading-relaxed text-gray-600">
+                    Preneurin is being built as a live learning and community experience exclusively for fashion designers. The first session happened in April, and future editions are being shaped around the same promise: a supportive space for learning, sharing, networking, and professional growth.
                   </p>
 
                   <div className="mt-8 grid gap-4 sm:grid-cols-2">
                     {programHighlights.map((item) => (
-                      <div key={item.label} className="rounded-2xl border border-[var(--border)] bg-[var(--background)] p-4">
+                      <div key={item.label} className="rounded-2xl border border-[var(--border)] bg-white/60 p-4">
                         <p className="text-xs uppercase tracking-[0.2em] text-accent">{item.label}</p>
-                        <p className="mt-2 text-sm text-gray-600 dark:text-gray-300">{item.value}</p>
+                        <p className="mt-2 text-sm text-gray-700">{item.value}</p>
                       </div>
                     ))}
                   </div>
@@ -104,12 +104,13 @@ export default function ProgramsPage() {
         <div className="max-w-7xl mx-auto">
           <StaggerContainer>
             <StaggerItem>
-              <div className="rounded-3xl border border-[var(--border)] bg-[var(--card)] p-8 md:p-10">
+              <div className="premium-panel rounded-[2rem] p-8 md:p-10">
                 <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr]">
                   <div>
-                    <h3 className="font-serif text-3xl mb-4">What designers can expect</h3>
-                    <p className="text-gray-500 dark:text-gray-300 leading-relaxed">
-                      This page reflects only the real Preneurin format. There are no extra bootcamps, masterclasses, or layered offers listed here because they are not part of the current public experience.
+                    <p className="section-kicker">What Designers Can Expect</p>
+                    <h3 className="mt-6 font-serif text-3xl mb-4">A more thoughtful kind of fashion learning space.</h3>
+                    <p className="text-gray-600 leading-relaxed">
+                      This page reflects only the real Preneurin format. There are no extra public offers listed here because the value is currently in the room itself: the conversation, the learning, and the community being built carefully.
                     </p>
                   </div>
 
@@ -117,7 +118,7 @@ export default function ProgramsPage() {
                     {programOutcomes.map((outcome) => (
                       <div
                         key={outcome}
-                        className="rounded-2xl border border-[var(--border)] bg-[var(--background)] px-5 py-4 text-gray-500 dark:text-gray-300"
+                        className="rounded-2xl border border-[var(--border)] bg-white/60 px-5 py-4 text-gray-700"
                       >
                         {outcome}
                       </div>

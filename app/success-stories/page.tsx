@@ -31,31 +31,161 @@ const sessionMoments = [
 
 const sessionGallery = [
   {
+    src: '/DASA%20PICTURES/IMG_0498.jpg',
+    alt: 'Opening moment from the Preneurin April session',
+  },
+  {
+    src: '/DASA%20PICTURES/IMG_0508.jpg',
+    alt: 'Fashion community interaction at the Preneurin session',
+  },
+  {
+    src: '/DASA%20PICTURES/IMG_0514.jpg',
+    alt: 'Guests gathered during the Preneurin April event',
+  },
+  {
+    src: '/DASA%20PICTURES/IMG_0519.jpg',
+    alt: 'Stage conversation during the Preneurin Forum session',
+  },
+  {
+    src: '/DASA%20PICTURES/IMG_0521.jpg',
+    alt: 'Founder moment from the Preneurin event space',
+  },
+  {
+    src: '/DASA%20PICTURES/IMG_0524.jpg',
+    alt: 'Preneurin guests in conversation during the April session',
+  },
+  {
+    src: '/DASA%20PICTURES/IMG_0584.jpg',
+    alt: 'Another candid moment from the Preneurin room',
+  },
+  {
+    src: '/DASA%20PICTURES/IMG_0600.jpg',
+    alt: 'Attendees inside the Preneurin April gathering',
+  },
+  {
+    src: '/DASA%20PICTURES/IMG_0629.jpg',
+    alt: 'Visual moment from the Preneurin April session',
+  },
+  {
+    src: '/DASA%20PICTURES/IMG_0655.jpg',
+    alt: 'Fashion founder interaction during the Preneurin session',
+  },
+  {
+    src: '/DASA%20PICTURES/IMG_0659.jpg',
+    alt: 'Another documentary-style view of the April session',
+  },
+  {
+    src: '/DASA%20PICTURES/IMG_0667.jpg',
+    alt: 'Guests participating in the Preneurin Forum gathering',
+  },
+  {
+    src: '/DASA%20PICTURES/IMG_0675.jpg',
+    alt: 'Attendee moment from Preneurin Forum',
+  },
+  {
+    src: '/DASA%20PICTURES/IMG_0682.jpg',
+    alt: 'Session atmosphere inside the Preneurin event',
+  },
+  {
+    src: '/DASA%20PICTURES/IMG_0700.jpg',
+    alt: 'Live room image from the first Preneurin session',
+  },
+  {
+    src: '/DASA%20PICTURES/IMG_0709.jpg',
+    alt: 'Founders and guests during the April Preneurin room',
+  },
+  {
+    src: '/DASA%20PICTURES/IMG_0712.jpg',
+    alt: 'A quiet documentary frame from the Preneurin event',
+  },
+  {
     src: '/DASA%20PICTURES/IMG_0718.jpg',
     alt: 'Designers seated during the Preneurin April session',
-    className: 'lg:col-span-2',
+  },
+  {
+    src: '/DASA%20PICTURES/IMG_0720.jpg',
+    alt: 'Community image from the Preneurin April event',
+  },
+  {
+    src: '/DASA%20PICTURES/IMG_0735.jpg',
+    alt: 'Audience perspective from Preneurin Forum',
+  },
+  {
+    src: '/DASA%20PICTURES/IMG_0736.jpg',
+    alt: 'Another attendee perspective from the April session',
+  },
+  {
+    src: '/DASA%20PICTURES/IMG_0737.jpg',
+    alt: 'Detail from the Preneurin event experience',
   },
   {
     src: '/DASA%20PICTURES/IMG_0739.jpg',
     alt: 'A candid moment from the Preneurin first session',
-    className: 'lg:col-span-1',
   },
   {
-    src: '/DASA%20PICTURES/IMG_0794.jpg',
-    alt: 'Participants listening during the Preneurin session',
-    className: 'lg:col-span-1',
+    src: '/DASA%20PICTURES/IMG_0740.jpg',
+    alt: 'Audience engagement during the first Preneurin room',
+  },
+  {
+    src: '/DASA%20PICTURES/IMG_0745.jpg',
+    alt: 'Session presentation moment from Preneurin Forum',
+  },
+  {
+    src: '/DASA%20PICTURES/IMG_0747.jpg',
+    alt: 'Guests in the Preneurin room during the April session',
+  },
+  {
+    src: '/DASA%20PICTURES/IMG_0752.jpg',
+    alt: 'Another documentary image from the Preneurin event',
+  },
+  {
+    src: '/DASA%20PICTURES/IMG_0759.jpg',
+    alt: 'A live scene from the Preneurin Forum gathering',
+  },
+  {
+    src: '/DASA%20PICTURES/IMG_0766.jpg',
+    alt: 'Designers listening during the Preneurin April session',
+  },
+  {
+    src: '/DASA%20PICTURES/IMG_0770.jpg',
+    alt: 'Another real moment from the Preneurin event',
   },
   {
     src: '/DASA%20PICTURES/IMG_0797.jpg',
     alt: 'Another view of the Preneurin April gathering',
-    className: 'lg:col-span-1',
+  },
+  {
+    src: '/DASA%20PICTURES/IMG_0810.jpg',
+    alt: 'Documentary image from the Preneurin first session',
+  },
+  {
+    src: '/DASA%20PICTURES/IMG_0812.jpg',
+    alt: 'Audience and room detail from the Preneurin event',
+  },
+  {
+    src: '/DASA%20PICTURES/IMG_0815.jpg',
+    alt: 'Community view from the Preneurin April room',
+  },
+  {
+    src: '/DASA%20PICTURES/IMG_0826.jpg',
+    alt: 'Another scene from Preneurin Forum',
+  },
+  {
+    src: '/DASA%20PICTURES/IMG_0842.jpg',
+    alt: 'An additional event image from the Preneurin session',
+  },
+  {
+    src: '/DASA%20PICTURES/IMG_0847.jpg',
+    alt: 'Closing atmosphere from the Preneurin April room',
   },
   {
     src: '/DASA%20PICTURES/IMG_0856.jpg',
     alt: 'A detailed scene from the first Preneurin session',
-    className: 'lg:col-span-2',
   },
 ];
+
+const gallerySpanClass = (index: number) =>
+  index % 7 === 0 || index % 7 === 4 ? 'lg:col-span-2' : 'lg:col-span-1';
 
 const proofPoints = [
   'The photos on this page are from the real April session.',
@@ -122,19 +252,19 @@ export default function FirstSessionPage() {
     <div className="min-h-screen text-[var(--foreground)] font-sans">
       <Breadcrumb />
 
-      <section className="pb-24 px-6 pt-24">
-        <div className="max-w-5xl mx-auto text-center">
+      <section className="px-6 pb-24 pt-32">
+        <div className="max-w-6xl mx-auto">
           <StaggerContainer>
             <StaggerItem>
-              <h1 className="font-serif font-luxury text-5xl md:text-7xl lg:text-8xl leading-tight mb-8">
-                Our First Session
-              </h1>
-            </StaggerItem>
-
-            <StaggerItem>
-              <p className="text-gray-500 dark:text-gray-300 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
-                Preneurin is still early. What we can show honestly is where it started: one live session in April and the practical conversations that came out of it.
-              </p>
+              <div className="premium-panel rounded-[2.25rem] px-8 py-14 text-center md:px-14">
+                <p className="section-kicker">Our First Session</p>
+                <h1 className="mt-6 font-serif font-luxury text-5xl leading-tight md:text-7xl lg:text-8xl">
+                  The room where the community first came to life.
+                </h1>
+                <p className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-gray-600 md:text-xl">
+                  Preneurin is still early. What we can show honestly is where it began: one live session in April and the atmosphere, conversations, and connection that came out of it.
+                </p>
+              </div>
             </StaggerItem>
           </StaggerContainer>
         </div>
@@ -144,13 +274,13 @@ export default function FirstSessionPage() {
         <div className="max-w-6xl mx-auto">
           <StaggerContainer>
             <StaggerItem>
-              <div className="rounded-3xl border border-[var(--border)] bg-[var(--card)] p-8 md:p-10">
+              <div className="premium-panel rounded-[2rem] p-8 md:p-10">
                 <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr]">
                   <div>
-                    <p className="text-sm uppercase tracking-[0.2em] text-accent">Real Proof</p>
-                    <h2 className="mt-4 font-serif text-4xl md:text-5xl">One session. Real conversations. A clear next step.</h2>
-                    <p className="mt-6 text-lg leading-relaxed text-gray-500 dark:text-gray-300">
-                      Preneurin was founded by Damilola Obisesan, Creative Director of Dassah Oikos, to create a more honest support system for fashion designers navigating business growth. The first live session became the foundation for everything now being built.
+                    <p className="section-kicker">Real Proof</p>
+                    <h2 className="mt-6 font-serif text-4xl md:text-5xl">One session. Real connection. A clear foundation.</h2>
+                    <p className="mt-6 text-lg leading-relaxed text-gray-600">
+                      Preneurin was founded by Damilola Obisesan, Creative Director of Dassah Oikos, to create a more meaningful community for fashion designers. The first live session became the foundation for everything now being built.
                     </p>
                   </div>
 
@@ -158,7 +288,7 @@ export default function FirstSessionPage() {
                     {proofPoints.map((point) => (
                       <div
                         key={point}
-                        className="rounded-2xl border border-[var(--border)] bg-[var(--background)] px-5 py-4 text-gray-500 dark:text-gray-300"
+                        className="rounded-2xl border border-[var(--border)] bg-white/60 px-5 py-4 text-gray-700"
                       >
                         {point}
                       </div>
@@ -176,10 +306,10 @@ export default function FirstSessionPage() {
           <StaggerContainer>
             <StaggerItem>
               <div className="mb-12 text-center">
-                <p className="text-sm uppercase tracking-[0.2em] text-accent">Behind The Scenes</p>
+                <p className="section-kicker">Behind The Scenes</p>
                 <h2 className="mt-4 font-serif font-luxury text-4xl md:text-5xl">What the April session actually felt like</h2>
-                <p className="mx-auto mt-4 max-w-3xl text-lg leading-relaxed text-gray-500 dark:text-gray-300">
-                  This BTS video adds movement and atmosphere to the real story of Preneurin&apos;s first room, showing the energy behind the conversations, focus, and founder-led direction.
+                <p className="mx-auto mt-4 max-w-3xl text-lg leading-relaxed text-gray-600">
+                  This BTS video adds movement and atmosphere to the real story of Preneurin&apos;s first room, showing the energy behind the conversations, focus, and shared community spirit.
                 </p>
               </div>
             </StaggerItem>
@@ -227,10 +357,10 @@ export default function FirstSessionPage() {
           <StaggerContainer>
             <StaggerItem>
               <div className="mb-12 text-center">
-                <p className="text-sm uppercase tracking-[0.2em] text-accent">Session Gallery</p>
+                <p className="section-kicker">Session Gallery</p>
                 <h2 className="mt-4 font-serif font-luxury text-4xl md:text-5xl">More from the April room</h2>
-                <p className="mx-auto mt-4 max-w-3xl text-lg leading-relaxed text-gray-500 dark:text-gray-300">
-                  These additional images capture the atmosphere, attention, and real founder conversations that defined Preneurin&apos;s first session.
+                <p className="mx-auto mt-4 max-w-3xl text-lg leading-relaxed text-gray-600">
+                  These additional images capture the atmosphere, attention, and real shared experiences that defined Preneurin&apos;s first session.
                 </p>
               </div>
             </StaggerItem>
@@ -240,7 +370,7 @@ export default function FirstSessionPage() {
             {sessionGallery.map((image, index) => (
               <StaggerContainer key={image.src} delay={index * 0.1}>
                 <StaggerItem>
-                  <div className={`overflow-hidden rounded-3xl border border-[var(--border)] bg-[var(--card)] ${image.className}`}>
+                  <div className={`overflow-hidden rounded-3xl border border-[var(--border)] bg-[var(--card)] ${gallerySpanClass(index)}`}>
                     <Image
                       src={image.src}
                       alt={image.alt}

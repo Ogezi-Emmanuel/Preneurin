@@ -5,7 +5,7 @@ import Breadcrumb from '@/components/Breadcrumb';
 import StaggerContainer from '@/components/StaggerContainer';
 import StaggerItem from '@/components/StaggerItem';
 
-const ABOUT_IMAGE = '/DASA%20PICTURES/IMG_0700.jpg';
+const ABOUT_IMAGE = '/DASA%20PICTURES/IMG_0519.jpg';
 
 export default function AboutPage() {
   return (
@@ -13,45 +13,46 @@ export default function AboutPage() {
       <Breadcrumb />
 
       {/* Hero Section */}
-      <section className="pb-24 px-6 pt-24">
-        <div className="max-w-5xl mx-auto text-center">
+      <section className="px-6 pb-24 pt-32">
+        <div className="max-w-6xl mx-auto">
           <StaggerContainer>
             <StaggerItem>
-              <h1 className="font-serif font-luxury text-5xl md:text-7xl lg:text-8xl leading-tight mb-8">
-                About Preneurin
-              </h1>
-            </StaggerItem>
-            
-            <StaggerItem>
-              <p className="text-gray-500 dark:text-gray-300 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
-                Preneurin is an early-stage, founder-led platform created to help fashion designers face the business side of growth with more honesty and structure.
-              </p>
+              <div className="premium-panel rounded-[2.25rem] px-8 py-14 text-center md:px-14">
+                <p className="section-kicker">About Preneurin</p>
+                <h1 className="mt-6 font-serif font-luxury text-5xl leading-tight md:text-7xl lg:text-8xl">
+                  A community built for fashion designers to grow together.
+                </h1>
+                <p className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-gray-600 md:text-xl">
+                  Preneurin is a community where fashion designers connect, share experiences, and grow together.
+                </p>
+              </div>
             </StaggerItem>
           </StaggerContainer>
         </div>
       </section>
 
       {/* Our Story Section */}
-      <section className="py-24 px-6 bg-gradient-to-b from-transparent via-[var(--card)] to-transparent">
+      <section className="editorial-shell py-24 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <StaggerContainer>
               <StaggerItem>
-                <h2 className="font-serif font-luxury text-4xl md:text-5xl mb-8">
-                  How It Started
+                <p className="section-kicker">How It Started</p>
+                <h2 className="mt-6 font-serif font-luxury text-4xl md:text-5xl mb-8">
+                  Built from a real room, not an imagined one.
                 </h2>
               </StaggerItem>
               
               <StaggerItem>
-                <div className="space-y-6 text-gray-500 dark:text-gray-300 text-lg leading-relaxed">
+                <div className="premium-panel space-y-6 rounded-[2rem] p-8 text-lg leading-relaxed text-gray-600">
                   <p>
-                    Preneurin began with one live session in April. It was created by Damilola Obisesan, Creative Director of Dassah Oikos, after years of seeing talented designers carry operational pressure in silence.
+                    Preneurin began with one live session in April. It was created by Damilola Obisesan, Creative Director of Dassah Oikos, to bring fashion designers into a room where they could connect honestly and learn from shared experience.
                   </p>
                   <p>
-                    Instead of pretending to be a large institution from day one, Preneurin started as a practical room: a space to talk honestly about pricing, production bottlenecks, client issues, and the systems fashion founders need to grow well.
+                    From the beginning, the focus has been practical: guidance on production, pricing, branding, mentorship, collaboration, and the kind of support that helps designers grow sustainably.
                   </p>
                   <p>
-                    The photos on this site come from that first session. They represent the real starting point of the work, and they shape how we are building the next chapter.
+                    The photos on this site come from that first session. They show the real beginning of a platform committed to professionalism, creativity, excellence, and stronger opportunities for fashion entrepreneurs.
                   </p>
                 </div>
               </StaggerItem>
@@ -59,7 +60,7 @@ export default function AboutPage() {
 
             <StaggerContainer delay={0.2}>
               <StaggerItem>
-                <div className="rounded-3xl overflow-hidden border border-[var(--border)]">
+                <div className="premium-panel overflow-hidden rounded-[2rem]">
                   <Image
                     src={ABOUT_IMAGE}
                     alt="Fashion designers in conversation during Preneurin's first live session"
@@ -81,44 +82,47 @@ export default function AboutPage() {
         <div className="max-w-6xl mx-auto">
           <StaggerContainer>
             <StaggerItem>
-              <h2 className="font-serif font-luxury text-4xl md:text-5xl mb-12 text-center">
-                What We Stand For
-              </h2>
+              <div className="text-center">
+                <p className="section-kicker">What We Stand For</p>
+                <h2 className="mt-6 font-serif font-luxury text-4xl md:text-5xl mb-12">
+                  The values shaping the community.
+                </h2>
+              </div>
             </StaggerItem>
           </StaggerContainer>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               { 
-                title: "Founder-Led Clarity", 
-                desc: "Preneurin is shaped by real studio experience and a founder who understands the pressure behind fashion growth."
+                title: "Supportive Platform", 
+                desc: "Create a space where fashion designers can connect, share experiences, and grow professionally."
               },
               { 
-                title: "Practical Honesty", 
-                desc: "We focus on the issues designers actually deal with: costing, production, client management, and decision-making under pressure."
+                title: "Mentorship And Knowledge Sharing", 
+                desc: "Bring emerging and established designers together to exchange practical insight and guidance."
               },
               { 
-                title: "Truth Before Hype", 
-                desc: "We would rather show one real session than invent scale we have not earned. Credibility matters."
+                title: "Fashion Business Guidance", 
+                desc: "Support designers with clearer thinking around production, pricing, branding, and day-to-day operations."
               },
               { 
-                title: "Steady Growth", 
-                desc: "Preneurin is still early, and that means we can build carefully, learn from each session, and improve the format with intention."
+                title: "Collaboration And Networking", 
+                desc: "Encourage stronger relationships and aligned opportunities across the fashion industry."
               },
               { 
-                title: "Designers First", 
-                desc: "Every session, initiative, and resource is meant to solve real friction for fashion designers, not create more noise."
+                title: "Sustainable Entrepreneur Growth", 
+                desc: "Help upcoming fashion entrepreneurs grow with better structure, resilience, and long-term thinking."
               },
               { 
-                title: "Open Collaboration", 
-                desc: "We are open to aligned sponsors and ecosystem partners who want to help fashion founders grow with substance."
+                title: "Professionalism And Excellence", 
+                desc: "Promote creativity, professionalism, and high standards within the fashion community."
               }
             ].map((value, index) => (
               <StaggerContainer key={index} delay={index * 0.1}>
                 <StaggerItem>
-                  <div className="bg-[var(--card)] border border-[var(--border)] rounded-2xl p-8 hover:border-accent/50 transition-all">
+                  <div className="premium-panel rounded-[1.75rem] p-8 transition-all hover:border-accent/50">
                     <h3 className="font-serif text-2xl mb-4 text-accent">{value.title}</h3>
-                    <p className="text-gray-500 dark:text-gray-400">{value.desc}</p>
+                    <p className="text-gray-600">{value.desc}</p>
                   </div>
                 </StaggerItem>
               </StaggerContainer>

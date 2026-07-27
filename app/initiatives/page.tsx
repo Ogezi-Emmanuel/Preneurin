@@ -46,19 +46,19 @@ export default function InitiativesPage() {
       <Breadcrumb />
 
       {/* Hero Section */}
-      <section className="pb-24 px-6 pt-24">
-        <div className="max-w-5xl mx-auto text-center">
+      <section className="px-6 pb-24 pt-32">
+        <div className="max-w-6xl mx-auto">
           <StaggerContainer>
             <StaggerItem>
-              <h1 className="font-serif font-luxury text-5xl md:text-7xl lg:text-8xl leading-tight mb-8">
-                Our Initiatives
-              </h1>
-            </StaggerItem>
-            
-            <StaggerItem>
-              <p className="text-gray-500 dark:text-gray-300 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
-                These are the support tracks Preneurin is building around its core live session as the platform grows carefully from its first start.
-              </p>
+              <div className="premium-panel rounded-[2.25rem] px-8 py-14 text-center md:px-14">
+                <p className="section-kicker">Initiatives</p>
+                <h1 className="mt-6 font-serif font-luxury text-5xl leading-tight md:text-7xl lg:text-8xl">
+                  Support tracks growing around the community.
+                </h1>
+                <p className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-gray-600 md:text-xl">
+                  These are the initiatives Preneurin is shaping around its core live session so fashion designers can gain more visibility, stronger support, and deeper connection over time.
+                </p>
+              </div>
             </StaggerItem>
           </StaggerContainer>
         </div>
@@ -71,8 +71,8 @@ export default function InitiativesPage() {
             {initiatives.map((initiative, index) => (
               <StaggerContainer key={index} delay={index * 0.15}>
                 <StaggerItem>
-                  <div className="group rounded-3xl border border-[var(--border)] bg-[var(--card)] p-6 md:p-8">
-                    <div className="rounded-3xl overflow-hidden border border-[var(--border)] mb-6">
+                  <div className="group premium-panel rounded-[2rem] p-6 md:p-8">
+                    <div className="mb-6 overflow-hidden rounded-3xl border border-[var(--border)]">
                       <Image
                         src={initiative.image}
                         alt={initiative.title}
@@ -82,20 +82,20 @@ export default function InitiativesPage() {
                         className="h-[300px] w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                       />
                     </div>
-                    <h3 className="font-serif text-2xl mb-4">{initiative.title}</h3>
-                    <p className="text-gray-500 dark:text-gray-400 leading-relaxed">{initiative.desc}</p>
+                    <p className="section-kicker">{initiative.title}</p>
+                    <p className="mt-5 text-gray-600 leading-relaxed">{initiative.desc}</p>
                     <div className="mt-6 space-y-4">
-                      <div className="rounded-2xl bg-[var(--background)] p-4">
+                      <div className="rounded-2xl bg-white/60 p-4">
                         <p className="text-xs uppercase tracking-[0.2em] text-accent">Objective</p>
-                        <p className="mt-2 text-sm text-gray-500 dark:text-gray-300">{initiative.objective}</p>
+                        <p className="mt-2 text-sm text-gray-600">{initiative.objective}</p>
                       </div>
-                      <div className="rounded-2xl bg-[var(--background)] p-4">
+                      <div className="rounded-2xl bg-white/60 p-4">
                         <p className="text-xs uppercase tracking-[0.2em] text-accent">Eligibility</p>
-                        <p className="mt-2 text-sm text-gray-500 dark:text-gray-300">{initiative.eligibility}</p>
+                        <p className="mt-2 text-sm text-gray-600">{initiative.eligibility}</p>
                       </div>
-                      <div className="rounded-2xl bg-[var(--background)] p-4">
+                      <div className="rounded-2xl bg-white/60 p-4">
                         <p className="text-xs uppercase tracking-[0.2em] text-accent">Benefits</p>
-                        <p className="mt-2 text-sm text-gray-500 dark:text-gray-300">{initiative.benefits}</p>
+                        <p className="mt-2 text-sm text-gray-600">{initiative.benefits}</p>
                       </div>
                     </div>
                   </div>

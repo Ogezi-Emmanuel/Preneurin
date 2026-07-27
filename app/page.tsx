@@ -10,7 +10,7 @@ import StaggerItem from '@/components/StaggerItem';
 
 const DASA_MEDIA_ROOT = '/DASA%20PICTURES';
 const HERO_VIDEO_SRC = `${DASA_MEDIA_ROOT}/IMG_5870.MP4`;
-const HERO_FALLBACK_IMAGE = `${DASA_MEDIA_ROOT}/IMG_0847.jpg`;
+const HERO_FALLBACK_IMAGE = `${DASA_MEDIA_ROOT}/IMG_0629.jpg`;
 const COMMUNITY_IMAGE = `${DASA_MEDIA_ROOT}/IMG_0815.jpg`;
 const BTS_POSTER_IMAGE = `${DASA_MEDIA_ROOT}/IMG_0718.jpg`;
 const FOUNDER_IMAGE = '/IMG_0580.JPG.jpeg';
@@ -18,10 +18,42 @@ const VISION_VIDEOS = [
   { src: '/Preneurin%202!.mp4', label: 'Vision Film 01' },
   { src: '/Preneurin%20Video.mp4', label: 'Vision Film 02' },
 ];
-const WHATSAPP_NUMBER = '2348132098926';
+const CONTACT_EMAIL = 'secretariat@preneurin.org';
+const COMMUNITY_OBJECTIVES = [
+  {
+    label: '01',
+    title: 'Knowledge Sharing',
+    description: 'Bring emerging and established fashion designers together to learn from shared experiences and practical insight.',
+  },
+  {
+    label: '02',
+    title: 'Business Guidance',
+    description: 'Offer clarity around production, pricing, branding, and the business systems that help creative work grow sustainably.',
+  },
+  {
+    label: '03',
+    title: 'Meaningful Connections',
+    description: 'Create room for networking, collaboration, and the kinds of relationships that make founders feel less alone.',
+  },
+  {
+    label: '04',
+    title: 'Entrepreneur Growth',
+    description: 'Support upcoming fashion entrepreneurs as they grow with stronger structure, confidence, and long-term thinking.',
+  },
+  {
+    label: '05',
+    title: 'Personal Development',
+    description: 'Encourage designers to grow not only professionally, but personally, with more courage, identity, and self-belief.',
+  },
+  {
+    label: '06',
+    title: 'Professional Excellence',
+    description: 'Promote creativity, professionalism, and a higher standard of practice across the fashion community.',
+  },
+];
 
-function buildWhatsAppHref(lines: string[]) {
-  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(lines.join('\n'))}`;
+function buildMailtoHref(subject: string, lines: string[]) {
+  return `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join('\n'))}`;
 }
 
 // Magnetic Button Component
@@ -222,7 +254,6 @@ const VisionVideoCarousel = () => {
                     src={video.src}
                     playsInline
                     preload="metadata"
-                    poster={HERO_FALLBACK_IMAGE}
                     className="h-full w-full rounded-3xl object-cover object-top"
                     onClick={() => togglePlay(index)}
                     onPause={() => {
@@ -340,7 +371,7 @@ const MultiStepForm = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (validateStep()) {
-      const href = buildWhatsAppHref([
+      const href = buildMailtoHref(`Preneurin Interest Form: ${formData.brandName}`, [
         'PRENEURIN INTEREST FORM',
         '',
         `Full Name: ${formData.fullName}`,
@@ -554,7 +585,7 @@ const MultiStepForm = () => {
               type="submit"
               className="flex-1 py-4 bg-primary text-cream font-semibold rounded-xl hover:bg-[#5a2833] transition-all flex items-center justify-center gap-2"
             >
-              Send To WhatsApp <Send className="w-4 h-4" />
+              Send To Email <Send className="w-4 h-4" />
             </button>
           )}
         </div>
@@ -571,24 +602,25 @@ export default function Home() {
         <HeroBackgroundVideo />
         <div className="relative z-10 flex min-h-[100svh] items-center px-6 pb-16 pt-32">
           <div className="mx-auto w-full max-w-7xl">
-            <div className="max-w-xl !text-white">
+            <div className="grid items-end gap-10 lg:grid-cols-[1.05fr_0.95fr]">
+            <div className="max-w-2xl !text-white">
               <StaggerContainer>
                 <StaggerItem>
                   <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/25 px-3 py-2 text-[10px] tracking-[0.16em] !text-white backdrop-blur-xl sm:px-4 sm:text-xs">
                     <span className="h-2 w-2 rounded-full bg-accent" />
-                    LIVE FASHION BUSINESS ROOM
+                    FASHION DESIGNER COMMUNITY
                   </div>
                 </StaggerItem>
 
                 <StaggerItem>
-                  <h1 className="mt-5 max-w-lg font-serif font-luxury text-[2.4rem] leading-[0.95] !text-white sm:text-5xl md:text-6xl lg:text-[5.4rem]">
-                    A sharper, more beautiful home for fashion founders.
+                  <h1 className="mt-5 max-w-3xl font-serif font-luxury text-[2.7rem] leading-[0.92] !text-white sm:text-5xl md:text-6xl lg:text-[5.6rem]">
+                    A beautiful community for fashion designers to learn, share, connect, and grow.
                   </h1>
                 </StaggerItem>
 
                 <StaggerItem>
-                  <p className="mt-4 max-w-md text-sm leading-relaxed !text-white/90 sm:text-base md:text-lg">
-                    Preneurin is built from a real April session and designed for fashion designers who want clarity around pricing, production, clients, and growth.
+                  <p className="mt-5 max-w-2xl text-sm leading-relaxed !text-white/90 sm:text-base md:text-lg">
+                    Preneurin is a community that brings fashion designers together to learn, share experiences, build meaningful connections, and grow both personally and professionally.
                   </p>
                 </StaggerItem>
 
@@ -596,12 +628,12 @@ export default function Home() {
                   <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                     <MagneticButton href="#join-inner-circle">
                       <span className="flex w-full items-center justify-center gap-2 rounded-full bg-primary px-7 py-3.5 font-semibold text-white transition-all hover:bg-[#5a2833] hover:scale-105 sm:w-auto sm:px-8 sm:py-4">
-                        Join The Next Session <ChevronRight className="h-4 w-4" />
+                        Register Your Interest <ChevronRight className="h-4 w-4" />
                       </span>
                     </MagneticButton>
                     <MagneticButton href="/success-stories">
                       <span className="flex w-full items-center justify-center gap-2 rounded-full border border-white/25 bg-black/20 px-7 py-3.5 text-white transition-all hover:border-accent hover:text-white sm:w-auto sm:px-8 sm:py-4">
-                        See How It Started
+                        See The First Session
                       </span>
                     </MagneticButton>
                   </div>
@@ -610,9 +642,9 @@ export default function Home() {
                 <StaggerItem>
                   <div className="mt-10 grid max-w-xl gap-4 sm:grid-cols-3">
                     {[
-                      { label: 'Founded From', value: 'One Live Session' },
-                      { label: 'Built For', value: 'Fashion Designers' },
-                      { label: 'Next Step', value: 'Founder-Led Growth' },
+                      { label: 'Learn', value: 'Knowledge And Mentorship' },
+                      { label: 'Share', value: 'Honest Founder Experiences' },
+                      { label: 'Grow', value: 'Personally And Professionally' },
                     ].map((item) => (
                       <div key={item.label} className="rounded-[1.5rem] border border-white/15 bg-white/10 px-4 py-4 backdrop-blur-md">
                         <p className="text-[10px] uppercase tracking-[0.2em] text-white/65">{item.label}</p>
@@ -622,6 +654,25 @@ export default function Home() {
                   </div>
                 </StaggerItem>
               </StaggerContainer>
+            </div>
+            <div className="hidden lg:block">
+              <div className="section-frame ml-auto max-w-md rounded-[2rem] p-8 text-[var(--foreground)]">
+                <p className="section-kicker">The Community Vision</p>
+                <h2 className="mt-6 font-serif text-3xl leading-tight">
+                  A space where fashion designers feel seen, supported, and sharpened.
+                </h2>
+                <p className="mt-5 text-sm leading-relaxed text-gray-600">
+                  Preneurin is not positioned as noise or hype. It is a thoughtful room for learning, connection, professionalism, and real growth.
+                </p>
+                <div className="mt-6 grid gap-3">
+                  {['Mentorship rooted in lived experience', 'Practical conversations around pricing, branding, and production', 'A more meaningful network for designers building with intention'].map((point) => (
+                    <div key={point} className="rounded-2xl bg-white/65 px-4 py-3 text-sm text-gray-700">
+                      {point}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
             </div>
           </div>
         </div>
@@ -708,20 +759,20 @@ export default function Home() {
             <StaggerContainer delay={0.2}>
               <StaggerItem>
                 <h2 className="font-serif font-luxury text-4xl md:text-5xl lg:text-6xl leading-tight mb-8">
-                  Built from one honest room for fashion founders.
+                  Built to bring designers into one thoughtful, supportive room.
                 </h2>
               </StaggerItem>
               
               <StaggerItem>
                 <div className="premium-panel rounded-[2rem] p-8 text-lg leading-relaxed text-gray-600">
                   <p>
-                    Preneurin started with one live session in April after Damilola Obisesan, Creative Director of Dassah Oikos, saw how often designers were facing pricing, production, and client problems alone.
+                    Preneurin started from a simple aim: to create a community where fashion designers can connect, share experiences, and grow together.
                   </p>
                   <p>
-                    The first session was intentionally practical: honest conversations about what happens inside real studios, what keeps founders stuck, and what kind of support actually helps.
+                    The first live session in April confirmed how valuable that kind of room can be. Designers need honest conversations, meaningful connections, and guidance that speaks to both the creative and business sides of their work.
                   </p>
                   <p>
-                    That early momentum now guides the next phase of Preneurin: a founder-led platform for fashion designers who want clearer decisions, stronger structure, and growth they can sustain.
+                    That is what guides Preneurin now: learning, sharing, collaboration, personal growth, professional growth, and a stronger culture of excellence within the fashion community.
                   </p>
                 </div>
               </StaggerItem>
@@ -761,12 +812,12 @@ export default function Home() {
 
             <StaggerContainer delay={0.15}>
               <StaggerItem>
-                <p className="text-sm uppercase tracking-[0.2em] text-accent">Inside The April Session</p>
+                <p className="section-kicker">Inside The April Session</p>
                 <h2 className="mt-4 font-serif font-luxury text-4xl leading-tight md:text-5xl">
-                  See the behind-the-scenes energy that made the first session real.
+                  See the atmosphere of the room that first brought the community together.
                 </h2>
                 <p className="mt-6 max-w-2xl text-lg leading-relaxed text-gray-600">
-                  The BTS video captures what the photos alone cannot: the atmosphere,and attention that shaped Preneurin&apos;s first live gathering.
+                  The BTS video captures the attention, conversation, and shared energy that shaped Preneurin&apos;s first live gathering for fashion designers.
                 </p>
                 <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                   <MagneticButton href="/success-stories">
@@ -793,7 +844,7 @@ export default function Home() {
             <StaggerItem>
               <div className="text-center mb-12">
                 <h2 className="font-serif font-luxury text-4xl md:text-5xl mb-4">Watch The Vision</h2>
-                <p className="text-lg text-gray-600">Hear directly from Damilola about why Preneurin started and where it can grow from here.</p>
+                <p className="text-lg text-gray-600">Hear directly from Damilola about why this community matters and what it can become for fashion designers.</p>
               </div>
             </StaggerItem>
             
@@ -804,51 +855,36 @@ export default function Home() {
         </div>
       </section>
 
-      {/* The Reality Pillars */}
+      {/* Aim And Objectives */}
       <section className="py-24 px-6">
         <div className="max-w-7xl mx-auto">
           <StaggerContainer>
             <StaggerItem>
               <div className="text-center mb-16">
-                <h2 className="font-serif font-luxury text-4xl md:text-5xl mb-4">The Reality</h2>
-                <p className="text-lg text-gray-600">Why the first session mattered</p>
+                <h2 className="font-serif font-luxury text-4xl md:text-5xl mb-4">Aim And Objectives</h2>
+                <p className="text-lg text-gray-600">The principles shaping Preneurin as a more meaningful fashion designer community.</p>
               </div>
             </StaggerItem>
           </StaggerContainer>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              { 
-                num: "01", 
-                title: "Staffing & Production", 
-                desc: "Unpacking the daily chaos around tailors, pattern makers, and the handoff between creative ideas and real delivery.",
-                icon: <Users className="w-10 h-10 text-accent" />
-              },
-              { 
-                num: "02", 
-                title: "Pricing & Profitability", 
-                desc: "Helping designers price with more confidence so growth does not come at the expense of profit.",
-                icon: <DollarSign className="w-10 h-10 text-accent" />
-              },
-              { 
-                num: "03", 
-                title: "Client Boundaries", 
-                desc: "Giving founders language and structure for handling demanding clients with more clarity.",
-                icon: <MessageSquare className="w-10 h-10 text-accent" />
-              }
-            ].map((pillar, index) => (
+          <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+            {COMMUNITY_OBJECTIVES.map((pillar, index) => (
               <StaggerContainer key={index} delay={index * 0.15}>
                 <StaggerItem>
                   <motion.div 
                     whileHover={{ y: -8, transition: { duration: 0.3 } }}
                     className="premium-panel rounded-[1.75rem] p-8 transition-all group hover:border-accent/50"
                   >
-                    <div className="text-accent font-serif text-5xl font-bold mb-4 opacity-30 group-hover:opacity-100 transition-opacity">
-                      {pillar.num}
+                    <div className="mb-6 flex items-center justify-between">
+                      <span className="text-accent font-serif text-5xl font-bold opacity-30 transition-opacity group-hover:opacity-100">
+                        {pillar.label}
+                      </span>
+                      <span className="rounded-full border border-accent/20 px-3 py-1 text-[10px] uppercase tracking-[0.18em] text-accent">
+                        Objective
+                      </span>
                     </div>
-                    <div className="mb-4">{pillar.icon}</div>
                     <h3 className="font-serif text-2xl mb-3">{pillar.title}</h3>
-                    <p className="text-gray-600">{pillar.desc}</p>
+                    <p className="text-gray-600">{pillar.description}</p>
                   </motion.div>
                 </StaggerItem>
               </StaggerContainer>
@@ -864,7 +900,7 @@ export default function Home() {
             <StaggerItem>
               <div className="text-center mb-12">
                 <h2 className="font-serif font-luxury text-4xl md:text-5xl mb-4">Frequently Asked Questions</h2>
-                <p className="text-lg text-gray-600">Clear answers about where Preneurin stands today.</p>
+                <p className="text-lg text-gray-600">Clear answers about how the community works and what it is growing toward.</p>
               </div>
             </StaggerItem>
             
@@ -872,19 +908,19 @@ export default function Home() {
               <div>
                 <FAQItem 
                   question="Who can join Preneurin?"
-                  answer="Preneurin is built for fashion designers who want practical business clarity. At this stage, each session is kept focused so the room fits the designers it is meant to serve."
+                  answer="Preneurin is built for fashion designers who want to learn, share experiences, build stronger relationships, and grow with more clarity."
                 />
                 <FAQItem 
                   question="How much does it cost to join?"
-                  answer="Pricing is shared when the next session opens. Because Preneurin is still growing from its first live session, details are communicated directly to interested designers."
+                  answer="Pricing is shared when the next session opens. Because Preneurin is growing thoughtfully from its first live session, details are communicated directly to interested designers."
                 />
                 <FAQItem 
                   question="What kind of support will I get?"
-                  answer="Right now, support centers on live sessions, practical discussion, and follow-up resources shaped by the questions designers brought into the April room."
+                  answer="Support centers on live sessions, practical discussion, shared founder experience, and resources shaped by the real needs designers brought into the April room."
                 />
                 <FAQItem 
                   question="Is this community only for designers in Nigeria?"
-                  answer="Preneurin started in Lagos and the first session happened there, but the long-term vision is to support fashion designers wherever the conversation is relevant."
+                  answer="Preneurin started in Lagos and the first session happened there, but the long-term vision is to support fashion designers wherever the community and conversation are relevant."
                 />
               </div>
             </StaggerItem>
@@ -899,7 +935,7 @@ export default function Home() {
             <StaggerItem>
               <div className="text-center mb-12">
                 <h2 className="font-serif font-luxury text-4xl md:text-5xl mb-4">Register Your Interest</h2>
-                <p className="text-gray-500 dark:text-gray-400 text-lg">Share your details and the challenge you want help with for the next Preneurin session.</p>
+                <p className="text-gray-500 dark:text-gray-400 text-lg">Share your details, what stage you are in, and the support you want so Preneurin can keep building for real community needs.</p>
               </div>
             </StaggerItem>
             
