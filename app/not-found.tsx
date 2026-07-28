@@ -15,7 +15,7 @@ export default function NotFound() {
           <h1 className="font-serif text-8xl md:text-9xl text-accent mb-6">404</h1>
           <h2 className="font-serif text-3xl md:text-5xl mb-6">Page Not Found</h2>
           <p className="text-gray-400 text-lg mb-10">
-            Looks like you've wandered off the runway. Let's get you back to the main show.
+            Looks like you&apos;ve wandered off the runway. Let&apos;s get you back to the main show.
           </p>
           <Link 
             href="/" 
