@@ -7,8 +7,8 @@ import Breadcrumb from '@/components/Breadcrumb';
 import StaggerContainer from '@/components/StaggerContainer';
 import StaggerItem from '@/components/StaggerItem';
 
-const ABOUT_HERO_IMAGE = '/DASA%20PICTURES/IMG_0519.jpg';
-const ABOUT_STORY_IMAGE = '/DASA%20PICTURES/IMG_0815.jpg';
+const ABOUT_HERO_IMAGE = '/DASA PICTURES/IMG_0519.jpg';
+const ABOUT_STORY_IMAGE = '/DASA PICTURES/IMG_0815.jpg';
 
 const values = [
   {
@@ -72,6 +72,9 @@ export default function AboutPage() {
                   <p className="mt-8 max-w-2xl text-lg leading-relaxed text-gray-600 md:text-xl">
                     Not an imagined one. Preneurin is being built around the honest, unglamoured conversations
                     fashion founders actually need — live, human, and in the room.
+                  </p>
+                  <p className="mt-6 max-w-2xl text-lg font-semibold leading-relaxed text-[var(--foreground)] md:text-xl">
+                    Preneurin exists to ensure that no fashion designer has to navigate the industry alone.
                   </p>
                   <div className="mt-12 flex items-center gap-4">
                     <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-accent/30 to-accent/10">
@@ -186,33 +189,68 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Mission Section */}
-      <section className="relative py-20 px-6">
-        <div className="max-w-5xl mx-auto">
+      {/* Vision & Aim */}
+      <section className="relative py-28 px-6">
+        <div className="max-w-6xl mx-auto">
           <StaggerContainer>
             <StaggerItem>
-              <div className="text-center">
-                <p className="section-kicker">The Mission</p>
-                <h2 className="mt-8 font-serif font-luxury text-4xl leading-[1.05] md:text-5xl lg:text-6xl">
-                  To give fashion designers a place where
+              <div className="mb-16 max-w-3xl">
+                <p className="section-kicker">Vision &amp; Aim</p>
+                <h2 className="mt-6 font-serif font-luxury text-4xl leading-[1.05] md:text-5xl lg:text-6xl">
+                  The community we are building,
                   <br />
-                  they can <span className="text-accent">learn, share, connect, and grow.</span>
+                  <span className="text-accent">and the promise it keeps.</span>
                 </h2>
-                <motion.div
-                  initial={{ scaleX: 0 }}
-                  whileInView={{ scaleX: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 1, ease: 'easeOut' }}
-                  className="mx-auto mt-10 h-px w-28 bg-accent/60"
-                />
-                <p className="mx-auto mt-10 max-w-3xl text-lg leading-relaxed text-gray-600 md:text-xl">
-                  Preneurin exists to help fashion founders in Nigeria and across Africa build their brands with
-                  more clarity, more community, more professional structure, and less of the isolation that
-                  usually comes with creative entrepreneurship.
-                </p>
               </div>
             </StaggerItem>
           </StaggerContainer>
+
+          <div className="grid gap-6 md:gap-8 lg:grid-cols-2">
+            <StaggerContainer>
+              <StaggerItem>
+                <div className="premium-panel relative h-full overflow-hidden rounded-[2.25rem] p-8 md:p-10 lg:p-12">
+                  <div className="absolute -right-16 -top-16 h-64 w-64 rounded-full bg-accent/10 blur-3xl" aria-hidden="true" />
+                  <div className="relative flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-primary/15 via-accent/25 to-transparent md:h-16 md:w-16">
+                    <Heart className="h-6 w-6 text-accent md:h-7 md:w-7" strokeWidth={1.8} />
+                  </div>
+                  <p className="relative mt-8 text-[11px] font-semibold uppercase tracking-[0.3em] text-accent md:text-xs">
+                    Vision
+                  </p>
+                  <h3 className="relative mt-5 font-serif font-luxury text-3xl leading-tight md:text-4xl">
+                    To build the most trusted community for fashion designers.
+                  </h3>
+                  <div className="relative mt-8 h-px w-16 bg-gradient-to-r from-accent to-transparent" />
+                  <p className="relative mt-8 text-lg leading-relaxed text-gray-600 md:text-xl">
+                    To build the most trusted community for fashion designers, where creatives
+                    are empowered through meaningful conversations, shared experiences,
+                    collaboration, and continuous growth.
+                  </p>
+                </div>
+              </StaggerItem>
+            </StaggerContainer>
+
+            <StaggerContainer delay={0.12}>
+              <StaggerItem>
+                <div className="premium-panel relative h-full overflow-hidden rounded-[2.25rem] p-8 md:p-10 lg:p-12">
+                  <div className="absolute -left-16 -bottom-16 h-64 w-64 rounded-full bg-primary/10 blur-3xl" aria-hidden="true" />
+                  <div className="relative flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-primary/20 via-primary/10 to-transparent md:h-16 md:w-16">
+                    <Target className="h-6 w-6 text-primary md:h-7 md:w-7" strokeWidth={1.8} />
+                  </div>
+                  <p className="relative mt-8 text-[11px] font-semibold uppercase tracking-[0.3em] text-accent md:text-xs">
+                    Aim
+                  </p>
+                  <h3 className="relative mt-5 font-serif font-luxury text-3xl leading-tight md:text-4xl">
+                    To connect, support, and empower fashion designers.
+                  </h3>
+                  <div className="relative mt-8 h-px w-16 bg-gradient-to-r from-accent to-transparent" />
+                  <p className="relative mt-8 text-lg leading-relaxed text-gray-600 md:text-xl">
+                    To connect, support, and empower fashion designers by creating spaces
+                    where they can learn, share experiences, and grow together.
+                  </p>
+                </div>
+              </StaggerItem>
+            </StaggerContainer>
+          </div>
         </div>
       </section>
 

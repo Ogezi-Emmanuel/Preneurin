@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Play, Quote, ArrowRight } from 'lucide-react';
+import { Play, Quote } from 'lucide-react';
 import { useRef, useState } from 'react';
 import Breadcrumb from '@/components/Breadcrumb';
 import StaggerContainer from '@/components/StaggerContainer';
@@ -503,10 +503,6 @@ export default function FirstSessionPage() {
                       <p className="text-base leading-relaxed text-gray-600 md:text-lg">
                         {moment.body}
                       </p>
-                      <div className="mt-6 flex items-center gap-2 text-sm font-semibold text-accent">
-                        <span>Read the arc</span>
-                        <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1.5" />
-                      </div>
                     </div>
                   </motion.article>
                 </StaggerItem>

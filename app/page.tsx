@@ -1,16 +1,15 @@
 'use client';
 
 import { motion, useMotionValue, useSpring } from 'framer-motion';
-import { Users, DollarSign, MessageSquare, Send, ChevronRight, ChevronLeft, Play, Plus, Minus, Quote, CheckCircle2, Compass, Info } from 'lucide-react';
-import { useState, useEffect, useRef } from 'react';
+import { Send, ChevronRight, ChevronLeft, Play, Plus, Minus, Quote, CheckCircle2, Compass, Info } from 'lucide-react';
+import { useState, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import StaggerContainer from '@/components/StaggerContainer';
 import StaggerItem from '@/components/StaggerItem';
 
 const DASA_MEDIA_ROOT = '/DASA PICTURES';
-const HERO_VIDEO_SRC = `${DASA_MEDIA_ROOT}/IMG_5870.MP4`;
-const HERO_FALLBACK_IMAGE = `${DASA_MEDIA_ROOT}/IMG_0629.jpg`;
+const HERO_IMAGE = `${DASA_MEDIA_ROOT}/PRENEURIN.jpg.jpeg`;
 const COMMUNITY_IMAGE = `${DASA_MEDIA_ROOT}/IMG_0815.jpg`;
 const BTS_POSTER_IMAGE = `${DASA_MEDIA_ROOT}/IMG_0718.jpg`;
 const FOUNDER_IMAGE = '/IMG_0580.JPG.jpeg';
@@ -193,57 +192,19 @@ const FAQItem = ({ question, answer }: { question: string; answer: string }) => 
   );
 };
 
-const HeroBackgroundVideo = () => {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [autoplayBlocked, setAutoplayBlocked] = useState(false);
-  const [videoReady, setVideoReady] = useState(false);
-
-  useEffect(() => {
-    const video = videoRef.current;
-
-    if (!video) {
-      return;
-    }
-
-    const playPromise = video.play();
-
-    if (playPromise && typeof playPromise.catch === 'function') {
-      playPromise.catch(() => {
-        setAutoplayBlocked(true);
-      });
-    }
-  }, []);
-
+const HeroBackgroundImage = () => {
   return (
     <div className="absolute inset-0">
       <Image
-        src={HERO_FALLBACK_IMAGE}
+        src={HERO_IMAGE}
         alt=""
         fill
         priority
         sizes="100vw"
-        className="object-cover"
+        className="object-cover object-center"
       />
-      {!autoplayBlocked && (
-        <video
-          ref={videoRef}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          poster={HERO_FALLBACK_IMAGE}
-          onLoadedData={() => setVideoReady(true)}
-          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${videoReady ? 'opacity-100' : 'opacity-0'}`}
-          aria-hidden="true"
-        >
-          <source src={HERO_VIDEO_SRC} type="video/mp4" />
-        </video>
-      )}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-primary/20 to-[var(--background)]" />
-      <div className="absolute inset-0 bg-gradient-to-r from-primary/48 via-black/10 to-black/45" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_25%,rgba(74,32,41,0.15)_100%)]" />
-      <div className="pointer-events-none absolute inset-0 opacity-[0.12] mix-blend-overlay" style={{backgroundImage:'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'n\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'3\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23n)\'/%3E%3C/svg%3E")'}} />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/25 to-black/55" />
+      <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-transparent to-black/10" />
     </div>
   );
 };
@@ -857,113 +818,51 @@ export default function Home() {
   return (
     <div className="min-h-screen text-[var(--foreground)] font-sans">
       {/* Hero Section */}
-      <section className="soft-grid relative min-h-[100svh] w-full overflow-hidden">
-        <HeroBackgroundVideo />
-        <div className="relative z-10 flex min-h-[100svh] items-end px-6 pb-24 pt-36">
+      <section className="relative min-h-[100svh] w-full overflow-hidden">
+        <HeroBackgroundImage />
+        <div className="relative z-10 flex min-h-[100svh] items-center px-6 pb-24 pt-32">
           <div className="mx-auto w-full max-w-7xl">
-            <div className="grid items-end gap-10 lg:gap-16 lg:grid-cols-[1.05fr_0.95fr]">
-            <div className="max-w-3xl !text-white">
+            <div className="max-w-3xl">
               <StaggerContainer>
                 <StaggerItem>
-                  <div className="inline-flex items-center gap-2.5 rounded-full border border-white/20 bg-black/25 px-4 py-2.5 text-[10px] tracking-[0.24em] !text-white backdrop-blur-xl sm:px-5 sm:text-xs">
-                    <span className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse" />
+                  <div className="inline-flex items-center gap-2.5 rounded-full border border-[var(--gold)]/35 bg-black/25 px-4 py-2.5 text-[10px] tracking-[0.24em] text-[var(--gold)] backdrop-blur-xl sm:px-5 sm:text-xs">
+                    <span className="h-1.5 w-1.5 rounded-full bg-[var(--gold)] animate-pulse" />
                     FOUNDER-LED · BEHIND THE SEAMS
                   </div>
                 </StaggerItem>
 
                 <StaggerItem>
-                  <h1 className="mt-6 max-w-3xl font-serif font-luxury text-[2.8rem] leading-[0.9] !text-white sm:text-6xl md:text-7xl lg:text-[6.4rem]">
-                    The community fashion founders
+                  <h1 className="mt-8 font-serif font-luxury text-[3.4rem] leading-[0.88] text-white sm:text-6xl md:text-7xl lg:text-[7.6rem]">
+                    Fashion founders,
                     <br />
-                    <span className="text-accent">have been waiting for.</span>
+                    <span className="text-[var(--gold)]">no longer alone.</span>
                   </h1>
                 </StaggerItem>
 
                 <StaggerItem>
-                  <p className="mt-6 max-w-2xl text-base leading-relaxed !text-white/85 sm:text-lg md:text-xl">
-                    Preneurin is the thoughtful room where fashion designers learn together,
-                    share real founder experiences, build meaningful connections, and grow
-                    with more clarity, confidence, and professional structure.
-                  </p>
+                  <div className="mt-8 inline-flex items-center rounded-[1.75rem] border border-[var(--gold)]/25 bg-black/25 px-6 py-5 backdrop-blur-2xl sm:px-7 sm:py-6">
+                    <p className="max-w-xl text-base leading-relaxed text-[var(--gold)] sm:text-lg md:text-xl">
+                      A community room where fashion designers learn together,
+                      share real experiences, and grow with more clarity.
+                    </p>
+                  </div>
                 </StaggerItem>
 
                 <StaggerItem>
-                  <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+                  <div className="mt-12 flex flex-col gap-3 sm:flex-row">
                     <MagneticButton href="#join-inner-circle">
-                      <span className="group flex w-full items-center justify-center gap-2.5 rounded-full bg-accent px-8 py-4 font-semibold text-[#0A0A0A] shadow-[0_24px_60px_rgba(173,138,112,0.38)] transition-all hover:bg-[#b8957b] hover:scale-105 sm:w-auto sm:px-10 sm:py-4.5">
+                      <span className="group flex w-full items-center justify-center gap-2.5 rounded-full bg-[var(--gold)] px-8 py-4 font-semibold text-[#0A0A0A] shadow-[0_24px_60px_rgba(201,169,110,0.28)] transition-all hover:bg-[#d4b37a] hover:scale-105 sm:w-auto sm:px-10 sm:py-4.5">
                         Register Your Interest <ChevronRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
                       </span>
                     </MagneticButton>
                     <MagneticButton href="/success-stories">
-                      <span className="group flex w-full items-center justify-center gap-2.5 rounded-full border border-white/30 bg-black/25 backdrop-blur-2xl px-8 py-4 text-white transition-all hover:border-accent hover:text-white sm:w-auto sm:px-10 sm:py-4.5">
+                      <span className="group flex w-full items-center justify-center gap-2.5 rounded-full border border-[var(--gold)]/40 bg-black/25 backdrop-blur-2xl px-8 py-4 text-[var(--gold)] transition-all hover:border-[var(--gold)] hover:text-[var(--gold)] sm:w-auto sm:px-10 sm:py-4.5">
                         <Play className="h-3.5 w-3.5" /> Explore First Session
                       </span>
                     </MagneticButton>
                   </div>
                 </StaggerItem>
-
-                <StaggerItem>
-                  <div className="mt-12 grid max-w-2xl gap-4 sm:grid-cols-3">
-                    {[
-                      { label: 'Learn', value: 'Mentorship & Craft', icon: Users },
-                      { label: 'Share', value: 'Real Room Stories', icon: MessageSquare },
-                      { label: 'Grow', value: 'Studio & Self', icon: DollarSign },
-                    ].map((item) => (
-                      <div key={item.label} className="group rounded-[1.75rem] border border-white/15 bg-gradient-to-br from-white/15 to-white/5 px-5 py-5 backdrop-blur-2xl transition-all hover:border-accent/40 hover:bg-white/20">
-                        <div className="flex items-center justify-between">
-                          <item.icon className="h-4 w-4 text-accent" strokeWidth={1.85} />
-                          <p className="text-[10px] uppercase tracking-[0.22em] text-white/65">{item.label}</p>
-                        </div>
-                        <p className="mt-3 text-sm font-semibold leading-snug text-white">{item.value}</p>
-                      </div>
-                    ))}
-                  </div>
-                </StaggerItem>
               </StaggerContainer>
-            </div>
-            <div className="hidden lg:block">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.3 }}
-              >
-                <div className="premium-panel ml-auto max-w-md overflow-hidden rounded-[2.25rem] p-8 text-[var(--foreground)] shadow-[0_50px_120px_rgba(0,0,0,0.25)] backdrop-blur-3xl hover-tilt">
-                  <div className="flex items-center justify-between gap-4">
-                    <p className="section-kicker">The Community</p>
-                    <span className="font-serif text-5xl text-accent/20">01</span>
-                  </div>
-                  <h2 className="mt-7 font-serif font-luxury text-3xl leading-[1.05] md:text-4xl">
-                    A room where fashion designers feel <span className="text-accent">seen, supported, and sharpened.</span>
-                  </h2>
-                  <motion.div
-                    initial={{ scaleX: 0 }}
-                    whileInView={{ scaleX: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.9, ease: 'easeOut' }}
-                    className="mt-7 h-px w-20 bg-gradient-to-r from-accent to-transparent"
-                  />
-                  <p className="mt-7 text-base leading-relaxed text-gray-600 md:text-[17px]">
-                    Preneurin is built not from noise or hype, but from a single live room in April —
-                    and everything the founders there actually needed to hear.
-                  </p>
-                  <div className="mt-8 grid gap-3.5">
-                    {[
-                      'Mentorship rooted in lived studio experience',
-                      'Practical pricing, production & branding conversations',
-                      'A more meaningful network, built with intention',
-                    ].map((point) => (
-                      <div key={point} className="group flex items-start gap-4 rounded-2xl border border-[var(--border)] bg-gradient-to-br from-white/95 to-white/70 px-5 py-4 transition-all hover:border-accent/40">
-                        <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-accent/15 font-serif text-xs font-semibold text-accent">
-                          ✓
-                        </span>
-                        <p className="text-[15px] leading-snug text-gray-700">{point}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-            </div>
             </div>
           </div>
         </div>
