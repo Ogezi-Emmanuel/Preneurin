@@ -51,22 +51,22 @@ export default function ProgramsPage() {
       <Breadcrumb />
 
       {/* Hero Section */}
-      <section className="relative px-6 pb-24 pt-32 overflow-hidden">
+      <section className="relative px-6 pb-16 pt-24 overflow-hidden">
         <div className="absolute -top-40 -right-40 h-[520px] w-[520px] rounded-full bg-accent/10 blur-3xl" aria-hidden="true" />
         <div className="absolute top-40 -left-32 h-[400px] w-[400px] rounded-full bg-primary/8 blur-3xl" aria-hidden="true" />
         <div className="relative max-w-6xl mx-auto">
           <StaggerContainer>
             <StaggerItem>
-              <div className="premium-panel relative overflow-hidden rounded-[2.25rem] px-8 py-20 md:px-14 md:py-28 text-center">
+              <div className="premium-panel relative overflow-hidden rounded-[2.25rem] px-8 py-16 md:px-14 md:py-20 text-center">
                 <div className="absolute inset-0 soft-grid opacity-60" aria-hidden="true" />
                 <div className="relative">
                   <p className="section-kicker">The Program</p>
-                  <h1 className="mt-8 font-serif font-luxury text-5xl leading-[0.95] md:text-7xl lg:text-8xl">
+                  <h1 className="mt-8 font-serif font-luxury text-4xl leading-[0.95] md:text-5xl lg:text-6xl">
                     One core format.
                     <br />
                     <span className="text-accent">A richer community experience.</span>
                   </h1>
-                  <p className="mx-auto mt-8 max-w-3xl text-lg leading-relaxed text-gray-600 md:text-xl">
+                  <p className="mx-auto mt-8 max-w-3xl text-base leading-relaxed text-gray-600 md:text-lg">
                     Preneurin currently has one public program: a live session created to bring fashion designers
                     together to learn, share experiences, build meaningful connections, and grow.
                   </p>
@@ -112,7 +112,7 @@ export default function ProgramsPage() {
                       </div>
                     </div>
                     <div className="absolute inset-x-6 bottom-6 md:inset-x-8 md:bottom-8">
-                      <h3 className="font-serif text-3xl leading-tight text-white md:text-5xl">
+                      <h3 className="font-serif text-2xl leading-tight text-white md:text-4xl">
                         A community room built for and by fashion founders.
                       </h3>
                     </div>
@@ -134,11 +134,11 @@ export default function ProgramsPage() {
                     </span>
                   </div>
 
-                  <h2 className="mt-6 font-serif font-luxury text-4xl leading-[1.05] md:text-5xl">
+                  <h2 className="mt-6 font-serif font-luxury text-3xl leading-[1.05] md:text-4xl">
                     A fashion designer community expressed through one live format.
                   </h2>
 
-                  <p className="mt-6 text-lg leading-relaxed text-gray-600 md:text-lg">
+                  <p className="mt-6 text-base leading-relaxed text-gray-600 md:text-lg">
                     Preneurin is being built as a live learning and community experience exclusively for fashion designers.
                     The first session happened in April, and future editions are being shaped around the same promise:
                     a supportive space for learning, sharing, networking, and professional growth.
@@ -172,13 +172,13 @@ export default function ProgramsPage() {
       </section>
 
       {/* Pillars Grid */}
-      <section className="relative py-28 px-6">
+      <section className="relative py-20 px-6">
         <div className="max-w-7xl mx-auto">
           <StaggerContainer>
             <StaggerItem>
-              <div className="max-w-3xl mb-16">
+              <div className="max-w-3xl mb-12">
                 <p className="section-kicker">Four Pillars</p>
-                <h2 className="mt-6 font-serif font-luxury text-4xl leading-[1.05] md:text-5xl lg:text-6xl">
+                <h2 className="mt-6 font-serif font-luxury text-3xl leading-[1.05] md:text-4xl lg:text-5xl">
                   What every session is <span className="text-accent">designed around.</span>
                 </h2>
               </div>
@@ -225,7 +225,7 @@ export default function ProgramsPage() {
                 <div className="relative grid gap-12 lg:grid-cols-[0.9fr_1.1fr] items-center">
                   <div>
                     <p className="section-kicker">What Designers Can Expect</p>
-                    <h3 className="mt-6 font-serif font-luxury text-3xl leading-[1.1] md:text-5xl mb-6">
+                    <h3 className="mt-6 font-serif font-luxury text-2xl leading-[1.1] md:text-4xl mb-6">
                       A more thoughtful kind of fashion learning space.
                     </h3>
                     <motion.div

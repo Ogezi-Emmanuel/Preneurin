@@ -55,7 +55,7 @@ export default function AboutPage() {
       <Breadcrumb />
 
       {/* Hero Section */}
-      <section className="relative px-6 pb-24 pt-32 overflow-hidden">
+      <section className="relative px-6 pb-16 pt-24 overflow-hidden">
         <div className="absolute -top-32 right-0 h-[480px] w-[480px] rounded-full bg-accent/10 blur-3xl" aria-hidden="true" />
         <div className="absolute top-20 -left-20 h-[360px] w-[360px] rounded-full bg-primary/8 blur-3xl" aria-hidden="true" />
         <div className="relative max-w-7xl mx-auto">
@@ -64,16 +64,16 @@ export default function AboutPage() {
               <div className="grid gap-12 lg:gap-16 lg:grid-cols-[1.1fr_0.9fr] items-center">
                 <div>
                   <p className="section-kicker">About Preneurin</p>
-                  <h1 className="mt-8 font-serif font-luxury text-5xl leading-[0.92] md:text-6xl lg:text-7xl xl:text-8xl">
+                  <h1 className="mt-8 font-serif font-luxury text-4xl leading-[0.92] md:text-5xl lg:text-6xl xl:text-7xl">
                     A fashion community
                     <br />
                     <span className="text-accent">built from a real room.</span>
                   </h1>
-                  <p className="mt-8 max-w-2xl text-lg leading-relaxed text-gray-600 md:text-xl">
+                  <p className="mt-8 max-w-2xl text-base leading-relaxed text-gray-600 md:text-lg">
                     Not an imagined one. Preneurin is being built around the honest, unglamoured conversations
                     fashion founders actually need — live, human, and in the room.
                   </p>
-                  <p className="mt-6 max-w-2xl text-lg font-semibold leading-relaxed text-[var(--foreground)] md:text-xl">
+                  <p className="mt-6 max-w-2xl text-base font-semibold leading-relaxed text-[var(--foreground)] md:text-lg">
                     Preneurin exists to ensure that no fashion designer has to navigate the industry alone.
                   </p>
                   <div className="mt-12 flex items-center gap-4">
@@ -113,7 +113,7 @@ export default function AboutPage() {
                           </div>
                         </div>
                         <div className="absolute inset-x-6 bottom-6 md:inset-x-8 md:bottom-8">
-                          <p className="font-serif text-3xl leading-tight text-white md:text-5xl">
+                          <p className="font-serif text-2xl leading-tight text-white md:text-4xl">
                             Built from one room.
                             <br />
                             Built for many more.
@@ -130,7 +130,7 @@ export default function AboutPage() {
       </section>
 
       {/* How It Started Story Section */}
-      <section className="relative py-28 px-6">
+      <section className="relative py-20 px-6">
         <div className="max-w-6xl mx-auto">
           <StaggerContainer>
             <StaggerItem>
@@ -151,7 +151,7 @@ export default function AboutPage() {
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-primary/25 via-transparent to-transparent" />
                       <div className="absolute bottom-5 left-5">
-                        <span className="font-serif text-6xl text-white/95 drop-shadow-xl md:text-7xl">
+                        <span className="font-serif text-5xl text-white/95 drop-shadow-xl md:text-6xl">
                           01
                         </span>
                       </div>
@@ -160,13 +160,13 @@ export default function AboutPage() {
 
                   <div>
                     <p className="section-kicker">How It Started</p>
-                    <h2 className="mt-6 font-serif font-luxury text-4xl leading-[1.02] md:text-5xl lg:text-6xl">
+                    <h2 className="mt-6 font-serif font-luxury text-3xl leading-[1.02] md:text-4xl lg:text-5xl">
                       The first session happened in April.
                       <br />
                       <span className="text-accent">Everything grew from there.</span>
                     </h2>
                     <div className="mt-10 h-px w-20 bg-gradient-to-r from-accent to-transparent" />
-                    <div className="mt-10 space-y-5 text-lg leading-relaxed text-gray-600 md:text-xl">
+                    <div className="mt-10 space-y-5 text-base leading-relaxed text-gray-600 md:text-lg">
                       <p>
                         Preneurin began with a question: what if fashion designers in Nigeria had a room where
                         the real business questions were actually on the table — not just fashion-week aesthetics
@@ -190,13 +190,13 @@ export default function AboutPage() {
       </section>
 
       {/* Vision & Aim */}
-      <section className="relative py-28 px-6">
+      <section className="relative py-20 px-6">
         <div className="max-w-6xl mx-auto">
           <StaggerContainer>
             <StaggerItem>
-              <div className="mb-16 max-w-3xl">
+              <div className="mb-12 max-w-3xl">
                 <p className="section-kicker">Vision &amp; Aim</p>
-                <h2 className="mt-6 font-serif font-luxury text-4xl leading-[1.05] md:text-5xl lg:text-6xl">
+                <h2 className="mt-6 font-serif font-luxury text-3xl leading-[1.05] md:text-4xl lg:text-5xl">
                   The community we are building,
                   <br />
                   <span className="text-accent">and the promise it keeps.</span>
@@ -220,7 +220,7 @@ export default function AboutPage() {
                     To build the most trusted community for fashion designers.
                   </h3>
                   <div className="relative mt-8 h-px w-16 bg-gradient-to-r from-accent to-transparent" />
-                  <p className="relative mt-8 text-lg leading-relaxed text-gray-600 md:text-xl">
+                  <p className="relative mt-8 text-base leading-relaxed text-gray-600 md:text-lg">
                     To build the most trusted community for fashion designers, where creatives
                     are empowered through meaningful conversations, shared experiences,
                     collaboration, and continuous growth.
@@ -243,7 +243,7 @@ export default function AboutPage() {
                     To connect, support, and empower fashion designers.
                   </h3>
                   <div className="relative mt-8 h-px w-16 bg-gradient-to-r from-accent to-transparent" />
-                  <p className="relative mt-8 text-lg leading-relaxed text-gray-600 md:text-xl">
+                  <p className="relative mt-8 text-base leading-relaxed text-gray-600 md:text-lg">
                     To connect, support, and empower fashion designers by creating spaces
                     where they can learn, share experiences, and grow together.
                   </p>
@@ -255,13 +255,13 @@ export default function AboutPage() {
       </section>
 
       {/* Values Grid */}
-      <section className="relative py-28 px-6">
+      <section className="relative py-20 px-6">
         <div className="max-w-7xl mx-auto">
           <StaggerContainer>
             <StaggerItem>
               <div className="max-w-3xl mb-16">
                 <p className="section-kicker">Six Values</p>
-                <h2 className="mt-6 font-serif font-luxury text-4xl leading-[1.05] md:text-5xl lg:text-6xl">
+                <h2 className="mt-6 font-serif font-luxury text-3xl leading-[1.05] md:text-4xl lg:text-5xl">
                   The principles that shape
                   <br />
                   <span className="text-accent"> every room Preneurin builds.</span>
@@ -290,7 +290,7 @@ export default function AboutPage() {
                       </div>
                       <div className="mt-6 flex items-center justify-between gap-4">
                         <h3 className="font-serif text-2xl md:text-3xl">{value.title}</h3>
-                        <span className="font-serif text-4xl text-accent/15 md:text-5xl">
+                        <span className="font-serif text-3xl text-accent/15 md:text-4xl">
                           {String(idx + 1).padStart(2, '0')}
                         </span>
                       </div>
@@ -311,11 +311,11 @@ export default function AboutPage() {
       </section>
 
       {/* Closing Statement */}
-      <section className="relative pb-32 px-6">
+      <section className="relative pb-20 px-6">
         <div className="max-w-5xl mx-auto">
           <StaggerContainer>
             <StaggerItem>
-              <div className="relative overflow-hidden rounded-[2.5rem] border border-[var(--border)] bg-gradient-to-br from-primary via-[#5a2833] to-primary px-8 py-20 text-center shadow-[0_50px_120px_rgba(74,32,41,0.28)] md:px-14 md:py-28">
+              <div className="relative overflow-hidden rounded-[2.5rem] border border-[var(--border)] bg-gradient-to-br from-primary via-[#5a2833] to-primary px-8 py-16 text-center shadow-[0_50px_120px_rgba(74,32,41,0.28)] md:px-14 md:py-20">
                 <div className="absolute inset-0 opacity-[0.08]" aria-hidden="true">
                   <Image
                     src={ABOUT_STORY_IMAGE}
@@ -331,7 +331,7 @@ export default function AboutPage() {
                   transition={{ duration: 1.1, ease: 'easeOut' }}
                   className="relative mx-auto mb-12 h-px w-28 origin-center bg-accent/60"
                 />
-                <h2 className="relative font-serif font-luxury text-3xl leading-tight text-white md:text-5xl lg:text-6xl">
+                <h2 className="relative font-serif font-luxury text-2xl leading-tight text-white md:text-3xl lg:text-4xl">
                   Preneurin is building the room African fashion founders deserve.
                 </h2>
                 <p className="relative mx-auto mt-10 max-w-2xl text-base leading-relaxed text-white/80 md:text-lg">

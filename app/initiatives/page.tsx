@@ -105,24 +105,24 @@ export default function InitiativesPage() {
       <Breadcrumb />
 
       {/* Hero Section */}
-      <section className="relative px-6 pb-24 pt-32 overflow-hidden">
+      <section className="relative px-6 pb-16 pt-24 overflow-hidden">
         <div className="absolute -top-32 -right-20 h-[500px] w-[500px] rounded-full bg-accent/10 blur-3xl" aria-hidden="true" />
         <div className="absolute top-32 -left-24 h-[380px] w-[380px] rounded-full bg-primary/8 blur-3xl" aria-hidden="true" />
         <div className="relative max-w-6xl mx-auto">
           <StaggerContainer>
             <StaggerItem>
-              <div className="premium-panel relative overflow-hidden rounded-[2.25rem] px-8 py-20 md:px-14 md:py-28 text-center">
+              <div className="premium-panel relative overflow-hidden rounded-[2.25rem] px-8 py-16 md:px-14 md:py-20 text-center">
                 <div className="absolute inset-0 soft-grid opacity-50" aria-hidden="true" />
                 <div className="relative">
                   <p className="text-xs font-semibold uppercase tracking-[0.32em] text-accent">
                     Initiatives
                   </p>
-                  <h1 className="mt-8 font-serif font-luxury text-5xl leading-[0.93] md:text-7xl lg:text-8xl">
+                  <h1 className="mt-8 font-serif font-luxury text-4xl leading-[0.93] md:text-5xl lg:text-6xl">
                     Four ways Preneurin is
                     <br />
                     <span className="text-accent"> moving beyond the room.</span>
                   </h1>
-                  <p className="mx-auto mt-8 max-w-3xl text-lg leading-relaxed text-gray-600 md:text-xl">
+                  <p className="mx-auto mt-8 max-w-3xl text-base leading-relaxed text-gray-600 md:text-lg">
                     The live session format is the foundation.
                     These four initiatives are how Preneurin converts a single conversation
                     into ongoing exposure, real opportunity, and growth systems for designers.
@@ -281,7 +281,7 @@ export default function InitiativesPage() {
                   <p className="text-xs font-semibold uppercase tracking-[0.32em] text-accent">
                     Join The Build
                   </p>
-                  <h2 className="mt-6 font-serif font-luxury text-4xl leading-[1.05] md:text-5xl lg:text-6xl">
+                  <h2 className="mt-6 font-serif font-luxury text-3xl leading-[1.05] md:text-4xl lg:text-5xl">
                     A community where
                     <br />
                     <span className="text-accent">the conversation continues.</span>

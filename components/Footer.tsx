@@ -3,9 +3,10 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { Mail, MapPin, Instagram, Users, Quote } from 'lucide-react';
+import { Mail, MapPin, Instagram, Users } from 'lucide-react';
 
 const CONTACT_EMAIL = 'secretariat@preneurin.org';
+const INSTAGRAM_URL = 'https://www.instagram.com/preneurinforum/';
 
 const navigationLinks = [
   { name: 'Home', href: '/' },
@@ -20,7 +21,7 @@ const currentYear = new Date().getFullYear();
 
 export default function Footer() {
   return (
-    <footer className="relative overflow-hidden px-6 pb-10 pt-24">
+    <footer className="relative overflow-hidden px-6 pb-10 pt-20">
       <div className="absolute -top-10 left-1/2 h-[420px] w-[80vw] max-w-[900px] -translate-x-1/2 rounded-full bg-primary/7 blur-3xl" aria-hidden="true" />
       <div className="absolute bottom-0 right-10 h-[300px] w-[300px] rounded-full bg-accent/10 blur-3xl" aria-hidden="true" />
       <div className="relative max-w-7xl mx-auto">
@@ -29,9 +30,8 @@ export default function Footer() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="premium-panel relative overflow-hidden rounded-[2.25rem] p-8 md:p-12 xl:p-14 shadow-[0_40px_120px_rgba(74,32,41,0.1)]"
+          className="premium-panel relative overflow-hidden rounded-[2.25rem] p-8 md:p-10 xl:p-12 shadow-[0_40px_120px_rgba(74,32,41,0.1)]"
         >
-          <Quote className="absolute -top-4 right-8 h-28 w-28 text-accent/10 md:h-36 md:w-36" />
           <div className="grid gap-12 md:gap-10 lg:gap-14 md:grid-cols-[1.1fr_0.95fr_1fr]">
             <div className="relative">
               <div className="flex items-center gap-4 mb-6">
@@ -55,7 +55,7 @@ export default function Footer() {
                   </p>
                 </div>
               </div>
-              <p className="max-w-sm text-base leading-relaxed text-gray-600 md:text-lg md:leading-relaxed">
+              <p className="max-w-sm text-base leading-relaxed text-gray-600 md:leading-relaxed">
                 A community built for fashion designers who want to learn honestly, share openly,
                 build real connections, and grow both personally and professionally — in a room
                 that actually gets them.
@@ -78,7 +78,7 @@ export default function Footer() {
                 <span className="h-1 w-8 rounded-full bg-gradient-to-r from-accent to-primary" />
                 <h4 className="font-serif text-xl font-semibold md:text-2xl">Explore</h4>
               </div>
-              <div className="grid grid-cols-2 gap-y-3 gap-x-4">
+              <div className="grid grid-cols-1 gap-y-3 gap-x-4">
                 {navigationLinks.map((link, i) => (
                   <Link
                     key={link.name}
@@ -101,32 +101,40 @@ export default function Footer() {
                 <span className="h-1 w-8 rounded-full bg-gradient-to-r from-primary to-accent" />
                 <h4 className="font-serif text-xl font-semibold md:text-2xl">Community Desk</h4>
               </div>
-              <div className="space-y-4">
-                <div className="flex items-start gap-4 rounded-2xl border border-[var(--border)] bg-gradient-to-br from-white/80 to-white/50 px-5 py-4.5 backdrop-blur-sm">
-                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-primary/10 text-primary">
-                    <MapPin className="h-5 w-5" strokeWidth={1.9} />
-                  </span>
-                  <div>
-                    <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-accent">
-                      Based In
-                    </p>
-                    <p className="mt-1 text-sm font-medium leading-snug text-gray-700 md:text-base">
+              <div className="space-y-5">
+                <div>
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-accent">
+                    Based In
+                  </p>
+                  <div className="mt-2.5 flex items-start gap-4">
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                      <MapPin className="h-4.5 w-4.5" strokeWidth={1.9} />
+                    </span>
+                    <p className="pt-1 text-base font-medium leading-snug text-gray-700 md:text-lg">
                       Lagos, Nigeria
                     </p>
                   </div>
                 </div>
-                <div className="flex items-start gap-4 rounded-2xl border border-[var(--border)] bg-gradient-to-br from-white/80 to-white/50 px-5 py-4.5 backdrop-blur-sm">
-                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-accent/15 text-accent">
-                    <Instagram className="h-5 w-5" strokeWidth={1.9} />
-                  </span>
-                  <div>
-                    <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-accent">
-                      Follow The Journey
-                    </p>
-                    <p className="mt-1 text-sm font-medium leading-snug text-gray-700 md:text-base">
+                <div>
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-accent">
+                    Follow The Journey
+                  </p>
+                  <motion.a
+                    whileHover={{ scale: 1.02, y: -1 }}
+                    whileTap={{ scale: 0.98 }}
+                    transition={{ type: 'spring', stiffness: 220, damping: 18 }}
+                    href={INSTAGRAM_URL}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="mt-2.5 group flex items-start gap-4"
+                  >
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-accent/25 to-accent/10 text-accent transition-all group-hover:from-accent/35 group-hover:to-accent/15">
+                      <Instagram className="h-4.5 w-4.5" strokeWidth={1.9} />
+                    </span>
+                    <p className="pt-1 text-base font-medium leading-snug text-gray-700 transition-colors group-hover:text-accent md:text-lg">
                       Community stories · Session highlights
                     </p>
-                  </div>
+                  </motion.a>
                 </div>
               </div>
               <motion.a
@@ -134,7 +142,7 @@ export default function Footer() {
                 whileTap={{ scale: 0.98 }}
                 transition={{ type: 'spring', stiffness: 220, damping: 18 }}
                 href={`mailto:${CONTACT_EMAIL}`}
-                className="group relative mt-7 flex w-full items-center justify-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-primary via-[#5a2833] to-primary bg-[length:200%_100%] px-6 py-4 font-semibold text-cream shadow-[0_20px_55px_rgba(74,32,41,0.28)] transition-all hover:bg-[position:100%_0] hover:shadow-[0_26px_75px_rgba(74,32,41,0.36)]"
+                className="group relative mt-8 flex w-full items-center justify-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-primary via-[#5a2833] to-primary bg-[length:200%_100%] px-6 py-4 font-semibold text-cream shadow-[0_20px_55px_rgba(74,32,41,0.28)] transition-all hover:bg-[position:100%_0] hover:shadow-[0_26px_75px_rgba(74,32,41,0.36)]"
               >
                 <Users className="h-4 w-4" strokeWidth={2.2} />
                 <span className="relative z-10">Reach The Secretariat</span>
@@ -142,7 +150,7 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="mt-14 flex flex-col gap-5 border-t border-[var(--border)] pt-8 md:flex-row md:items-center md:justify-between">
+          <div className="mt-12 flex flex-col gap-5 border-t border-[var(--border)] pt-7 md:flex-row md:items-center md:justify-between">
             <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-gray-500 md:text-base">
               <span className="font-medium">© {currentYear} Preneurin.</span>
               <span className="hidden md:inline text-gray-300">·</span>

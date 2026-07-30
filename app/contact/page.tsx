@@ -151,22 +151,22 @@ export default function ContactPage() {
       <Breadcrumb />
 
       {/* Hero Section */}
-      <section className="relative px-6 pb-24 pt-32 overflow-hidden">
+      <section className="relative px-6 pb-16 pt-24 overflow-hidden">
         <div className="absolute -top-20 right-0 h-[420px] w-[420px] rounded-full bg-accent/10 blur-3xl" aria-hidden="true" />
         <div className="absolute top-40 -left-20 h-[340px] w-[340px] rounded-full bg-primary/8 blur-3xl" aria-hidden="true" />
         <div className="relative max-w-6xl mx-auto">
           <StaggerContainer>
             <StaggerItem>
-              <div className="premium-panel relative overflow-hidden rounded-[2.25rem] px-8 py-20 md:px-14 md:py-28 text-center">
+              <div className="premium-panel relative overflow-hidden rounded-[2.25rem] px-8 py-16 md:px-14 md:py-20 text-center">
                 <div className="absolute inset-0 soft-grid opacity-50" aria-hidden="true" />
                 <div className="relative">
                   <p className="text-xs font-semibold uppercase tracking-[0.32em] text-accent">
                     Contact Preneurin
                   </p>
-                  <h1 className="mt-6 font-serif font-luxury text-5xl leading-[0.95] md:text-7xl lg:text-8xl">
+                  <h1 className="mt-6 font-serif font-luxury text-4xl leading-[0.95] md:text-5xl lg:text-6xl">
                     Reach the <span className="text-accent">Preneurin</span> community.
                   </h1>
-                  <p className="mx-auto mt-8 max-w-3xl text-lg leading-relaxed text-gray-600 md:text-xl">
+                  <p className="mx-auto mt-8 max-w-3xl text-base leading-relaxed text-gray-600 md:text-lg">
                     For community enquiries, future sessions, collaborations, or early sponsorship conversations —
                     the Preneurin Secretariat listens from a single inbox.
                   </p>
@@ -205,7 +205,7 @@ export default function ContactPage() {
               <StaggerItem>
                 <div>
                   <p className="section-kicker">Get in touch</p>
-                  <h2 className="mt-6 font-serif font-luxury text-4xl leading-[1.05] md:text-5xl">
+                  <h2 className="mt-6 font-serif font-luxury text-3xl leading-[1.05] md:text-4xl">
                     Three ways to <span className="text-accent">connect.</span>
                   </h2>
                   <p className="mt-5 max-w-lg text-base leading-relaxed text-gray-600 md:text-lg">
@@ -287,7 +287,7 @@ export default function ContactPage() {
                           <CheckCircle2 className="h-10 w-10 text-accent" strokeWidth={1.5} />
                         </div>
                       </div>
-                      <h3 className="font-serif text-3xl text-[var(--foreground)] md:text-4xl">
+                      <h3 className="font-serif text-2xl text-[var(--foreground)] md:text-3xl">
                         Thank you.
                       </h3>
                       <p className="mt-4 max-w-md text-base leading-relaxed text-gray-500 md:text-lg">
@@ -398,7 +398,7 @@ export default function ContactPage() {
       </section>
 
       {/* Sponsorship Inquiry Section */}
-      <section className="relative py-24 px-6">
+      <section className="relative py-20 px-6">
         <div className="max-w-7xl mx-auto">
           <StaggerContainer>
             <StaggerItem>
@@ -411,10 +411,10 @@ export default function ContactPage() {
                     <p className="text-xs font-semibold uppercase tracking-[0.32em] text-accent">
                       Sponsorship Inquiry
                     </p>
-                    <h2 className="mt-6 font-serif font-luxury text-4xl leading-[1.05] md:text-5xl">
+                    <h2 className="mt-6 font-serif font-luxury text-3xl leading-[1.05] md:text-4xl">
                       Start a <span className="text-accent">sponsorship</span> or partnership conversation.
                     </h2>
-                    <p className="mt-7 text-lg leading-relaxed text-gray-600 md:text-xl">
+                    <p className="mt-7 text-base leading-relaxed text-gray-600 md:text-lg">
                       Share the vision for how your organization would stand with Preneurin —
                       and the Secretariat will shape a response around the next stage of the community.
                     </p>
@@ -457,7 +457,7 @@ export default function ContactPage() {
                             <CheckCircle2 className="h-10 w-10 text-accent" strokeWidth={1.5} />
                           </div>
                         </div>
-                        <h3 className="font-serif text-3xl text-[var(--foreground)] md:text-4xl">
+                        <h3 className="font-serif text-2xl text-[var(--foreground)] md:text-3xl">
                           Brief prepared.
                         </h3>
                         <p className="mt-4 max-w-md text-base leading-relaxed text-gray-500 md:text-lg">
