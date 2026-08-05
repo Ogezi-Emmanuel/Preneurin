@@ -135,8 +135,7 @@ function SessionBTSVideo() {
           preload="none"
           poster={BTS_POSTER}
           controls={isPlaying}
-          className="h-full w-full object-cover object-center cursor-pointer"
-          onClick={handleVideoClick}
+          className="h-full w-full object-cover object-center"
           onPause={() => setIsPlaying(false)}
           onPlay={() => {
             setIsPlaying(true);
@@ -146,6 +145,18 @@ function SessionBTSVideo() {
             setIsPlaying(false);
             setButtonVisible(true);
           }}
+        />
+        {/* Invisible overlay to reliably catch clicks for pause */}
+        <button
+          type="button"
+          onClick={handleVideoClick}
+          aria-label="Pause behind the scenes video"
+          aria-hidden={!isPlaying}
+          className={
+            isPlaying
+              ? 'absolute inset-0 z-[2] cursor-transparent bg-transparent focus:outline-none'
+              : 'pointer-events-none absolute inset-0 z-[2] opacity-0'
+          }
         />
         <motion.button
           type="button"
@@ -226,8 +237,7 @@ function ExperienceVoicesVideo() {
           playsInline
           preload="metadata"
           controls={isPlaying}
-          className="h-full w-full object-contain object-center bg-[#0A0A0A] cursor-pointer"
-          onClick={handleVideoClick}
+          className="h-full w-full object-contain object-center bg-[#0A0A0A]"
           onPause={() => setIsPlaying(false)}
           onPlay={() => {
             setIsPlaying(true);
@@ -237,6 +247,18 @@ function ExperienceVoicesVideo() {
             setIsPlaying(false);
             setButtonVisible(true);
           }}
+        />
+        {/* Invisible overlay to reliably catch clicks for pause */}
+        <button
+          type="button"
+          onClick={handleVideoClick}
+          aria-label="Pause designer voices video"
+          aria-hidden={!isPlaying}
+          className={
+            isPlaying
+              ? 'absolute inset-0 z-[2] cursor-transparent bg-transparent focus:outline-none'
+              : 'pointer-events-none absolute inset-0 z-[2] opacity-0'
+          }
         />
         <motion.button
           type="button"

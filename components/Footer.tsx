@@ -156,17 +156,6 @@ export default function Footer() {
               <span className="hidden md:inline text-gray-300">·</span>
               <span>Built for fashion designers, by fashion founders.</span>
             </div>
-            <motion.a
-              whileHover={{ y: -2, x: 1 }}
-              transition={{ type: 'spring', stiffness: 220, damping: 20 }}
-              href="https://emmanuelogezi.cv"
-              target="_blank"
-              rel="noreferrer"
-              className="group inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-gray-500 transition-colors hover:text-accent md:text-sm"
-            >
-              <span className="h-1 w-1 rounded-full bg-accent transition-all group-hover:h-1.5 group-hover:w-1.5" />
-              Engineered by Emmanuel Ogezi
-            </motion.a>
           </div>
         </motion.div>
       </div>
