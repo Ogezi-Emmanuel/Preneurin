@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, useMotionValue, useSpring } from 'framer-motion';
-import { Send, ChevronRight, ChevronLeft, Play, Plus, Minus, Quote, CheckCircle2, Compass, Info, Heart, BriefcaseBusiness } from 'lucide-react';
+import { Send, ChevronRight, ChevronLeft, Play, Pause, Plus, Minus, Quote, CheckCircle2, Compass, Info, Heart, BriefcaseBusiness } from 'lucide-react';
 import { useState, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -260,10 +260,10 @@ const HeroBackgroundImage = () => {
         fill
         priority
         sizes="100vw"
-        className="object-cover object-center"
+        className="object-cover object-center brightness-75"
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/25 to-black/55" />
-      <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-transparent to-black/10" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/45 to-black/80" />
+      <div className="absolute inset-0 bg-gradient-to-r from-primary/35 via-black/20 to-black/25" />
     </div>
   );
 };
@@ -273,6 +273,18 @@ const VisionVideoCarousel = () => {
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const [activeIndex, setActiveIndex] = useState(0);
   const [playingIndex, setPlayingIndex] = useState<number | null>(null);
+  const [buttonsVisible, setButtonsVisible] = useState<Set<number>>(
+    () => new Set(VISION_VIDEOS.map((_, i) => i))
+  );
+
+  const setButtonVisible = (index: number, visible: boolean) => {
+    setButtonsVisible((prev) => {
+      const next = new Set(prev);
+      if (visible) next.add(index);
+      else next.delete(index);
+      return next;
+    });
+  };
 
   const scrollToIndex = (index: number) => {
     slideRefs.current[index]?.scrollIntoView({
@@ -288,6 +300,8 @@ const VisionVideoCarousel = () => {
       if (!video) return;
       if (idx !== keepIndex && !video.paused) {
         video.pause();
+        // When pausing other videos, show their buttons again
+        setButtonVisible(idx, true);
       }
     });
   };
@@ -297,25 +311,43 @@ const VisionVideoCarousel = () => {
     const video = videoRefs.current[index];
     if (!video) return;
 
-    if (video.paused) {
-      pauseOtherVideos(index);
-      try {
-        try {
-          video.muted = false;
-        } catch {
-          // no-op
-        }
-        await video.play();
-        setPlayingIndex(index);
-        scrollToIndex(index);
-      } catch {
-        setPlayingIndex(video.paused ? null : index);
-      }
+    // If currently playing, pause it and show button
+    if (!video.paused) {
+      video.pause();
+      setPlayingIndex(null);
+      setButtonVisible(index, true);
       return;
     }
 
-    video.pause();
-    setPlayingIndex(null);
+    // Otherwise, try to play (button will hide once play event fires)
+    pauseOtherVideos(index);
+    
+    try {
+      video.muted = false;
+      await video.play();
+      setPlayingIndex(index);
+      scrollToIndex(index);
+    } catch (error) {
+      try {
+        video.muted = true;
+        await video.play();
+        setPlayingIndex(index);
+        scrollToIndex(index);
+      } catch (err) {
+        setPlayingIndex(video.paused ? null : index);
+      }
+    }
+  };
+
+  const handleVideoClick = (index: number) => {
+    const video = videoRefs.current[index];
+    if (!video) return;
+    // User clicks on video: if playing → pause and show button
+    if (!video.paused) {
+      video.pause();
+      setPlayingIndex(null);
+      setButtonVisible(index, true);
+    }
   };
 
   const goPrev = () => scrollToIndex(Math.max(0, activeIndex - 1));
@@ -351,12 +383,26 @@ const VisionVideoCarousel = () => {
                     }}
                     onPlay={() => {
                       setPlayingIndex(index);
+                      // Hide button once video starts playing
+                      setButtonVisible(index, false);
                     }}
                     onEnded={() => {
-                      if (playingIndex === index) {
-                        setPlayingIndex(null);
-                      }
+                      setPlayingIndex(null);
+                      // Show button when video ends
+                      setButtonVisible(index, true);
                     }}
+                  />
+                  {/* Invisible overlay to reliably catch clicks for pause */}
+                  <button
+                    type="button"
+                    onClick={() => handleVideoClick(index)}
+                    aria-label={`Pause ${video.label}`}
+                    aria-hidden={playingIndex !== index}
+                    className={
+                      playingIndex === index
+                        ? 'absolute inset-0 z-[2] cursor-transparent bg-transparent focus:outline-none rounded-[2.25rem]'
+                        : 'pointer-events-none absolute inset-0 z-[2] opacity-0'
+                    }
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-primary/55 via-primary/5 to-transparent" />
                   <div className="absolute left-5 top-5 md:left-7 md:top-7 flex items-center gap-3 rounded-full border border-white/20 bg-black/25 px-4 py-2 backdrop-blur-2xl">
@@ -368,11 +414,13 @@ const VisionVideoCarousel = () => {
                   <motion.button
                     type="button"
                     initial={{ opacity: 1 }}
-                    animate={{ opacity: playingIndex === index ? 0 : 1 }}
-                    transition={{ duration: 0.3 }}
-                    onClick={() => togglePlay(index)}
-                    className="absolute inset-0 flex items-center justify-center rounded-[2.25rem] bg-black/28 transition-colors hover:bg-black/36"
-                    style={{ pointerEvents: playingIndex === index ? 'none' : 'auto' }}
+                    animate={{ 
+                      opacity: buttonsVisible.has(index) ? 1 : 0,
+                      pointerEvents: buttonsVisible.has(index) ? 'auto' : 'none',
+                    }}
+                    transition={{ duration: 0.4 }}
+                    onClick={(e) => togglePlay(index, e)}
+                    className="absolute inset-0 flex items-center justify-center rounded-[2.25rem] bg-black/28 transition-colors hover:bg-black/40"
                     aria-label={`Play ${video.label}`}
                   >
                     <div className="relative">
@@ -680,7 +728,7 @@ const MultiStepForm = () => {
                   value={formData.fullName}
                   onChange={handleChange}
                   className={inputClass('fullName')}
-                  placeholder="e.g. Damilola Obisesan"
+                  placeholder="e.g. Damilola Hadassah Obisesan"
                 />
                 {errors.fullName && <p className="text-sm mt-2 text-red-500">{errors.fullName}</p>}
               </div>
@@ -948,7 +996,7 @@ export default function Home() {
                   <div className="relative h-[440px] w-full md:h-[580px]">
                     <Image
                       src={FOUNDER_IMAGE}
-                      alt="Damilola Obisesan, founder of Preneurin"
+                      alt="Damilola Hadassah Obisesan, founder of Preneurin"
                       fill
                       sizes="(min-width: 1024px) 45vw, 100vw"
                       className="object-cover object-top transition-transform duration-[1.4s] ease-out group-hover:scale-105"
@@ -983,7 +1031,7 @@ export default function Home() {
                     <span className="font-serif text-4xl text-accent/15">02</span>
                   </div>
                   <h2 className="mt-6 font-serif font-luxury text-3xl leading-[1.05] md:text-4xl lg:text-5xl">
-                    Damilola <span className="text-accent">Obisesan.</span>
+                    Damilola Hadassah <span className="text-accent">Obisesan.</span>
                   </h2>
                   <motion.div
                     initial={{ scaleX: 0 }}

@@ -85,7 +85,7 @@ export default function AboutPage() {
                         Founded by
                       </p>
                       <p className="mt-1 font-serif text-xl md:text-2xl">
-                        Damilola Obisesan
+                        Damilola Hadassah Obisesan
                       </p>
                     </div>
                   </div>
@@ -97,7 +97,7 @@ export default function AboutPage() {
                       <div className="relative h-[420px] md:h-[560px]">
                         <Image
                           src={ABOUT_HERO_IMAGE}
-                          alt="Damilola Obisesan, founder of Preneurin and Dassah Oikos"
+                          alt="Damilola Hadassah Obisesan, founder of Preneurin and Dassah Oikos"
                           fill
                           priority
                           sizes="(min-width: 1024px) 45vw, 100vw"

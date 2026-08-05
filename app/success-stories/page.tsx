@@ -90,6 +90,7 @@ const proofPoints = [
 function SessionBTSVideo() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [buttonVisible, setButtonVisible] = useState(true);
 
   const togglePlay = async (e?: React.MouseEvent) => {
     if (e) e.stopPropagation();
@@ -107,9 +108,20 @@ function SessionBTSVideo() {
       } else {
         video.pause();
         setIsPlaying(false);
+        setButtonVisible(true);
       }
     } catch {
       setIsPlaying(!video.paused);
+    }
+  };
+
+  const handleVideoClick = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (!video.paused) {
+      video.pause();
+      setIsPlaying(false);
+      setButtonVisible(true);
     }
   };
 
@@ -123,19 +135,28 @@ function SessionBTSVideo() {
           preload="none"
           poster={BTS_POSTER}
           controls={isPlaying}
-          className="h-full w-full object-cover object-center"
+          className="h-full w-full object-cover object-center cursor-pointer"
+          onClick={handleVideoClick}
           onPause={() => setIsPlaying(false)}
-          onPlay={() => setIsPlaying(true)}
-          onEnded={() => setIsPlaying(false)}
+          onPlay={() => {
+            setIsPlaying(true);
+            setButtonVisible(false);
+          }}
+          onEnded={() => {
+            setIsPlaying(false);
+            setButtonVisible(true);
+          }}
         />
         <motion.button
           type="button"
           initial={{ opacity: 1 }}
-          animate={{ opacity: isPlaying ? 0 : 1 }}
+          animate={{ 
+            opacity: buttonVisible ? 1 : 0,
+            pointerEvents: buttonVisible ? 'auto' : 'none',
+          }}
           transition={{ duration: 0.4 }}
           onClick={togglePlay}
           className="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-black/60 via-black/10 to-transparent transition-all hover:from-black/70"
-          style={{ pointerEvents: isPlaying ? 'none' : 'auto' }}
           aria-label="Play behind the scenes video"
         >
           <div className="relative">
@@ -167,16 +188,33 @@ function SessionBTSVideo() {
 function ExperienceVoicesVideo() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [buttonVisible, setButtonVisible] = useState(true);
 
-  const togglePlay = async () => {
-    if (!videoRef.current) return;
-    if (videoRef.current.paused) {
-      await videoRef.current.play();
-      setIsPlaying(true);
-      return;
+  const handleVideoClick = async (e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
+    const video = videoRef.current;
+    if (!video) return;
+    if (video.paused) {
+      try {
+        try {
+          video.muted = false;
+        } catch {
+          // no-op
+        }
+        await video.play();
+        setIsPlaying(true);
+      } catch {
+        try {
+          video.muted = true;
+          await video.play();
+          setIsPlaying(true);
+        } catch {}
+      }
+    } else {
+      video.pause();
+      setIsPlaying(false);
+      setButtonVisible(true);
     }
-    videoRef.current.pause();
-    setIsPlaying(false);
   };
 
   return (
@@ -187,20 +225,29 @@ function ExperienceVoicesVideo() {
           src={EXPERIENCE_VIDEO}
           playsInline
           preload="metadata"
-          controls
-          className="h-full w-full object-contain object-center bg-[#0A0A0A]"
-          onClick={togglePlay}
+          controls={isPlaying}
+          className="h-full w-full object-contain object-center bg-[#0A0A0A] cursor-pointer"
+          onClick={handleVideoClick}
           onPause={() => setIsPlaying(false)}
-          onPlay={() => setIsPlaying(true)}
+          onPlay={() => {
+            setIsPlaying(true);
+            setButtonVisible(false);
+          }}
+          onEnded={() => {
+            setIsPlaying(false);
+            setButtonVisible(true);
+          }}
         />
         <motion.button
           type="button"
           initial={{ opacity: 1 }}
-          animate={{ opacity: isPlaying ? 0 : 1 }}
+          animate={{ 
+            opacity: buttonVisible ? 1 : 0,
+            pointerEvents: buttonVisible ? 'auto' : 'none',
+          }}
           transition={{ duration: 0.4 }}
-          onClick={togglePlay}
+          onClick={handleVideoClick}
           className="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-black/70 via-black/20 to-black/10 transition-all hover:from-black/80"
-          style={{ pointerEvents: isPlaying ? 'none' : 'auto' }}
           aria-label="Play designer voices video"
         >
           <div className="relative">
@@ -333,7 +380,7 @@ export default function FirstSessionPage() {
                     <span className="text-accent">A clear foundation.</span>
                   </h2>
                   <p className="mt-6 max-w-xl text-sm leading-relaxed text-gray-600 md:text-base">
-                    Preneurin was founded by Damilola Obisesan, Creative Director of Dassah Oikos,
+                    Preneurin was founded by Damilola Hadassah Obisesan, Creative Director of Dassah Oikos,
                     to create a more meaningful community for fashion designers.
                     The first live session became the foundation for everything now being built.
                   </p>

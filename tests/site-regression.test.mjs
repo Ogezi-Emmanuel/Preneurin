@@ -60,7 +60,7 @@ test('first session page reflects real early-stage proof instead of fictional su
 
   assert.match(firstSessionPage, /Our First Session/);
   assert.match(firstSessionPage, /one live session in April/i);
-  assert.match(firstSessionPage, /Damilola Obisesan/);
+  assert.match(firstSessionPage, /Damilola Hadassah Obisesan/);
   assert.match(firstSessionPage, /IMG_0847\.jpg/);
   assert.doesNotMatch(firstSessionPage, /IMG_0794\.jpg/);
   assert.doesNotMatch(firstSessionPage, /Amara Okafor|Kofi Mensah|Zara Ibrahim|Grew revenue by 300%|Increased average order value by 150%/);
